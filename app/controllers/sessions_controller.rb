@@ -10,14 +10,17 @@ class SessionsController < ApplicationController
       params[:user][:email],
       params[:user][:password]
     )
+    @user = User.new(email: params[:user][:email])
+    @controller = "users"
+    
     if user.class == User
       sign_in(user)
     elsif user.class == String
-      flash[:errors] = "Password is incorrect"
-      redirect_to new_session_url
+      flash.now[:errors] = "Password is incorrect"
+      render :new
     else
-      flash[:errors] = "Email does not exist"
-      redirect_to new_session_url
+      flash.now[:errors] = "Email does not exist"
+      render :new
     end
   end
   

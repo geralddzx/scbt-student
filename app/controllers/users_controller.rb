@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    
+    @controller = "users"
     if @user.save
       flash[:notices] = "You have created the user: #{@user.email}"
       sign_in(@user)
     else
-      flash[:errors] = @user.errors.full_messages
+      flash[:errors] = @user.errors.full_messages[0]
       render :new
     end 
   end

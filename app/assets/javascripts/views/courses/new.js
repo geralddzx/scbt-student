@@ -21,14 +21,13 @@ Scbt.Views.CoursesNew = Backbone.View.extend({
     var newCourse = new Scbt.Models.Course()
     
     newCourse.save(params["course"], {
-      success: function(response){
-        $("#notices").html("Your course has been created")
+      success: function(req, res){
+        alert("Your course has been created")
         view.collection.add(newCourse)
         Backbone.history.navigate("/#", {trigger: true})
       },
-      error: function(response){
-        debugger
-        alert(response)
+      error: function(req, res){
+        alert(res.responseJSON || res.responseText)
       }
     })
   }

@@ -1,5 +1,5 @@
 class Api::CoursesController < ApplicationController
-  before_action :require_permission, only: [:update, :create]
+  before_action :require_permission, only: [:update, :create, :destroy]
   def create
     @course = Course.new(course_params)
     if @course.save
@@ -7,6 +7,11 @@ class Api::CoursesController < ApplicationController
     else
       render json: @course.errors.full_messages, status: :unprocessable_entity
     end
+  end
+  
+  def show
+    @course = Course.find(params[:id])
+    render json: @course
   end
   
   def update
@@ -20,6 +25,12 @@ class Api::CoursesController < ApplicationController
   
   def index
     render json: Course.all
+  end
+  
+  def destroy
+    @course = Course.find(params[:id])
+    @course.destroy!
+    render json: @course
   end
   
   def course_params
