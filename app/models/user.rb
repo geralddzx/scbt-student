@@ -8,18 +8,20 @@
 #  session_token   :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
+#  permission      :string(255)      not null
 #
 
 class User < ActiveRecord::Base
-  before_validation :ensure_session_token
-  validates :email, :password_digest, :session_token, presence: true
+  before_validation :ensure_session_token, :ensure_permission_set
+  validates :email, :password_digest, :session_token, :permission, presence: true
   validates :email, uniqueness: true, email: true
+  validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN"]}
   
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     return nil if user.nil?
     return user if user.password?(password) 
-    nil
+    email
   end
    
   def password?(password)
@@ -42,5 +44,9 @@ class User < ActiveRecord::Base
   
   def ensure_session_token
     self.session_token || self.session_token = User.generate_token
+  end
+  
+  def ensure_permission_set
+    self.permission ||= "STUDENT"
   end
 end

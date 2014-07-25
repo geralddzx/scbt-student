@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -39,6 +39,10 @@ end
 
 
 gem "backbone-on-rails"
+gem "letter_opener", group: :development
+gem 'bootstrap-sass'
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

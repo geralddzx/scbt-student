@@ -4,10 +4,7 @@ window.Scbt = {
   Views: {},
   Routers: {},
   initialize: function() {
-    // alert('Hello from Backbone!');
+    new Scbt.Routers.Router();
+    Backbone.history.start()
   }
 };
-
-$(document).ready(function(){
-  Scbt.initialize();
-});

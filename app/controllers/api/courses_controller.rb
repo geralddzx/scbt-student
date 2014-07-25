@@ -1,0 +1,28 @@
+class Api::CoursesController < ApplicationController
+  before_action :require_permission, only: [:update, :create]
+  def create
+    @course = Course.new(course_params)
+    if @course.save
+      render json: @course
+    else
+      render json: @course.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+  
+  def update
+    @course = Course.find(params[:id])
+    if @course.update_attributes(course_params)
+      render json: @course
+    else
+      render json: @course.errors.full_messages, status: :unprocessable_entity
+    end
+  end    
+  
+  def index
+    render json: Course.all
+  end
+  
+  def course_params
+    params.require(:course).permit(:name, :code, :start_date, :end_date, :hours)
+  end
+end

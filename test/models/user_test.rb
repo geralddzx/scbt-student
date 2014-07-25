@@ -8,6 +8,7 @@
 #  session_token   :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
+#  permission      :string(255)      not null
 #
 
 require 'test_helper'

@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :ensure_signed_in
   
   def root
+    @controller = "static_pages"
     render :root
   end
   

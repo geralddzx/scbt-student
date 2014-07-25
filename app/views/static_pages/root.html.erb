@@ -1,1 +1,13 @@
-Welcome <%= current_user if current_user %>
+Welcome <%= current_user.email %> to Stanford College Student Space
+
+<div id="notices">
+</div>
+
+<div id="container">
+</div>
+
+<script>
+  var userPermission = "<%= current_user.permission %>"
+  var userId = "<%= current_user.id %>"
+  $(Scbt.initialize)
+</script>
