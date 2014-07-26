@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   validates :email, :password_digest, :session_token, :permission, presence: true
   validates :email, uniqueness: true, email: true
   validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN"]}
+  has_many :student_enrollments, foreign_key: :student_id
+  has_many :courses, through: :student_enrollments, source: :course 
   
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)

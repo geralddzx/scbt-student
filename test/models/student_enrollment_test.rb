@@ -11,7 +11,7 @@
 
 require 'test_helper'
 
-class StudentEnrollmentsTest < ActiveSupport::TestCase
+class StudentEnrollmentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

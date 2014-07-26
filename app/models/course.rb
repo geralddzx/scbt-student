@@ -14,4 +14,6 @@
 
 class Course < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
+  has_many :student_enrollments
+  has_many :students, through: :student_enrollments, source: :student
 end

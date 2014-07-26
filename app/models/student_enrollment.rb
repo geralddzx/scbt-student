@@ -9,7 +9,10 @@
 #  updated_at :datetime
 #
 
-class StudentEnrollments < ActiveRecord::Base
+class StudentEnrollment < ActiveRecord::Base
   validates :student_id, :course_id, presence: true
-  validates [:student_id, :course_id], pressence: true
+  validates :course_id, uniqueness: {scope: :student_id}
+  
+  belongs_to :student, class_name: "User", foreign_key: :student_id
+  belongs_to :course
 end
