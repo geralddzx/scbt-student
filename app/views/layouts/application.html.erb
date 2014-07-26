@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script type="text/javascript">
+    var userPermission = "<%= current_user.permission %>"
+    var userId = "<%= current_user.id %>"
+  </script>
+  
   <title>Stanford College Student Space</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
