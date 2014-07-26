@@ -37,6 +37,7 @@ group :development do
   gem 'email_validator'
 end
 
+gem 'rails_12factor', group: :production
 
 gem "backbone-on-rails"
 gem "letter_opener", group: :development

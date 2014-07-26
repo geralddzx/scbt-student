@@ -13,7 +13,7 @@ Please select a course that you are interested in:
       </a>
       <% if (userPermission != "STUDENT"){ %>
         <button class="remove-course" id="<%= course.id %>">Remove Course</button>
-        <a href="#course/<%= course.id %>/edit">Edit Course</a>
+        <a href="#courses/<%= course.id %>/edit">Edit Course</a>
       <% } %>
     </li>
   <% })  %>

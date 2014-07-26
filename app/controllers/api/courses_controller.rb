@@ -15,7 +15,8 @@ class Api::CoursesController < ApplicationController
   end
   
   def update
-    @course = Course.find(params[:id])
+    @course = Course.find_by_id(params[:id])
+    return render json: "This course does not exist" if @course.nil?
     if @course.update_attributes(course_params)
       render json: @course
     else
@@ -28,7 +29,8 @@ class Api::CoursesController < ApplicationController
   end
   
   def destroy
-    @course = Course.find(params[:id])
+    @course = Course.find_by_id(params[:id])
+    return render json: "This course does not exist" if @course.nil?
     @course.destroy!
     render json: @course
   end

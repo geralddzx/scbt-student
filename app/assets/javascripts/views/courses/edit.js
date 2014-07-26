@@ -28,7 +28,6 @@ Scbt.Views.CourseEdit = Backbone.View.extend({
        Backbone.history.navigate("/", {trigger: true})
      },
      error: function(req, res){
-       debugger
        alert(res.responseJSON || res.responseText)
      }     
    }) 
