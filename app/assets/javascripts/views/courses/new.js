@@ -1,4 +1,7 @@
 Scbt.Views.CoursesNew = Backbone.View.extend({
+  initialize: function(){
+    this.render()
+  },  
   events: {
     "submit form": "submit"
   },
@@ -19,7 +22,6 @@ Scbt.Views.CoursesNew = Backbone.View.extend({
     
     var params = $(event.currentTarget).serializeJSON()
     var newCourse = new Scbt.Models.Course()
-    
     newCourse.save(params["course"], {
       success: function(req, res){
         alert("Your course has been created")

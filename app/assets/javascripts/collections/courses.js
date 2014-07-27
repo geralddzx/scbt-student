@@ -5,7 +5,9 @@ Scbt.Collections.Courses = Backbone.Collection.extend({
     course = this.get(id)
     collection = this
     
-    if (!course){
+    if (course){
+      course.fetch()
+    } else {
       course = new this.model({id: id})
       course.fetch({
         success: function(req, res){collection.add(course)}

@@ -21,3 +21,9 @@
     <td><%= course.get('hours') %></td>
   </tr>
 </table>
+
+<% if (course.enrollment.status){ %>
+  Enrollment status: <%= course.enrollment.status %>
+<% } else { %>
+  <button class="enroll-course">Enroll in this Course</button>
+<% } %>

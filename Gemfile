@@ -43,7 +43,6 @@ gem "backbone-on-rails"
 gem "letter_opener", group: :development
 gem 'bootstrap-sass'
 
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
