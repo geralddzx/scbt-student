@@ -14,17 +14,20 @@
 #
 
 class User < ActiveRecord::Base
+  attr_reader :password
   before_validation :ensure_session_token, :ensure_permission_set
-  validates :email, :password_digest, :session_token, :first_name, :last_name, :permission, presence: true
+  validates :email, :session_token, :first_name, :last_name, :permission, presence: true
   validates :email, uniqueness: true, email: true
   validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN"]}
-  has_many :student_enrollments, foreign_key: :student_id
-  has_many :courses, through: :student_enrollments, source: :course 
+  validates :password, length: { minimum: 6, allow_nil: true }
+  has_many :enrollments, foreign_key: :student_id, dependent: :destroy
+  has_many :enrolled_courses, through: :enrollments, source: :course 
+  has_many :taught_courses, class_name: "Course", foreign_key: :instructor_id 
   
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     return nil if user.nil?
-    return user if user.password?(password) 
+    return user if user.password?(password)
     email
   end
    
@@ -33,6 +36,7 @@ class User < ActiveRecord::Base
   end
   
   def password=(password)
+    @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 

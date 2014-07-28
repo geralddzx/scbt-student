@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: student_enrollments
+# Table name: enrollments
 #
 #  id         :integer          not null, primary key
 #  created_at :datetime
@@ -12,7 +12,7 @@
 
 require 'test_helper'
 
-class StudentEnrollmentTest < ActiveSupport::TestCase
+class EnrollmentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

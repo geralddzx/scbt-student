@@ -15,7 +15,16 @@
 
 class Course < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
+  validate :valid_instructor
   belongs_to :instructor, class_name: "User"
-  has_many :student_enrollments
-  has_many :students, through: :student_enrollments, source: :student
+  has_many :enrollments, dependent: :destroy
+  has_many :approved_enrollments, -> {where status: "APPROVED"}, class_name: "Enrollment"
+  has_many :students, through: :enrollments, source: :student
+  has_many :approved_students, through: :approved_enrollments, source: :student 
+  
+  def valid_instructor
+    if self.instructor && self.instructor.permission != "INSTRUCTOR"
+      errors.add(:instructor_id, "ID does not match a valid instructor")
+    end
+  end
 end

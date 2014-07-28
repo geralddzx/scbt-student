@@ -6,7 +6,7 @@ class Api::CoursesController < ApplicationController
     if @course.save
       render json: @course
     else
-      render json: @course.errors.full_messages, status: :unprocessable_entity
+      render json: @course.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
   
@@ -14,7 +14,7 @@ class Api::CoursesController < ApplicationController
     @course = Course.find(params[:id])
     # include this user's course_enrollment if any.
     @instructor = @course.instructor
-    @student_enrollments = @course.student_enrollments
+    @enrollments = @course.enrollments
     @enrolled_students = @course.students
     render "api/courses/show"
 
@@ -52,7 +52,7 @@ class Api::CoursesController < ApplicationController
     if @course.update_attributes(course_params)
       render json: @course
     else
-      render json: @course.errors.full_messages, status: :unprocessable_entity
+      render json: @course.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end    
   

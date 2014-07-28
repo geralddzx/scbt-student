@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       flash[:notices] = "You have created the user: #{@user.email}"
       sign_in(@user)
     else
-      flash[:errors] = @user.errors.full_messages[0]
+      flash[:errors] = @user.errors.full_messages.join(", ")
       render :new
     end 
   end

@@ -7,6 +7,7 @@ Scbt.Views.CourseShow = Backbone.View.extend({
   },
   template: JST["courses/show"],
   render: function(){
+    debugger
     renderedContent = this.template({course: this.model})
     this.$el.html(renderedContent)
     return this

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: student_enrollments
+# Table name: enrollments
 #
 #  id         :integer          not null, primary key
 #  created_at :datetime

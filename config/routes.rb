@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :users, only:[:new, :create]
   namespace :api, defaults: {format: :json} do
     resources :courses, except:[:new, :edit]
-    resources :student_enrollments, only: [:create, :update]
+    resources :enrollments, only: [:create, :update]
   end
 end
