@@ -15,8 +15,9 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def require_isntructor
-    unless current_user.permission = "INSTRUCTOR"
+  def require_instructor
+    unless current_user.permission == "INSTRUCTOR"
+      puts true
       render json: "You must be an instructor to make this request", status: :unauthorized
     end
   end

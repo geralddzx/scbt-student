@@ -4,7 +4,7 @@ class Api::CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     if @course.save
-      render json: @course, include: [@course.student_enrollments.find_by(student_id: current_user.id)]
+      render json: @course
     else
       render json: @course.errors.full_messages, status: :unprocessable_entity
     end
@@ -13,7 +13,7 @@ class Api::CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     # include this user's course_enrollment if any.
-    @current_user_enrollment = @course.students.find_by(id: current_user.id) || StudentEnrollment.new
+    @current_user_enrollment = @course.student_enrollments.find_by(student_id: current_user.id) || StudentEnrollment.new
     render "api/courses/show"
 
     # P1: To start, lets 

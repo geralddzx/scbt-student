@@ -9,11 +9,13 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  permission      :string(255)      not null
+#  first_name      :string(255)      not null
+#  last_name       :string(255)      not null
 #
 
 class User < ActiveRecord::Base
   before_validation :ensure_session_token, :ensure_permission_set
-  validates :email, :password_digest, :session_token, :permission, presence: true
+  validates :email, :password_digest, :session_token, :first_name, :last_name, :permission, presence: true
   validates :email, uniqueness: true, email: true
   validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN"]}
   has_many :student_enrollments, foreign_key: :student_id

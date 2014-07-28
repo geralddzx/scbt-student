@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       params[:user][:password]
     )
     @user = User.new(email: params[:user][:email])
-    @controller = "users"
+    @controller = "sessions"
     
     if user.class == User
       sign_in(user)

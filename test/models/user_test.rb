@@ -9,6 +9,8 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  permission      :string(255)      not null
+#  first_name      :string(255)      not null
+#  last_name       :string(255)      not null
 #
 
 require 'test_helper'

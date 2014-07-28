@@ -13,7 +13,7 @@ Scbt.Routers.Router = Backbone.Router.extend({
   },
   coursesNew: function(){
     var view = new Scbt.Views.CoursesNew({
-      // collection: Scbt.Collections.courses
+      collection: Scbt.Collections.courses
     })
     this.swapView(view)
   },

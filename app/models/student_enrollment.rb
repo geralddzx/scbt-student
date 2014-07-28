@@ -11,10 +11,9 @@
 #
 
 class StudentEnrollment < ActiveRecord::Base
-  before_validation :ensure_status_set
   validates :student_id, :course_id, presence: true
   validates :course_id, uniqueness: {scope: :student_id}
-  validates :status, inclusion: {in: ["PENDING", "APPROVED", "COMPLETED"]}
+  validates :status, inclusion: {in: ["PENDING", "ENROLLED", "COMPLETED", "TEACHING"]}
   validates :course, presence: true
   
   belongs_to :student, class_name: "User", foreign_key: :student_id

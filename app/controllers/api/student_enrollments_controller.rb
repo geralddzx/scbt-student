@@ -4,7 +4,7 @@ class Api::StudentEnrollmentsController < ApplicationController
   before_action :require_instructor, only: [:update]
   def create
     @enrollment = StudentEnrollment.new(
-      course_id: params[:enrollment][:course_id]
+      course_id: params[:student_enrollment][:course_id]
     )    
     @enrollment.student_id = current_user.id
     @enrollment.status = "PENDING"
@@ -17,6 +17,7 @@ class Api::StudentEnrollmentsController < ApplicationController
   end
   
   def update
+    render json: @enrollment
   end
 end
 

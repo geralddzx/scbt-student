@@ -1,4 +1,4 @@
-<% if (userPermission != "STUDENT"){ %>
+<% if (permission != "STUDENT"){ %>
   <a href="#courses/new" class="btn btn-default">Create New Course</a>
 <% } %>
 
@@ -11,7 +11,7 @@
       <a href="#courses/<%= course.id %>">
         <%= course.escape("name") %> <%= course.escape("code") %>
       </a>
-      <% if (userPermission != "STUDENT"){ %>
+      <% if (permission != "STUDENT"){ %>
         <button class="remove-course" id="<%= course.id %>">Remove Course</button>
         <a href="#courses/<%= course.id %>/edit">Edit Course</a>
       <% } %>
