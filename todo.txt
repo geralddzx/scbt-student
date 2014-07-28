@@ -1,0 +1,1 @@
+Join enrollment status to student table

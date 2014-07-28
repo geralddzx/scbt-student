@@ -1,5 +1,7 @@
 json.(@course, :name, :code, :start_date, :end_date, :hours)
-if current_user.permission == "STUDENT"
-json.current_user_enrollment do
-  json.(@current_user_enrollment, :id, :student_id, :course_id, :status)
-end
+json.partial!("api/courses/show_student") if current_user.permission == "STUDENT"
+json.partial!("api/courses/show_instructor") if @course.instructor == current_user
+json.partial!("api/courses/show_admin") if current_user.permission == "ADMIN"
+
+
+

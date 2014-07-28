@@ -13,7 +13,9 @@ class Api::CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     # include this user's course_enrollment if any.
-    @current_user_enrollment = @course.student_enrollments.find_by(student_id: current_user.id) || StudentEnrollment.new
+    @instructor = @course.instructor
+    @student_enrollments = @course.student_enrollments
+    @enrolled_students = @course.students
     render "api/courses/show"
 
     # P1: To start, lets 
