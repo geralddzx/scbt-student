@@ -10,8 +10,6 @@ Scbt.Views.CourseShow = Backbone.View.extend({
   
   template: JST["courses/show"],
   
-  partialTemplate: JST['courses/show_admin'],
-  
   render: function(){
     renderedContent = this.template({
       course: this.model,

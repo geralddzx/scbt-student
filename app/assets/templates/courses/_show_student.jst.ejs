@@ -1,5 +1,5 @@
-<% if (course.enrollment.status){ %> 
+<% if (course.enrollment.get("status")){ %> 
   Enrollment status: <%= course.enrollment.get("status") %>
-<% } else if (permission === "STUDENT"){ %>
+<% } else { %>
   <button class="enroll-course">Enroll in this Course</button>
 <% } %>

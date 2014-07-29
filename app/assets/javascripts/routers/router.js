@@ -1,6 +1,9 @@
 Scbt.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "coursesIndex",
+    "profile/show": "userShow",
+    "profile/edit": "userEdit",
+    // "my/courses": "userCourses",
     "courses/new": "coursesNew",
     "courses/:id/edit": "courseEdit",
     "courses/:id": "courseShow"
@@ -11,6 +14,14 @@ Scbt.Routers.Router = Backbone.Router.extend({
     })
     this.swapView(view)
   },
+  userShow: function(){
+    var view = new Scbt.Views.UserShow({model: Scbt.Models.user})
+    this.swapView(view)
+  },
+  userEdit: function(){
+    var view = new Scbt.Views.UserEdit({model: Scbt.Models.user})
+    this.swapView(view)
+  },
   coursesNew: function(){
     var view = new Scbt.Views.CoursesNew({
       collection: Scbt.Collections.courses
@@ -18,12 +29,12 @@ Scbt.Routers.Router = Backbone.Router.extend({
     this.swapView(view)
   },
   courseEdit: function(id){
-    course = Scbt.Collections.courses.getOrFetch(id)
+    var course = Scbt.Collections.courses.getOrFetch(id)
     var view = new Scbt.Views.CourseEdit({model: course})
     this.swapView(view)
   },
   courseShow: function(id){
-    course = Scbt.Collections.courses.getOrFetch(id)
+    var course = Scbt.Collections.courses.getOrFetch(id)
     var view = new Scbt.Views.CourseShow({model: course})
     this.swapView(view)
   },

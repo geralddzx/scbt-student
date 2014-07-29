@@ -19,17 +19,17 @@ Scbt.Views.CourseEdit = Backbone.View.extend({
     return this
   },
   submit: function(event){
-   event.preventDefault()
-   params = $(event.currentTarget).serializeJSON()
-   
-   this.model.save(params["course"],{
-     success: function(req, res){
+    event.preventDefault()
+    params = $(event.currentTarget).serializeJSON()
+    
+    this.model.save(params["course"],{
+      success: function(req, res){
        alert("This course has been updated")
        Backbone.history.navigate("/", {trigger: true})
-     },
-     error: function(req, res){
+      },
+      error: function(req, res){
        alert(res.responseJSON || res.responseText)
-     }     
+      }     
    }) 
   }  
 })

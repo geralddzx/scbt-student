@@ -1,0 +1,32 @@
+<h1>Edit Profile</h1>
+<form>
+  <label for="email">Email</label>
+  <input 
+    type="email" 
+    name="user[email]" 
+    value="<%= user.escape("email") %>" 
+    id="email">
+    
+  <label for="password">Password</label>
+  <input 
+    type="password" 
+    name="user[password]" 
+    value=""
+    id="password">
+    
+  <label for="first_name">First Name</label>
+  <input 
+    type="first_name" 
+    name="user[first_name]" 
+    value="<%= user.escape("first_name") %>"
+    id="first_name">
+    
+  <label for="last_name">Last Name</label>
+  <input 
+    type="last_name" 
+    name="user[last_name]" 
+    value="<%= user.escape("last_name") %>"
+    id="last_name">    
+
+  <input type="submit" value="Update Profile">
+</form>

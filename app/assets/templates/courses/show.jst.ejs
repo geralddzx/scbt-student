@@ -21,7 +21,6 @@
     <td><%= course.get('hours') %></td>
   </tr>
 </table>
-<% if (course.get('permission') === "ADMIN") { %>
-  <%= JST["courses/_show_admin"]({course: course}) %>
-<% } %>
+<%= JST["courses/_show_" + permission.toLowerCase()]({course: course}) %>
+
   

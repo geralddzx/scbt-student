@@ -1,3 +1,6 @@
-should i build instructor model
-show i import all instructor information on show or have a seperate router
-current user log out on other session
+admin can approve enrollment
+instructor can post grade on enrollment
+where to put student messages, files, grades for a course
+How to upload files to course
+edit profile in api folder
+my courses tab

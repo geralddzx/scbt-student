@@ -5,8 +5,8 @@ else
 end
 
 json.enrollments(@course.enrollments) do |enrollment|
-  json.id enrollment.student.id
+  json.id enrollment.id
   json.first_name enrollment.student.first_name
   json.last_name enrollment.student.last_name
-  json.status enrollment.status
+  json.status enrollment.status  
 end

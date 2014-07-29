@@ -1,7 +1,6 @@
 Scbt.Models.Course = Backbone.Model.extend({
   urlRoot: "api/courses",
   parse: function(res){
-    this.current_user = new Scbt.Models.User(res["current_user"])
     this.instructor = new Scbt.Models.User(res["instructor"])
     this.enrollment = new Scbt.Models.Enrollment(res["enrollment"])
     this.enrollments = new Scbt.Collections.Enrollments(res["enrollments"])
