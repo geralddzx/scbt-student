@@ -1,0 +1,1 @@
+Scbt.Models.User = Backbone.Model.extend({})

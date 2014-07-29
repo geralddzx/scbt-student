@@ -1,0 +1,3 @@
+should i build instructor model
+show i import all instructor information on show or have a seperate router
+current user log out on other session

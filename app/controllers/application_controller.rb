@@ -21,4 +21,11 @@ class ApplicationController < ActionController::Base
       render json: "You must be an instructor to make this request", status: :unauthorized
     end
   end
+  
+  def require_admin
+    unless current_user.permission == "ADMIN"
+      puts true
+      render json: "You must be an admin to make this request", status: :unauthorized
+    end
+  end
 end

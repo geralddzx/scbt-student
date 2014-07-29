@@ -1,0 +1,13 @@
+<h4>All Enrollments</h4>
+<ul>
+  <% course.enrollments.each(function(enrollment){ %>
+    <li>
+      Student Name: <%= enrollment.escape("first_name") %> <%= enrollment.escape("last_name") %>  
+      <br>
+      Status: <%= enrollment.get("status") %>
+      <% if (enrollment.get("status") === "PENDING"){ %>
+        <button class="approve-enrollment" id="<%= enrollment.get("id") %>">Approve enrollment</button>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>

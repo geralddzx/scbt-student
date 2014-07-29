@@ -21,8 +21,7 @@
     <td><%= course.get('hours') %></td>
   </tr>
 </table>
-<% if (course.enrollment){ %>
-  Enrollment status: <%= course.enrollment.get("status") %>
-<% } else if (permission === "STUDENT") { %>
-  <button class="enroll-course">Enroll in this Course</button>
+<% if (course.get('permission') === "ADMIN") { %>
+  <%= JST["courses/_show_admin"]({course: course}) %>
 <% } %>
+  

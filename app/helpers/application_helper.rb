@@ -12,7 +12,7 @@ module ApplicationHelper
   end
   
   def sign_out
-    current_user.reset_token
+    current_user.reset_token if current_user
     session[:session_token] = nil
     redirect_to new_session_url
   end

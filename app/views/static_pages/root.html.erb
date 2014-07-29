@@ -1,4 +1,4 @@
-Welcome <%= current_user.email %> to Stanford College Student Space
+Welcome <%= current_user.first_name %> to Stanford College Student Space
 
 <div id="alert"></div>
 
@@ -8,5 +8,6 @@ Welcome <%= current_user.email %> to Stanford College Student Space
 <script>
   $(Scbt.initialize)
   var permission = "<%= current_user.permission %>"
+  
   // var userId = "<%= current_user.id %>"
 </script>
