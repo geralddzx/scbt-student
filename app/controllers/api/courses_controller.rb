@@ -57,6 +57,8 @@ class Api::CoursesController < ApplicationController
   end    
   
   def index
+    if params[:user_id]
+      
     render json: Course.all
   end
   

@@ -9,6 +9,7 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "courses/:id": "courseShow"
   },
   coursesIndex: function(){
+    Scbt.Collections.courses.fetch()
     var view = new Scbt.Views.CoursesIndex({
       collection: Scbt.Collections.courses
     })
