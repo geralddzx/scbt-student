@@ -58,8 +58,10 @@ class Api::CoursesController < ApplicationController
   
   def index
     if params[:user_id]
-      
-    render json: Course.all
+      render json: current_user.courses
+    else
+      render json: Course.all
+    end
   end
   
   def destroy
