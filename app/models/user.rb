@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   before_validation :ensure_session_token, :ensure_permission_set
   validates :email, :session_token, :first_name, :last_name, :permission, presence: true
   validates :email, uniqueness: true, email: true
-  validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN"]}
+  validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN", "MASTER"]}
   validates :password, length: { minimum: 6, allow_nil: true }
   has_many :enrollments, foreign_key: :student_id, dependent: :destroy
   has_many :enrolled_courses, through: :enrollments, source: :course 
@@ -67,5 +67,9 @@ class User < ActiveRecord::Base
   
   def instructor?
     self.permission == "INSTRUCTOR"
+  end
+  
+  def master?
+    self.permission == "MASTER"
   end
 end

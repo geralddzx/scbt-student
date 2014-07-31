@@ -22,10 +22,10 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def require_admin
-    unless current_user.admin?
+  def require_admin_or_master
+    unless current_user.admin? || current_user.master?
       puts true
-      render json: "You must be an admin to make this request", status: :unauthorized
+      render json: "You must be an admin or master to make this request", status: :unauthorized
     end
   end
 end

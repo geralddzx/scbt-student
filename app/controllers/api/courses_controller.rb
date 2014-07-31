@@ -1,6 +1,6 @@
 class Api::CoursesController < ApplicationController
   before_action :require_sign_in
-  before_action :require_admin, only: [:update, :create, :destroy]
+  before_action :require_admin_or_master, only: [:update, :create, :destroy]
   def create
     @course = Course.new(course_params)
     if @course.save
@@ -69,6 +69,8 @@ class Api::CoursesController < ApplicationController
   end
   
   def course_params
-    params.require(:course).permit(:name, :code, :start_date, :end_date, :hours)
+    basic_params = params.require(:course).permit(:name, :code, :start_date, :end_date, :hours)
+    return basic_params if current_user.admin?
+    basic_params.merge(params.require(:course).permit(:instructor_id))
   end
 end

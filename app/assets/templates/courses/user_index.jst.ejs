@@ -2,7 +2,7 @@
 <ul>
   <% courses.each(function(course){ %>
     <li>
-      <a href="#courses/<%= course.id %>">
+      <a href="#courses/<%= course.get("id") %>">
         <%= course.escape("name") %>
       </a>
 

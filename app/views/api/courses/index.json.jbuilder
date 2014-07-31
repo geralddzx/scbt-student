@@ -1,4 +1,5 @@
 json.(current_user.enrollments) do |enrollment|
+  json.id enrollment.course.id
   json.name enrollment.course.name
   json.code enrollment.course.code
   json.start_date enrollment.course.start_date
