@@ -5,11 +5,17 @@ Scbt.Views.CoursesIndex = Backbone.View.extend({
   },
   initialize: function(){
     this.listenTo(this.collection, "sync remove", this.render)
-
+    this.collection.fetch()
   },
-  template: JST["courses/index"],
+  template: function(){
+    if (this.collection.url.indexOf("user") === -1){
+      return JST["courses/index"]
+    } else {
+      return JST["courses/user_index"]
+    }      
+  },
   render: function(){
-    renderedContent = this.template({courses: this.collection})
+    renderedContent = this.template()({courses: this.collection})
     this.$el.html(renderedContent)
     return this
   },

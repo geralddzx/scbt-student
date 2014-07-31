@@ -2,12 +2,14 @@
 #
 # Table name: enrollments
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime
-#  updated_at :datetime
-#  status     :string(255)      not null
-#  student_id :integer          not null
-#  course_id  :integer          not null
+#  id          :integer          not null, primary key
+#  created_at  :datetime
+#  updated_at  :datetime
+#  status      :string(255)      not null
+#  student_id  :integer          not null
+#  course_id   :integer          not null
+#  grade       :integer
+#  approver_id :integer
 #
 
 require 'test_helper'

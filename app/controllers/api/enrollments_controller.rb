@@ -7,7 +7,6 @@ class Api::EnrollmentsController < ApplicationController
       course_id: params[:enrollment][:course_id]
     )    
     @enrollment.student_id = current_user.id
-    @enrollment.status = "PENDING"
     
     if @enrollment.save
       render json: @enrollment
@@ -18,8 +17,12 @@ class Api::EnrollmentsController < ApplicationController
   
   def update
     @enrollment = Enrollment.find(params[:enrollment][:id])
-    if @enrollment.update_attributes({status: params[:enrollment][:status]})
-      render json: @enrollment
+    status = params[:enrollment][:status]
+    attributes = {status: status}
+    attributes[:approver_id] = current_user.id if status == "APPROVED"
+    attributes[:approved_id] = nil if status == "PENDING"
+    if @enrollment.update_attributes(attributes)
+      render "api/enrollments/show"
     else
       render json: @enrollment.errors.full_messages.join(", "), status: :unprocessable_entity
     end

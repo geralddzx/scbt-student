@@ -2,7 +2,10 @@
   <div class="container">
     <ul>
       <li><a href="#">Home</a></li>
-      <li><a href="#profile/show">Profile</a></li>
+      <li><a href="#my/profile/show">My Profile</a></li>
+      <% if current_user.permission == "STUDENT" %>
+        <li><a href="#my/courses/index">My Courses</a></li>
+      <% end %>
     </ul>
   </div>
 </div>

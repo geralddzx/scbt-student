@@ -34,6 +34,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem "letter_opener"
 end
 
 gem 'email_validator'
@@ -41,7 +42,6 @@ gem 'email_validator'
 gem 'rails_12factor', group: :production
 
 gem "backbone-on-rails"
-gem "letter_opener", group: :development
 gem 'bootstrap-sass'
 
 # Use unicorn as the app server

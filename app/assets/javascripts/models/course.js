@@ -1,13 +1,18 @@
 Scbt.Models.Course = Backbone.Model.extend({
   urlRoot: "api/courses",
   parse: function(res){
-    this.instructor = new Scbt.Models.User(res["instructor"])
-    this.enrollment = new Scbt.Models.Enrollment(res["enrollment"])
-    this.enrollments = new Scbt.Collections.Enrollments(res["enrollments"])
-
-    delete res["current_user"]
-    delete res["instructor"]
+    if (res["enrollments"]){
+      this.enrollments = new Scbt.Collections.Enrollments(res["enrollments"], {parse: true})
+    }
+    if (res["enrollment"]){
+      this.enrollment = new Scbt.Models.Enrollment(res["enrollment"], {parse: true})
+    }
+    if (res["instructor"]){
+      this.instructor = new Scbt.Models.User(res["instructor"])
+    }
+      
     delete res["enrollment"]
+    delete res["instructor"]
     delete res["enrollments"]
     return res
   }

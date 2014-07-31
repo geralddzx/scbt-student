@@ -6,6 +6,7 @@ Scbt.Views.CourseShow = Backbone.View.extend({
   
   initialize: function(){
     this.listenTo(this.model, "sync", this.render)
+    this.model.fetch()
   },
   
   template: JST["courses/show"],
@@ -21,6 +22,7 @@ Scbt.Views.CourseShow = Backbone.View.extend({
   enroll: function(event){
     view = this
     event.preventDefault()
+    view.model.enrollment = new Scbt.Models.Enrollment
     view.model.enrollment.save({ course_id: view.model.id }, {
       success: function(req, res){
         alert("You have applied for this course. our staff will contact you within 24 hours")

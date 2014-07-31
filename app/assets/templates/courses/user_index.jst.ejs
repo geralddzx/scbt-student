@@ -1,0 +1,16 @@
+<h3>My Courses</h3>
+<ul>
+  <% courses.each(function(course){ %>
+    <li>
+      <a href="#courses/<%= course.id %>">
+        <%= course.escape("name") %>
+      </a>
+
+      Start Date <%= course.escape("start_date") %>
+      End Date <%= course.escape("end_date") %>
+      Status <%= course.escape("status") %>
+      Grade <%= course.escape("grade") %>
+    </li>
+  <% }) %>
+</ul>
+

@@ -23,7 +23,7 @@ class Course < ActiveRecord::Base
   has_many :approved_students, through: :approved_enrollments, source: :student 
   
   def valid_instructor
-    if self.instructor && self.instructor.permission != "INSTRUCTOR"
+    if self.instructor && !self.instructor.instructor?
       errors.add(:instructor_id, "ID does not match a valid instructor")
     end
   end

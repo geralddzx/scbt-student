@@ -1,6 +1,6 @@
 class Api::CoursesController < ApplicationController
   before_action :require_sign_in
-  before_action :require_permission, only: [:update, :create, :destroy]
+  before_action :require_admin, only: [:update, :create, :destroy]
   def create
     @course = Course.new(course_params)
     if @course.save
@@ -13,9 +13,6 @@ class Api::CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     # include this user's course_enrollment if any.
-    @instructor = @course.instructor
-    @enrollments = @course.enrollments
-    @enrolled_students = @course.students
     render "api/courses/show"
 
     # P1: To start, lets 
@@ -57,8 +54,8 @@ class Api::CoursesController < ApplicationController
   end    
   
   def index
-    if params[:user_id]
-      render json: current_user.courses
+    if request.url.include?("user")
+      render "api/courses/index"
     else
       render json: Course.all
     end

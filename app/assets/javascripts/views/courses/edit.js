@@ -4,6 +4,7 @@ Scbt.Views.CourseEdit = Backbone.View.extend({
   },
   initialize: function(){
     this.listenTo(this.model, "sync", this.render)
+    this.model.fetch()
   }, 
   template: JST["courses/form"],
   templateParams: function(){

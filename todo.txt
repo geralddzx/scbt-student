@@ -4,3 +4,5 @@ where to put student messages, files, grades for a course
 How to upload files to course
 edit profile in api folder
 my courses tab
+add approved by
+edit course from show

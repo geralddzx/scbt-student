@@ -1,4 +1,4 @@
-<% if (permission != "STUDENT"){ %>
+<% if (permission == "ADMIN"){ %>
   <a href="#courses/new" class="btn btn-default">Create New Course</a>
 <% } %>
 
@@ -11,7 +11,15 @@
       <a href="#courses/<%= course.id %>">
         <%= course.escape("name") %> <%= course.escape("code") %>
       </a>
-      <% if (permission != "STUDENT"){ %>
+      
+      <% if (courses.url.indexOf("user") != -1){ %>
+        Start Date<%= course.escape("start_date") %>
+        End Date<%= course.escape("end_date") %>
+        Status <%= course.escape("status") %>
+        Grade <%= course.escape("grade") %>
+      <% } %>
+      
+      <% if (permission === "ADMIN"){ %>
         <button class="remove-course" id="<%= course.id %>">Remove Course</button>
         <a href="#courses/<%= course.id %>/edit">Edit Course</a>
       <% } %>

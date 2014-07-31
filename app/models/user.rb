@@ -12,7 +12,6 @@
 #  first_name      :string(255)      not null
 #  last_name       :string(255)      not null
 #
-
 class User < ActiveRecord::Base
   attr_reader :password
   before_validation :ensure_session_token, :ensure_permission_set
@@ -56,5 +55,17 @@ class User < ActiveRecord::Base
   
   def ensure_permission_set
     self.permission ||= "STUDENT"
+  end
+  
+  def admin?
+    self.permission == "ADMIN"
+  end
+  
+  def student?
+    self.permission == "STUDENT"
+  end
+  
+  def instructor?
+    self.permission == "INSTRUCTOR"
   end
 end

@@ -22,7 +22,7 @@ Scbt.Views.UserEdit = Backbone.View.extend({
     this.model.save(params["user"], {
       success: function(req, res){
         alert("Your profile has been updated!")
-        Backbone.history.navigate("profile/show", {trigger: true})
+        Backbone.history.navigate("my/profile/show", {trigger: true})
       },
       error: function(req, res){
         alert(res.responseText || res.responseJSON)
