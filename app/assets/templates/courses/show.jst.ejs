@@ -20,7 +20,15 @@
     <td>Hours</td>
     <td><%= course.get('hours') %></td>
   </tr>
+  
+  <tr>
+    <td>Instructor</td>
+    <td>
+      <% if (course.instructor){ %>
+        <%= course.instructor.get('first_name') %> <%= course.instructor.get('last_name') %>
+      <%}%>
+    </td>
+  </tr>
 </table>
-<%= JST["courses/_show_" + permission.toLowerCase()]({course: course}) %>
-
+<%= JST["courses/_show_" + Scbt.Models.user.permissionType()]({course: course}) %>
   

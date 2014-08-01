@@ -1,6 +1,7 @@
 class Api::CoursesController < ApplicationController
   before_action :require_sign_in
-  before_action :require_admin_or_master, only: [:update, :create, :destroy]
+  before_action :assign_instructor_requires_master_admin, only: [:create, :update]
+  before_action :require_admin, only: [:update, :create, :destroy]
   def create
     @course = Course.new(course_params)
     if @course.save
@@ -44,8 +45,7 @@ class Api::CoursesController < ApplicationController
   end
   
   def update
-    @course = Course.find_by_id(params[:id])
-    return render json: "This course does not exist" if @course.nil?
+    @course = Course.find(params[:id])
     if @course.update_attributes(course_params)
       render json: @course
     else
@@ -69,8 +69,12 @@ class Api::CoursesController < ApplicationController
   end
   
   def course_params
-    basic_params = params.require(:course).permit(:name, :code, :start_date, :end_date, :hours)
-    return basic_params if current_user.admin?
-    basic_params.merge(params.require(:course).permit(:instructor_id))
+    params.require(:course).permit(:name, :code, :start_date, :end_date, :hours, :instructor_id)
+  end
+  
+  def assign_instructor_requires_master_admin
+    if params[:course][:instructor_id] && !current_user.master_admin?
+      render json: "You must be a master admin to assign an instructor", status: :unauthorized
+    end
   end
 end

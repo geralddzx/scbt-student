@@ -10,10 +10,17 @@ Scbt.Models.Course = Backbone.Model.extend({
     if (res["instructor"]){
       this.instructor = new Scbt.Models.User(res["instructor"])
     }
-      
+    if (res["instructors"]){
+      this.instructors = new Scbt.Collections.Users(res["instructors"])
+    }
+    // if (res["instructors"]){
+    //   this.instructors = new Scbt.Collections.Users(res["instructors"])
+    // }
     delete res["enrollment"]
     delete res["instructor"]
     delete res["enrollments"]
+    delete res["instructors"]
+    
     return res
   }
 })

@@ -22,4 +22,7 @@ enrollment.approver_id = 1
 enrollment.status = "APPROVED"
 enrollment.save
 
+
 User.last.enrolled_courses.create({name: "Modern Arts"})
+User.create(:first_name => "Master", :last_name => "Admin", :password => "turtle", :email => "master@gmail.com", permission: "MASTER_ADMIN")
+User.create(:first_name => "Dababa", :last_name => "Lalaala", :password => "turtle", :email => "haha@gmail.com", permission: "INSTRUCTOR")

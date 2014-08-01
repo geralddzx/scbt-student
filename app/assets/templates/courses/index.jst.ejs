@@ -1,4 +1,4 @@
-<% if (permission == "ADMIN"){ %>
+<% if (Scbt.Models.user.permissionType() == "admin"){ %>
   <a href="#courses/new" class="btn btn-default">Create New Course</a>
 <% } %>
 
@@ -19,7 +19,7 @@
         Grade <%= course.escape("grade") %>
       <% } %>
       
-      <% if (permission === "ADMIN"){ %>
+      <% if (Scbt.Models.user.permissionType() === "admin"){ %>
         <button class="remove-course" id="<%= course.id %>">Remove Course</button>
         <a href="#courses/<%= course.id %>/edit">Edit Course</a>
       <% } %>

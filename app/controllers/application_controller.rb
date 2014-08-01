@@ -17,15 +17,19 @@ class ApplicationController < ActionController::Base
   
   def require_instructor
     unless current_user.instructor?
-      puts true
       render json: "You must be an instructor to make this request", status: :unauthorized
     end
   end
   
-  def require_admin_or_master
-    unless current_user.admin? || current_user.master?
-      puts true
-      render json: "You must be an admin or master to make this request", status: :unauthorized
+  def require_admin
+    unless current_user.admin?
+      render json: "You must be an admin to make this request", status: :unauthorized
+    end
+  end
+  
+  def require_master_admin
+    unless current_user.master_admin?
+      render json: "You must be a master admin to make this request", status: :unauthorized
     end
   end
 end

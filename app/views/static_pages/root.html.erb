@@ -6,8 +6,19 @@ Welcome <%= current_user.first_name %> to Stanford College Student Space
 </div>
 
 <script>
+
+  currentUser = Scbt.Models.user = new Scbt.Models.User(
+    <%= current_user.to_json({except: [:password_digest, :session_token]}).html_safe %>
+  )
   $(Scbt.initialize)
-  var permission = "<%= current_user.permission %>"
-  
+  // Scbt.Models.user.fetch({success: function(){
+  // }});us
+  //
+  // var permission = "<%= current_user.permission %>"
+  // if (permission == "ADMIN" || permission == "MASTER_ADMIN"){
+  //   permissionType = "admin"
+  // } else {
+  //   permissionType = permission.toLowerCase()
+  // }
   // var userId = "<%= current_user.id %>"
 </script>

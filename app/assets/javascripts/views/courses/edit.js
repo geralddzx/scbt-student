@@ -4,7 +4,7 @@ Scbt.Views.CourseEdit = Backbone.View.extend({
   },
   initialize: function(){
     this.listenTo(this.model, "sync", this.render)
-    this.model.fetch()
+    this.model.fetch({data: {instructors: true}})
   }, 
   template: JST["courses/form"],
   templateParams: function(){
@@ -25,11 +25,11 @@ Scbt.Views.CourseEdit = Backbone.View.extend({
     
     this.model.save(params["course"],{
       success: function(req, res){
-       alert("This course has been updated")
-       Backbone.history.navigate("/", {trigger: true})
+        alert("This course has been updated")
+        Backbone.history.navigate("/", {trigger: true})
       },
       error: function(req, res){
-       alert(res.responseJSON || res.responseText)
+        alert(res.responseJSON || res.responseText)
       }     
    }) 
   }  

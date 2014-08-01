@@ -5,11 +5,11 @@
     value="<%= course.escape("name") %>" id="name">
   
   <label for="code">Code</label>
-  <input type="text" name="course[code]" 
+  <input type="text" name="course[code]"
     value="<%= course.escape("code") %>" id="code">
   
   <label for="start-date">Start Date</label>
-  <input type="date" name="course[start_date]" 
+  <input type="date" name="course[start_date]"
     value="<%= course.escape("start_date") %>" id="start-date">
   
   <label for="end-date">End Date</label>
@@ -19,6 +19,25 @@
   <label for="hours">Hours</label>
   <input type="number" name="course[hours]" 
     value="<%= course.escape("hours") %>" id="hours">
+    
+  <% if (course.instructors){ %>
+    <select name="course[instructor_id]">
+        <option value="" 
+        <% if (!course.instructor){ %>
+          selected="selected"
+        <% } %>
+        >No Instructor</option>
+      <% course.instructors.each(function(instructor){ %>
+        <option value="<%= instructor.get("id") %>" 
+          <% if (course.instructor && course.instructor.get("id") == instructor.get("id")) { %>
+            selected="selected"
+          <% } %>
+        >
+          <%= instructor.get("first_name") %> <%= instructor.get("last_name") %>
+        </option>
+      <% }) %>
+    </select>
+  <% } %>
 
   <input type="submit" value="<%= action %> Course">
 </form>
