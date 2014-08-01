@@ -1,5 +1,7 @@
-<h1>Profile</h1>
-<table border="1" cellspacing="5" cellpadding="5">
+<h1>Profile</h1> 
+<a class="btn btn-info" href="#my/profile/edit">Edit Profile</a>
+
+<table cellspacing="5" cellpadding="5">
   <tr>
     <td>First Name</td>
     <td><%= user.escape("first_name") %></td>
@@ -15,4 +17,3 @@
     <td><%= user.escape("email") %></td>
   </tr>
 </table>
-<a href="#my/profile/edit">Edit Profile</a>

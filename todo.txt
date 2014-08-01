@@ -12,3 +12,7 @@ modeling current_user
 how to implement assign instructor
 modeling current_user permission
 default user url should not be api/user
+
+why sign out is white
+
+jqeury select buttons and add class

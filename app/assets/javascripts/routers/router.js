@@ -51,6 +51,6 @@ Scbt.Routers.Router = Backbone.Router.extend({
       this._currentView.remove()
     }
     this._currentView = newView
-    $('#container').html(newView.$el)
+    $('#content').html(newView.$el)
   }
 })
