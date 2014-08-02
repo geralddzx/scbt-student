@@ -7,7 +7,7 @@ else
 end
 
 if params[:instructors] && current_user.master_admin?
-  json.instructors User.where(permission: "INSTRUCTOR") 
+  json.instructors User.where(permission: "INSTRUCTOR")
 end
 
 json.partial!("api/courses/show_student") if current_user.student?

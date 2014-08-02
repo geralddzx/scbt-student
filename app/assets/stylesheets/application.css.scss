@@ -21,7 +21,7 @@
 }
 
 .header-item {
-  margin: 10px 25px;
+  margin: 10px;
 }
 
 #header {
@@ -36,6 +36,11 @@
   color: white;
 }
 
-.header-item{
+.header-item {
   display: inline-block;
+  margin: 10px;
+}
+
+#header {
+  justify-content: flex-end;
 }
