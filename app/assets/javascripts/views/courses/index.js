@@ -4,7 +4,7 @@ Scbt.Views.CoursesIndex = Backbone.View.extend({
     "click button.edit-course": "courseEdit"
   },
   initialize: function(){
-    this.listenTo(this.collection, "sync remove", this.render)
+    this.listenTo(this.collection, "sync", this.render)
     this.collection.fetch()
   },
   template: function(){
@@ -24,11 +24,15 @@ Scbt.Views.CoursesIndex = Backbone.View.extend({
     view = this
     
     var id = $(event.target).attr("id")
-    var course = this.collection.getOrFetch(id)
+    var course = this.collection.get(id)
     course.destroy({
+      success: function(req, res){
+        alert("This course has been deleted")
+        view.render()
+      },
       error: function(req, res){
         alert(res.responseJSON || res.responseText)
-        view.collection.fetch()
+        // view.collection.fetch()
       }
     })
   }  

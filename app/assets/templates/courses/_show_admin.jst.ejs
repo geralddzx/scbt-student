@@ -1,20 +1,36 @@
-Number of Students: <%= course.enrollments.where({status: "APPROVED"}).length %>
-<br>
-
-<a href="#courses/<%= course.id %>/edit">Edit This Course</a>
 <h4>All Enrollments</h4>
-<ul>
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Student Name</th>
+    <th>Status</th>
+    <th>Approved by</th>
+  </tr>
+  
   <% course.enrollments.each(function(enrollment){ %>
-    <li>
-      Student Name: <%= enrollment.escape("first_name") %> <%= enrollment.escape("last_name") %>  
-      <br>
-      Status: <%= enrollment.get("status") %>
-      <% if (enrollment.get("status") == "PENDING"){ %>
-        <button class="approve-enrollment" id="<%= enrollment.get("id") %>">Approve enrollment</button>
-      <% } else { %>
-        Approved By: <%= enrollment.approver.get("email") %>
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+    <% if (enrollment.get("status") == "PENDING"){ %>
+      <tr class="warning">
+    <% } else { %>
+      <tr class="success">
+    <% } %>
 
+      <td>
+        <%= enrollment.escape("first_name") %> <%= enrollment.escape("last_name") %>  
+      </td>
+      <td>
+        <%= enrollment.get("status") %>
+      </td>  
+      
+      <% if (enrollment.get("status") == "PENDING"){ %>
+        <td></td>
+        <td>
+          <button class="approve-enrollment" id="<%= enrollment.get("id") %>">Approve enrollment</button>
+        </td>
+      <% } else { %>
+        <td>
+          <%= enrollment.approver.get("email") %>
+        </td>
+      <% } %>  
+      
+    </tr>
+  <% }) %>
+</table>

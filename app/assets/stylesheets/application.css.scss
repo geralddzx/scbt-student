@@ -44,3 +44,56 @@
 #header {
   justify-content: flex-end;
 }
+
+#auth-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form input, form select {
+  margin-bottom: 15px;
+  display: block;
+}
+
+#auth-content > * {
+  margin: auto;
+}
+
+td, th {
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+table.d1 td:first-child{
+ font-weight: bold; 
+}
+
+#banner {
+  padding-left: 25px;
+}
+
+#content {
+  padding: 25px;
+}
+
+
+h1, h2, h3 {
+  vertical-align: center;
+  display: inline-block;
+}
+
+.btn-default, #content .btn-info {
+  vertical-align: center;
+  margin: 10px;
+}
+
+.btn-info {
+  display: inline-block;
+  vertical-align: center;
+}
+
+form > label {
+  display: block;
+}
+

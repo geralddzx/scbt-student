@@ -1,16 +1,42 @@
 <h3>My Courses</h3>
-<ul>
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+    <th>Grade</th>
+  </tr>
+  
   <% courses.each(function(course){ %>
-    <li>
-      <a href="#courses/<%= course.get("id") %>">
-        <%= course.escape("name") %>
-      </a>
+    <% if (course.get("status") == "PENDING"){ %>
+      <tr class="warning">
+    <% } else if (course.get("status") == "APPROVED"){ %>
+      <tr class="success">
+    <% } %>
 
-      Start Date <%= course.escape("start_date") %>
-      End Date <%= course.escape("end_date") %>
-      Status <%= course.escape("status") %>
-      Grade <%= course.escape("grade") %>
-    </li>
+      <td>
+        <a href="#courses/<%= course.get("id") %>">
+          <%= course.escape("name") %>
+        </a>
+      </td>
+      
+      <td>
+        <%= course.escape("start_date") %>
+      </td>
+      
+      <td>
+        <%= course.escape("end_date") %>
+      </td>  
+      
+      <td>
+        <%= course.escape("status") %>
+      </td>
+      
+      <td>
+        <%= course.escape("grade") %>
+      </td>      
+    </tr>
   <% }) %>
-</ul>
+</table>
 
