@@ -1,17 +1,17 @@
 Scbt.Routers.Router = Backbone.Router.extend({
   routes: {
-    "": "coursesIndex",
+    "": "programsIndex",
     "my/profile/show": "userShow",
     "my/profile/edit": "userEdit",
-    // "my/courses": "userCourses",
-    "my/courses/index": "userCoursesIndex",
-    "courses/new": "coursesNew",
-    "courses/:id/edit": "courseEdit",
-    "courses/:id": "courseShow"
+    // "my/programs": "userPrograms",
+    "my/programs/index": "userProgramsIndex",
+    "programs/new": "programsNew",
+    "programs/:id/edit": "programEdit",
+    "programs/:id": "programShow"
   },
-  coursesIndex: function(){
-    var view = new Scbt.Views.CoursesIndex({
-      collection: Scbt.Collections.courses
+  programsIndex: function(){
+    var view = new Scbt.Views.ProgramsIndex({
+      collection: Scbt.Collections.programs
     })
     this.swapView(view)
   },
@@ -23,27 +23,27 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.UserEdit({model: Scbt.Models.user})
     this.swapView(view)
   },
-  userCoursesIndex: function(){
-    var view = new Scbt.Views.CoursesIndex({
-      collection: new Scbt.Collections.Courses([], {url: "api/user/courses"})
+  userProgramsIndex: function(){
+    var view = new Scbt.Views.ProgramsIndex({
+      collection: new Scbt.Collections.Programs([], {url: "api/user/programs"})
     })
     this.swapView(view)
   },  
-  coursesNew: function(){
-    var view = new Scbt.Views.CoursesNew({
-      model: new Scbt.Models.Course()
-      // collection: Scbt.Collections.courses
+  programsNew: function(){
+    var view = new Scbt.Views.ProgramsNew({
+      model: new Scbt.Models.Program()
+      // collection: Scbt.Collections.programs
     })
     this.swapView(view)
   },
-  courseEdit: function(id){
-    var course = new Scbt.Models.Course({id: id})
-    var view = new Scbt.Views.CourseEdit({model: course})
+  programEdit: function(id){
+    var program = new Scbt.Models.Program({id: id})
+    var view = new Scbt.Views.ProgramEdit({model: program})
     this.swapView(view)
   },
-  courseShow: function(id){
-    var course = new Scbt.Models.Course({id: id})
-    var view = new Scbt.Views.CourseShow({model: course})
+  programShow: function(id){
+    var program = new Scbt.Models.Program({id: id})
+    var view = new Scbt.Views.ProgramShow({model: program})
     this.swapView(view)
   },
   swapView: function(newView){

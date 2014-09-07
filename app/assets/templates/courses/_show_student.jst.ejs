@@ -1,9 +1,0 @@
-<% if (course.enrollment){ %>
-  Enrollment status: <%= course.enrollment.get("status") %>
-  <br>
-  <% if (course.enrollment.approver){ %>
-    Approved By: <%= course.enrollment.approver.escape("email") %>
-  <% } %>
-<% } else { %>
-  <button class="enroll-course">Enroll in this Course</button>
-<% } %>

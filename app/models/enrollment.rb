@@ -7,21 +7,22 @@
 #  updated_at  :datetime
 #  status      :string(255)      not null
 #  student_id  :integer          not null
-#  course_id   :integer          not null
+#  program_id  :integer          not null
 #  grade       :integer
 #  approver_id :integer
+#
 
 class Enrollment < ActiveRecord::Base
   before_validation :ensure_status_set
-  validates :course_id, uniqueness: {scope: :student_id}
+  validates :program_id, uniqueness: {scope: :student_id}
   validates :status, inclusion: {in: ["PENDING", "APPROVED", "COMPLETED"]}
-  validates :course, presence: true
+  validates :program, presence: true
   validate :is_student
   validate :valid_approver
 
   belongs_to :student, class_name: "User", foreign_key: :student_id
   belongs_to :approver, class_name: "User", foreign_key: :approver_id
-  belongs_to :course
+  belongs_to :program
   
   def is_student
     unless self.student && self.student.student?

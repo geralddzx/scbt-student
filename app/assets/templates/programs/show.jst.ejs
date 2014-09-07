@@ -1,0 +1,52 @@
+<h2><%= program.get('name') %></h2>
+  
+  <% if (Scbt.Models.user.permissionType() == "admin"){ %>
+    <a class="btn btn-info" href="#programs/<%= program.id %>/edit">Edit This Program</a>
+  <% } %>
+
+<table class="d1" border="0" cellspacing="5" cellpadding="5">  
+  <tr>
+    <td>Code</td>
+    <td><%= program.get('code') %></td>
+  </tr>
+  
+  <tr>
+    <td>Start Date</td>
+    <td><%= program.get('start_date') %></td>
+  </tr>
+  
+  <tr>
+    <td>End Date</td>
+    <td><%= program.get('end_date') %></td>
+  </tr>
+  
+  <tr>
+    <td>Hours</td>
+    <td><%= program.get('hours') %></td>
+  </tr>
+  
+  <tr>
+    <td>Instructor</td>
+    <td>
+      <% if (program.instructor){ %>
+        <%= program.instructor.get('first_name') %> <%= program.instructor.get('last_name') %>
+      <% } %>
+    </td>
+  </tr>
+  
+  <% if (Scbt.Models.user.permissionType() == "admin"){ %>
+    <tr>
+      <td>
+        Number of Students: 
+      </td>
+      <td>
+        <%= program.enrollments.where({status: "APPROVED"}).length %>
+      </td>
+    </tr>
+  <% } %>
+</table>
+
+<br>
+<%= JST["programs/_show_" + Scbt.Models.user.permissionType()]({program: program}) %>
+
+  

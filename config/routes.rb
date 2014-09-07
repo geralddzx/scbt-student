@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :users, only:[:new, :create]
   
   namespace :api, defaults: {format: :json} do
-    resources :courses, except:[:new, :edit]
+    resources :programs, except:[:new, :edit]
     resources :enrollments, only: [:create, :update]
     resource :user, only: [:show, :update] do
-      resources :courses, only: [:index]
+      resources :programs, only: [:index]
     end
     resource :users, only: [] do
       get "instructors" => "users#index"

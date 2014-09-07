@@ -1,4 +1,4 @@
-<h3>My Courses</h3>
+<h3>My Programs</h3>
 <table class="table" border="0" cellspacing="5" cellpadding="5">
   <tr>
     <th>Name</th>
@@ -8,33 +8,33 @@
     <th>Grade</th>
   </tr>
   
-  <% courses.each(function(course){ %>
-    <% if (course.get("status") == "PENDING"){ %>
+  <% programs.each(function(program){ %>
+    <% if (program.get("status") == "PENDING"){ %>
       <tr class="warning">
-    <% } else if (course.get("status") == "APPROVED"){ %>
+    <% } else if (program.get("status") == "APPROVED"){ %>
       <tr class="success">
     <% } %>
 
       <td>
-        <a href="#courses/<%= course.get("id") %>">
-          <%= course.escape("name") %>
+        <a href="#programs/<%= program.get("id") %>">
+          <%= program.escape("name") %>
         </a>
       </td>
       
       <td>
-        <%= course.escape("start_date") %>
+        <%= program.escape("start_date") %>
       </td>
       
       <td>
-        <%= course.escape("end_date") %>
+        <%= program.escape("end_date") %>
       </td>  
       
       <td>
-        <%= course.escape("status") %>
+        <%= program.escape("status") %>
       </td>
       
       <td>
-        <%= course.escape("grade") %>
+        <%= program.escape("grade") %>
       </td>      
     </tr>
   <% }) %>

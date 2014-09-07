@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: courses
+# Table name: programs
 #
 #  id            :integer          not null, primary key
 #  name          :string(255)      not null
@@ -13,7 +13,7 @@
 #  instructor_id :integer
 #
 
-class Course < ActiveRecord::Base
+class Program < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validate :valid_instructor
   belongs_to :instructor, -> {where permission: "INSTRUCTOR"}, class_name: "User"

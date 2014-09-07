@@ -6,7 +6,7 @@
     <th>Approved by</th>
   </tr>
   
-  <% course.enrollments.each(function(enrollment){ %>
+  <% program.enrollments.each(function(enrollment){ %>
     <% if (enrollment.get("status") == "PENDING"){ %>
       <tr class="warning">
     <% } else { %>

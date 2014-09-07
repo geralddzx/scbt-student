@@ -1,4 +1,4 @@
-Scbt.Views.CoursesNew = Backbone.View.extend({
+Scbt.Views.ProgramsNew = Backbone.View.extend({
   initialize: function(){
     if (Scbt.Models.user.get("permission") == "MASTER_ADMIN"){
       this.model.instructors = Scbt.Collections.instructors
@@ -14,12 +14,12 @@ Scbt.Views.CoursesNew = Backbone.View.extend({
   events: {
     "submit form": "submit"
   },
-  template: JST["courses/form"],
+  template: JST["programs/form"],
   templateParams: function(){
     return {
       title: "New", 
       action: "Create",
-      course: this.model
+      program: this.model
     }
   },
   render: function(){
@@ -32,11 +32,11 @@ Scbt.Views.CoursesNew = Backbone.View.extend({
     event.preventDefault()
     
     var params = $(event.currentTarget).serializeJSON()
-    var newCourse = new Scbt.Models.Course()
-    newCourse.save(params["course"], {
+    var newProgram = new Scbt.Models.Program()
+    newProgram.save(params["program"], {
       success: function(req, res){
-        alert("Your course has been created")
-        // view.collection.add(newCourse)
+        alert("Your program has been created")
+        // view.collection.add(newProgram)
         Backbone.history.navigate("/#", {trigger: true})
       },
       error: function(req, res){

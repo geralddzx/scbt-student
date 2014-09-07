@@ -1,25 +1,25 @@
-Scbt.Collections.Courses = Backbone.Collection.extend({
+Scbt.Collections.Programs = Backbone.Collection.extend({
   initialize: function(models, options){
     if (options && options.url){
       this.url = options.url
     }
   },
-  model: Scbt.Models.Course,
-  url: "api/courses"
+  model: Scbt.Models.Program,
+  url: "api/programs"
   // getOrFetch: function(id){
-//     course = this.get(id)
+//     program = this.get(id)
 //     collection = this
 //
-//     if (course){
-//       course.fetch()
+//     if (program){
+//       program.fetch()
 //     } else {
-//       course = new this.model({id: id})
-//       course.fetch({
-//         success: function(req, res){collection.add(course)}
+//       program = new this.model({id: id})
+//       program.fetch({
+//         success: function(req, res){collection.add(program)}
 //       })
 //     }
-//     return course
+//     return program
 //   }
 });
 
-Scbt.Collections.courses = new Scbt.Collections.Courses;
+Scbt.Collections.programs = new Scbt.Collections.Programs;

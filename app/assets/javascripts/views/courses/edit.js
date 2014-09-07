@@ -1,4 +1,4 @@
-Scbt.Views.CourseEdit = Backbone.View.extend({
+Scbt.Views.ProgramEdit = Backbone.View.extend({
   events: {
     "submit form": "submit"
   },
@@ -6,12 +6,12 @@ Scbt.Views.CourseEdit = Backbone.View.extend({
     this.listenTo(this.model, "sync", this.render)
     this.model.fetch({data: {instructors: true}})
   }, 
-  template: JST["courses/form"],
+  template: JST["programs/form"],
   templateParams: function(){
     return {
       title: "Edit",                 
       action: "Update",              
-      course: this.model             
+      program: this.model             
     }
   },                               
   render: function(){              
@@ -23,9 +23,9 @@ Scbt.Views.CourseEdit = Backbone.View.extend({
     event.preventDefault()
     params = $(event.currentTarget).serializeJSON()
     
-    this.model.save(params["course"],{
+    this.model.save(params["program"],{
       success: function(req, res){
-        alert("This course has been updated")
+        alert("This program has been updated")
         Backbone.history.navigate("/", {trigger: true})
       },
       error: function(req, res){

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: courses
+# Table name: programs
 #
 #  id            :integer          not null, primary key
 #  name          :string(255)      not null
@@ -15,7 +15,7 @@
 
 require 'test_helper'
 
-class CourseTest < ActiveSupport::TestCase
+class ProgramTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

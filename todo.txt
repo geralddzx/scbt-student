@@ -1,11 +1,11 @@
 admin can approve enrollment
 instructor can post grade on enrollment
-where to put student messages, files, grades for a course
-How to upload files to course
+where to put student messages, files, grades for a program
+How to upload files to program
 edit profile in api folder
-my courses tab
+my programs tab
 add approved by
-edit course from show
+edit program from show
 Api controller vs normal controller
 
 modeling current_user

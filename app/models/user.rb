@@ -11,7 +11,13 @@
 #  permission      :string(255)      not null
 #  first_name      :string(255)      not null
 #  last_name       :string(255)      not null
+#  address         :string(255)
+#  city            :string(255)
+#  country         :string(255)
+#  postal_code     :string(255)
+#  phone           :integer
 #
+
 class User < ActiveRecord::Base
   attr_reader :password
   before_validation :ensure_session_token, :ensure_permission_set
@@ -20,8 +26,8 @@ class User < ActiveRecord::Base
   validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN", "MASTER_ADMIN"]}
   validates :password, length: { minimum: 6, allow_nil: true }
   has_many :enrollments, foreign_key: :student_id, dependent: :destroy
-  has_many :enrolled_courses, through: :enrollments, source: :course 
-  has_many :taught_courses, class_name: "Course", foreign_key: :instructor_id 
+  has_many :enrolled_programs, through: :enrollments, source: :program 
+  has_many :taught_programs, class_name: "Program", foreign_key: :instructor_id 
   
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)

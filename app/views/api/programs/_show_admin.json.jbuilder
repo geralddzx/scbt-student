@@ -1,4 +1,4 @@
-json.enrollments(@course.enrollments) do |enrollment|
+json.enrollments(@program.enrollments) do |enrollment|
   json.id enrollment.id
   json.first_name enrollment.student.first_name
   json.last_name enrollment.student.last_name

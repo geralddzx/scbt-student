@@ -35,6 +35,7 @@ group :development do
   gem 'pry-rails'
   gem 'quiet_assets'
   gem "letter_opener"
+  gem 'annotate'
 end
 
 gem 'email_validator'

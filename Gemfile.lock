@@ -32,6 +32,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
     backbone-on-rails (1.1.1.0)
       actionmailer
@@ -166,6 +169,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   backbone-on-rails
   bcrypt (~> 3.1.7)
   better_errors

@@ -1,6 +1,6 @@
-Scbt.Views.CourseShow = Backbone.View.extend({
+Scbt.Views.ProgramShow = Backbone.View.extend({
   events: {
-    "click .enroll-course": "enroll",
+    "click .enroll-program": "enroll",
     "click .approve-enrollment": "approve"
   },
   
@@ -9,11 +9,11 @@ Scbt.Views.CourseShow = Backbone.View.extend({
     this.model.fetch()
   },
   
-  template: JST["courses/show"],
+  template: JST["programs/show"],
   
   render: function(){
     renderedContent = this.template({
-      course: this.model,
+      program: this.model,
     })
     this.$el.html(renderedContent)
     return this
@@ -23,9 +23,9 @@ Scbt.Views.CourseShow = Backbone.View.extend({
     view = this
     event.preventDefault()
     view.model.enrollment = new Scbt.Models.Enrollment
-    view.model.enrollment.save({ course_id: view.model.id }, {
+    view.model.enrollment.save({ program_id: view.model.id }, {
       success: function(req, res){
-        alert("You have applied for this course. our staff will contact you within 24 hours")
+        alert("You have applied for this program. our staff will contact you within 24 hours")
         view.render()
       },
       error: function(req, res){

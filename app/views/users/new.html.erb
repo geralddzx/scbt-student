@@ -23,17 +23,53 @@
 
     <label for="first_name">First Name</label>
     <input "form-control"
-      type="first_name" 
+      type="text" 
       name="user[first_name]" 
       value="<%= @user.first_name %>"
       id="first_name">
 
     <label for="last_name">Last Name</label>
     <input "form-control"
-      type="last_name" 
+      type="text" 
       name="user[last_name]" 
       value="<%= @user.last_name %>"
       id="last_name">    
+
+    <h2>Address</h2>
+    <label for="street">Street</label>
+    <input "form-control"
+      type="street" 
+      name="user[street]" 
+      value="<%= @user.street %>"
+      id="street">  
+
+    <label for="city">City</label>
+    <input "form-control"
+      type="city" 
+      name="user[city]" 
+      value="<%= @user.city %>"
+      id="city">  
+
+    <label for="country">Country</label>
+    <input "form-control"
+      type="text" 
+      name="user[country]" 
+      value="<%= @user.country %>"
+      id="country">  
+
+    <label for="postal-code">Postal Code</label>
+    <input "form-control"
+      type="text" 
+      name="user[postal_code]" 
+      value="<%= @user.postal_code %>"
+      id="postal-code">  
+
+    <label for="phone">Phone</label>
+    <input "form-control"
+      type="text"
+      name="user[phone]"
+      value="<%= @user.phone %>"
+      id="phone">
 
     <input "form-control" type="submit" value="Sign Up">
   </form>

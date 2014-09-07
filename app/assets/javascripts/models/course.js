@@ -1,5 +1,5 @@
-Scbt.Models.Course = Backbone.Model.extend({
-  urlRoot: "api/courses",
+Scbt.Models.Program = Backbone.Model.extend({
+  urlRoot: "api/programs",
   parse: function(res){
     if (res["enrollments"]){
       this.enrollments = new Scbt.Collections.Enrollments(res["enrollments"], {parse: true})
@@ -52,7 +52,7 @@ Scbt.Models.Course = Backbone.Model.extend({
 //
 // enrollments: function() {
 //   if(!this._enrollments) {
-//     this._enrollments = new Scbt.Collections.Enrollments([], { course: this })
+//     this._enrollments = new Scbt.Collections.Enrollments([], { program: this })
 //   }
 //   return this._enrollments;
 // },

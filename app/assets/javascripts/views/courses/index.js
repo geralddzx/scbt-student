@@ -1,7 +1,7 @@
-Scbt.Views.CoursesIndex = Backbone.View.extend({
+Scbt.Views.ProgramsIndex = Backbone.View.extend({
   events: {
-    "click button.remove-course": "courseDestroy",
-    "click button.edit-course": "courseEdit"
+    "click button.remove-program": "programDestroy",
+    "click button.edit-program": "programEdit"
   },
   initialize: function(){
     this.listenTo(this.collection, "sync", this.render)
@@ -9,25 +9,25 @@ Scbt.Views.CoursesIndex = Backbone.View.extend({
   },
   template: function(){
     if (this.collection.url.indexOf("user") === -1){
-      return JST["courses/index"]
+      return JST["programs/index"]
     } else {
-      return JST["courses/user_index"]
+      return JST["programs/user_index"]
     }      
   },
   render: function(){
-    renderedContent = this.template()({courses: this.collection})
+    renderedContent = this.template()({programs: this.collection})
     this.$el.html(renderedContent)
     return this
   },
-  courseDestroy: function(event){
+  programDestroy: function(event){
     event.preventDefault()
     view = this
     
     var id = $(event.target).attr("id")
-    var course = this.collection.get(id)
-    course.destroy({
+    var program = this.collection.get(id)
+    program.destroy({
       success: function(req, res){
-        alert("This course has been deleted")
+        alert("This program has been deleted")
         view.render()
       },
       error: function(req, res){

@@ -4,7 +4,7 @@ class Api::EnrollmentsController < ApplicationController
   before_action :require_admin, only: [:update]
   def create
     @enrollment = Enrollment.new(
-      course_id: params[:enrollment][:course_id]
+      program_id: params[:enrollment][:program_id]
     )    
     @enrollment.student_id = current_user.id
     
@@ -31,5 +31,5 @@ end
 
 # Backbone Enrollment model:
 # student_id
-# course_id
+# program_id
 # urlRoot: /api/enrollments

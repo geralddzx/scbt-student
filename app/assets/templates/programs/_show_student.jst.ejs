@@ -1,0 +1,9 @@
+<% if (program.enrollment){ %>
+  Enrollment status: <%= program.enrollment.get("status") %>
+  <br>
+  <% if (program.enrollment.approver){ %>
+    Approved By: <%= program.enrollment.approver.escape("email") %>
+  <% } %>
+<% } else { %>
+  <button class="enroll-program">Enroll in this Program</button>
+<% } %>
