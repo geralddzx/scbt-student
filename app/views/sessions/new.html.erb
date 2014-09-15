@@ -1,29 +1,25 @@
 <div id="auth-content">
-  <h1>Sign In</h1>
-  <br>
   <form action="<%= session_url %>" method="post">
+    <h1>Sign In</h1>
     <input 
       type="hidden" 
       name="authenticity_token" 
       value="<%= form_authenticity_token %>">
+  
+    <input class="form-control"
+      placeholder="Email"
+      type="text"
+      name="user[email]" 
+      value="<%= @user.email %>" 
+      id="email">
 
-    <div>
-      <label for="email">Email</label>
-      <input
-        type="text"
-        name="user[email]" 
-        value="<%= @user.email %>" 
-        id="email">
-    </div>
-    
-    <div>
-      <label for="password">Password</label>
-      <input 
-        type="password"
-        name="user[password]" 
-        value=""
-        id="password">
-    </div>
-    <input type="submit" value="Sign In">
+    <input class="form-control"
+      placeholder="Password"
+      type="password"
+      name="user[password]" 
+      value=""
+      id="password">
+
+    <input type="submit" class="btn btn-primary btn-block" value="Sign In">
   </form>
 </div>

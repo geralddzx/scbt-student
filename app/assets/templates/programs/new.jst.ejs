@@ -1,0 +1,42 @@
+<h3><%= title %> Program</h3><br>
+<form>
+    <input type="text" name="program[name]" 
+      placeholder="Name"
+      class="form-control"
+      value="<%= program.escape("name") %>" id="name">
+  
+    <input type="text" name="program[code]"
+      placeholder="Code"
+      class="form-control"
+      value="<%= program.escape("code") %>" id="code">
+    </input>
+  
+    <input type="number" name="program[hours]"
+      placeholder="Hours"
+      class="form-control"
+      value="<%= program.escape("hours") %>" id="hours">
+    </input>
+  
+  <% if (Scbt.Models.user.get("permission") == "MASTER_ADMIN"){ %>
+    <label>Select an Instructor
+      <select name="program[instructor_id]" class="form-control">
+          <option value="" 
+          <% if (!program.instructor){ %>
+            selected="selected"
+          <% } %>
+          >No Instructor</option>
+        <% program.instructors.each(function(instructor){ %>
+          <option value="<%= instructor.get("id") %>" 
+            <% if (program.instructor && program.instructor.get("id") == instructor.get("id")) { %>
+              selected="selected"
+            <% } %>
+          >
+            <%= instructor.get("first_name") %> <%= instructor.get("last_name") %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+  <% } %>
+
+  <input type="submit" class="btn btn-primary btn-block" value="<%= action %> Program">
+</form>

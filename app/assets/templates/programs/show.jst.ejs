@@ -1,10 +1,10 @@
-<h2><%= program.get('name') %></h2>
+<h3><%= program.get('name') %></h3>
   
   <% if (Scbt.Models.user.permissionType() == "admin"){ %>
-    <a class="btn btn-info" href="#programs/<%= program.id %>/edit">Edit This Program</a>
+    <a class="btn btn-info btn-head" href="#programs/<%= program.id %>/edit">Edit This Program</a>
   <% } %>
 
-<table class="d1" border="0" cellspacing="5" cellpadding="5">  
+<table class="table" border="0" cellspacing="5" cellpadding="5">  
   <tr>
     <td>Code</td>
     <td><%= program.get('code') %></td>

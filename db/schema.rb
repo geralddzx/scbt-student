@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904005649) do
+ActiveRecord::Schema.define(version: 20140911233954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20140904005649) do
     t.integer  "author_id"
     t.string   "title"
     t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "campuses", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "manager_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,11 +43,22 @@ ActiveRecord::Schema.define(version: 20140904005649) do
 
   add_index "enrollments", ["status"], name: "index_enrollments_on_status", using: :btree
 
+  create_table "program_offerings", force: true do |t|
+    t.integer  "program_id", null: false
+    t.integer  "campus_id",  null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "program_offerings", ["campus_id"], name: "index_program_offerings_on_campus_id", using: :btree
+  add_index "program_offerings", ["program_id", "campus_id"], name: "index_program_offerings_on_program_id_and_campus_id", using: :btree
+  add_index "program_offerings", ["program_id"], name: "index_program_offerings_on_program_id", using: :btree
+
   create_table "programs", force: true do |t|
     t.string   "name",          null: false
     t.string   "code"
-    t.date     "start_date"
-    t.date     "end_date"
     t.integer  "hours"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -63,9 +81,9 @@ ActiveRecord::Schema.define(version: 20140904005649) do
     t.string   "country"
     t.string   "postal_code"
     t.integer  "phone"
+    t.string   "referral"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["permission"], name: "index_users_on_permission", using: :btree
-
 end

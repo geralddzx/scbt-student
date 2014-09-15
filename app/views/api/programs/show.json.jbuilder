@@ -1,4 +1,4 @@
-json.(@program, :id, :name, :code, :start_date, :end_date, :hours)
+json.(@program, :id, :name, :code, :hours)
 
 if @program.instructor
   json.instructor(@program.instructor, :id, :first_name, :last_name)

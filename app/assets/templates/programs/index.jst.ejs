@@ -1,11 +1,10 @@
 <h3>All Programs</h3>
 
 <% if (Scbt.Models.user.permissionType() == "admin"){ %>
-  <a href="#programs/new" class="btn btn-default">Create New Program</a>
+  <a href="#programs/new" class="btn btn-default btn-head">Create New Program</a>
 <% } %>
 
-<table border="0" cellspacing="5" cellpadding="5">
-
+<table class="table" cellspacing="5" cellpadding="5">
   <% programs.each(function(program){ %>
     <tr>
       <td class="programs-data">

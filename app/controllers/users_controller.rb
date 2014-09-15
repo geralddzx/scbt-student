@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersHelper
+  
   def new
     @user = User.new
     render :new
@@ -19,8 +21,4 @@ class UsersController < ApplicationController
   # def instructors
 #     render json: User.where(permission: "INSTRUCTOR")
 #   end
-  
-  def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name)
-  end
 end

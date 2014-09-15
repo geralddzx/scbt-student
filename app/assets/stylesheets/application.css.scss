@@ -30,6 +30,7 @@
   background-color: #003282;
   align-items: center;
   justify-content: space-between;
+  padding: 10px;
 }
 
 #header, #header a {
@@ -41,10 +42,6 @@
   margin: 10px;
 }
 
-#header {
-  justify-content: flex-end;
-}
-
 #auth-content {
   display: flex;
   flex-direction: column;
@@ -53,7 +50,7 @@
 
 form input, form select {
   margin-bottom: 15px;
-  display: block;
+  display: inline-block;
 }
 
 #auth-content > * {
@@ -63,6 +60,7 @@ form input, form select {
 td, th {
   padding-bottom: 10px;
   padding-right: 10px;
+  vertical-align: center;
 }
 
 table.d1 td:first-child{
@@ -83,12 +81,11 @@ h1, h2, h3 {
   display: inline-block;
 }
 
-.btn-default, #content .btn-info {
-  vertical-align: center;
-  margin: 10px;
+.btn-head {
+  margin: 15px
 }
 
-.btn-info {
+.btn {
   display: inline-block;
   vertical-align: center;
 }
@@ -97,3 +94,10 @@ form > label {
   display: block;
 }
 
+h5#address {
+  margin-top: 20px
+}
+
+form {
+  display: inline-block
+}

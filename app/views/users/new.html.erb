@@ -1,77 +1,93 @@
 <div id="auth-content">
-  <h1>Sign Up</h1>
-  <br>
   <form action="<%= users_url %>" method="post">
+    <h1>Sign Up</h1>
     <input class="form-control" 
       type="hidden" 
       name="authenticity_token" 
       value="<%= form_authenticity_token %>">
 
-    <label for="email">Email</label>
-    <input "form-control"
+    <!-- <label for="email">Email</label> -->
+    <input class="form-control"
+      placeholder="Email"
       type="email" 
       name="user[email]" 
       value="<%= @user.email %>" 
       id="email">
 
-    <label for="password">Password</label>
-    <input "form-control"
+    <!-- <label for="password">Password</label> -->
+    <input class="form-control"
+      placeholder="Password"
       type="password" 
       name="user[password]" 
       value=""
       id="password">
 
-    <label for="first_name">First Name</label>
-    <input "form-control"
-      type="text" 
+    <!-- <label for="first_name">First Name</label> -->
+    <input class="form-control"
+      placeholder="First name"
       name="user[first_name]" 
       value="<%= @user.first_name %>"
       id="first_name">
 
-    <label for="last_name">Last Name</label>
-    <input "form-control"
-      type="text" 
+    <!-- <label for="last_name">Last Name</label> -->
+    <input class="form-control"
+      placeholder="Last name"
       name="user[last_name]" 
       value="<%= @user.last_name %>"
       id="last_name">    
 
-    <h2>Address</h2>
-    <label for="street">Street</label>
-    <input "form-control"
-      type="street" 
+
+    <h5 id="address">Address Info (optional)</h5>
+    <!-- <label for="street">Street</label> -->
+    <input class="form-control"
+      placeholder="Street"
       name="user[street]" 
       value="<%= @user.street %>"
       id="street">  
 
-    <label for="city">City</label>
-    <input "form-control"
-      type="city" 
+    <!-- <label for="city">City</label> -->
+    <input class="form-control"
+      placeholder="City"
       name="user[city]" 
       value="<%= @user.city %>"
       id="city">  
 
-    <label for="country">Country</label>
-    <input "form-control"
-      type="text" 
+    <!-- <label for="country">Country</label> -->
+    <input class="form-control"
+      placeholder="Country"
       name="user[country]" 
       value="<%= @user.country %>"
       id="country">  
 
-    <label for="postal-code">Postal Code</label>
-    <input "form-control"
-      type="text" 
+    <!-- <label for="postal-code">Postal Code</label> -->
+    <input class="form-control"
+      placeholder="Postal code"
       name="user[postal_code]" 
       value="<%= @user.postal_code %>"
       id="postal-code">  
 
-    <label for="phone">Phone</label>
-    <input "form-control"
-      type="text"
+    <!-- <label for="phone">Phone</label> -->
+    <input class="form-control"
+      placeholder="Phone"
+      type="tel"
       name="user[phone]"
       value="<%= @user.phone %>"
       id="phone">
 
-    <input "form-control" type="submit" value="Sign Up">
+    <label style="">Where did you hear about Stanford?
+      <select 
+        class="form-control selectpicker"
+        name="user[referral]" 
+      >
+        <% REFERRALS.each do |referral| %>
+          <option value="<%= referral %>">
+            <%= referral %>
+          </option>
+        <% end %>
+      </select>
+    </label>
+
+    <input class="btn btn-primary btn-block" type="submit" value="Sign Up">
   </form>
 </div>
   

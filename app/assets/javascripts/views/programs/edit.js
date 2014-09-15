@@ -6,7 +6,7 @@ Scbt.Views.ProgramEdit = Backbone.View.extend({
     this.listenTo(this.model, "sync", this.render)
     this.model.fetch({data: {instructors: true}})
   }, 
-  template: JST["programs/form"],
+  template: JST["programs/edit"],
   templateParams: function(){
     return {
       title: "Edit",                 

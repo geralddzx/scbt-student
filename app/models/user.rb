@@ -11,20 +11,38 @@
 #  permission      :string(255)      not null
 #  first_name      :string(255)      not null
 #  last_name       :string(255)      not null
-#  address         :string(255)
+#  street          :string(255)
 #  city            :string(255)
 #  country         :string(255)
 #  postal_code     :string(255)
 #  phone           :integer
+#  referral        :string(255)
 #
+REFERRALS = [
+  nil,
+  "google",
+  "facebook",
+  "yelp",
+  "51.ca", 
+  "Superlife.ca"
+]
+
+PERMISSIONS = [
+  "STUDENT", 
+  "INSTRUCTOR", 
+  "ADMIN", 
+  "MASTER_ADMIN"
+]
 
 class User < ActiveRecord::Base
   attr_reader :password
   before_validation :ensure_session_token, :ensure_permission_set
   validates :email, :session_token, :first_name, :last_name, :permission, presence: true
   validates :email, uniqueness: true, email: true
-  validates :permission, inclusion: {in: ["STUDENT", "INSTRUCTOR", "ADMIN", "MASTER_ADMIN"]}
+  validates :permission, inclusion: {in: PERMISSIONS}
   validates :password, length: { minimum: 6, allow_nil: true }
+  validates :referral, inclusion: {in: REFERRALS}
+
   has_many :enrollments, foreign_key: :student_id, dependent: :destroy
   has_many :enrolled_programs, through: :enrollments, source: :program 
   has_many :taught_programs, class_name: "Program", foreign_key: :instructor_id 
@@ -79,3 +97,5 @@ class User < ActiveRecord::Base
     self.permission == "MASTER_ADMIN"
   end
 end
+
+

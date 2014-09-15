@@ -1,32 +1,69 @@
-<h3>Edit Profile</h3>
+<h3>Edit Profile</h3><br>
 <form>
   <label for="email">Email</label>
-  <input 
-    type="email" 
+  <input class="form-control"
+    type="email"
     name="user[email]" 
     value="<%= user.escape("email") %>" 
     id="email">
     
   <label for="password">Password</label>
-  <input 
+  <input class="form-control"
     type="password" 
     name="user[password]" 
     value=""
     id="password">
     
   <label for="first_name">First Name</label>
-  <input 
+  <input class="form-control"
     type="first_name" 
     name="user[first_name]" 
     value="<%= user.escape("first_name") %>"
     id="first_name">
     
   <label for="last_name">Last Name</label>
-  <input 
+  <input class="form-control"
     type="last_name" 
     name="user[last_name]" 
     value="<%= user.escape("last_name") %>"
-    id="last_name">    
+    id="last_name">   
 
-  <input type="submit" value="Update Profile">
+  <label for="street">Street</label>
+  <input class="form-control"
+    name="user[street]" 
+    value="<%= user.escape("street") %>"
+    id="street">  
+
+  <label for="city">City</label>
+  <input class="form-control"
+    type="text" 
+    name="user[city]" 
+    value="<%= user.escape("city") %>"
+    id="city">  
+
+  <label for="country">Country</label>
+  <input class="form-control"
+    type="text" 
+    name="user[country]" 
+    value="<%= user.escape("country") %>"
+    id="country">  
+
+  <label for="postal-code">Postal Code</label>
+  <input class="form-control"
+    type="text" 
+    name="user[postal_code]" 
+    value="<%= user.escape("postal_code") %>"
+    id="postal-code">  
+
+  <label for="phone">Phone</label>
+  <input class="form-control"
+    type="tel"
+    name="user[phone]"
+    value="<%= user.escape("phone") %>"
+    id="phone"> 
+
+  <input 
+    class="btn btn-primary btn-block"
+    type="submit" value="Update Profile">
+    
 </form>

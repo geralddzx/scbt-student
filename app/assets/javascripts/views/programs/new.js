@@ -14,7 +14,7 @@ Scbt.Views.ProgramsNew = Backbone.View.extend({
   events: {
     "submit form": "submit"
   },
-  template: JST["programs/form"],
+  template: JST["programs/new"],
   templateParams: function(){
     return {
       title: "New", 

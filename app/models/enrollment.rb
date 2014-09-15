@@ -14,6 +14,7 @@
 
 class Enrollment < ActiveRecord::Base
   before_validation :ensure_status_set
+  
   validates :program_id, uniqueness: {scope: :student_id}
   validates :status, inclusion: {in: ["PENDING", "APPROVED", "COMPLETED"]}
   validates :program, presence: true

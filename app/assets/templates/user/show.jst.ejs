@@ -1,7 +1,7 @@
 <h3>Profile</h3> 
-<a class="btn btn-info" href="#my/profile/edit">Edit Profile</a>
+<a class="btn btn-info btn-head" href="#my/profile/edit">Edit Profile</a>
 
-<table class="d1" cellspacing="" cellpadding="">
+<table class="table" cellspacing="" cellpadding="">
   <tr>
     <td>First Name</td>
     <td><%= user.escape("first_name") %></td>
@@ -13,7 +13,27 @@
   </tr>
   
   <tr>
-    <td>Email</td>
-    <td><%= user.escape("email") %></td>
+    <td>Street</td>
+    <td><%= user.escape("street") %></td>
+  </tr>
+
+  <tr>
+    <td>City</td>
+    <td><%= user.escape("city") %></td>
+  </tr>
+
+  <tr>
+    <td>Country</td>
+    <td><%= user.escape("country") %></td>
+  </tr>
+
+  <tr>
+    <td>Postal Code</td>
+    <td><%= user.escape("postal_code") %></td>
+  </tr>
+
+  <tr>
+    <td>Phone</td>
+    <td><%= user.escape("phone") %></td>
   </tr>
 </table>
