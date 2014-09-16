@@ -1,11 +1,10 @@
 class Api::ProgramsController < ApplicationController
   before_action :require_sign_in
-  before_action :assign_instructor_requires_master_admin, only: [:create, :update]
   before_action :require_admin, only: [:update, :create, :destroy]
   def create
     @program = Program.new(program_params)
     if @program.save
-      render json: @program
+      render "api/programs/show"
     else
       render json: @program.errors.full_messages.join(", "), status: :unprocessable_entity
     end
@@ -47,7 +46,7 @@ class Api::ProgramsController < ApplicationController
   def update
     @program = Program.find(params[:id])
     if @program.update_attributes(program_params)
-      render json: @program
+      render "api/programs/show"
     else
       render json: @program.errors.full_messages.join(", "), status: :unprocessable_entity
     end
@@ -67,14 +66,10 @@ class Api::ProgramsController < ApplicationController
     @program.destroy!
     render json: @program
   end
-  
+
   def program_params
-    params.require(:program).permit(:name, :code, :start_date, :end_date, :hours, :instructor_id)
-  end
-  
-  def assign_instructor_requires_master_admin
-    if params[:program][:instructor_id] && !current_user.master_admin?
-      render json: "You must be a master admin to assign an instructor", status: :unauthorized
-    end
+    attributes = params.require(:program).permit(:name, :code, :start_date, :end_date, :hours, :instructor_id)
+    attributes.delete(:instructor_id) unless current_user.master_admin?
+    return attributes
   end
 end

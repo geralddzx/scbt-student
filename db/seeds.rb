@@ -26,3 +26,5 @@ enrollment.save
 User.last.enrolled_programs.create({name: "Modern Arts"})
 User.create(:first_name => "Master", :last_name => "Admin", :password => "turtle", :email => "master@gmail.com", permission: "MASTER_ADMIN")
 User.create(:first_name => "Dababa", :last_name => "Lalaala", :password => "turtle", :email => "haha@gmail.com", permission: "INSTRUCTOR")
+
+Campus.create(name: "North York", street: "150 Consumers Rd.", city: "North York", postal_code: "M2J 1P9")

@@ -1,0 +1,50 @@
+<h3>Edit Campus</h3><br>
+<form>
+  <label for="name">Name</label>
+  <input type="text" name="campus[name]"
+    class="form-control"
+    value="<%= campus.escape("name") %>" id="name">
+  
+  <% if (Scbt.Models.user.master_admin()){ %>
+    <label>Select a Manager
+      <select name="campus[manager_id]" class="form-control">
+        <option value=""
+          <% if (!campus.manager){ %>
+            selected="selected"
+          <% } %>
+        >No Manager</option>
+        <% campus.admins.each(function(admin){ %>
+          <option value="<%= admin.get("id") %>" 
+            <% if (campus.manager && campus.manager.get("id") == admin.get("id")) { %>
+              selected="selected"
+            <% } %>
+          >
+            <%= admin.get("first_name") %> <%= admin.get("last_name") %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+  <% } %>
+
+  <label for="street">Street</label>
+  <input type="text" name="campus[street]"
+    class="form-control"
+    value="<%= campus.escape("street") %>" id="street">
+
+  <label for="city">City</label>
+  <input type="text" name="campus[city]"
+    class="form-control"
+    value="<%= campus.escape("city") %>" id="city">
+
+  <label for="postal_code">Postal Code</label>
+  <input type="text" name="campus[postal_code]"
+    class="form-control"
+    value="<%= campus.escape("postal_code") %>" id="postal_code">
+
+  <label for="country">Country</label>
+  <input type="text" name="campus[country]"
+    class="form-control"
+    value="<%= campus.escape("country") %>" id="country">
+
+  <input type="submit" class="btn btn-primary btn-block" value="Update campus">
+</form>

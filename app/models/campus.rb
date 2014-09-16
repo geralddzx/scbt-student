@@ -10,7 +10,8 @@
 #
 
 class Campus < ActiveRecord::Base
-	validates :name, presence:true, uniqueness: true
+	validates :name, uniqueness: true
+	validates :name, :street, :city, :postal_code, presence: true
 	validate :valid_manager
 
 	belongs_to :manager, class_name: "User"

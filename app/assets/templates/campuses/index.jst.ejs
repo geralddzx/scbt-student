@@ -14,7 +14,7 @@
       </td>
       
       <% if (Scbt.Models.user.permissionType() === "admin"){ %>
-        <td><a class="btn btn-info" href="#campus/<%= campus.id %>/edit">Edit campus</a></td>
+        <td><a class="btn btn-info" href="#campuses/<%= campus.id %>/edit">Edit campus</a></td>
         <td><button class="remove-campus btn btn-danger" id="<%= campus.id %>">Remove campus</button>
       <% } %>
     </tr>

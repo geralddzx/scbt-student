@@ -1,14 +1,14 @@
-Scbt.Views.ProgramEdit = Backbone.View.extend({
+Scbt.Views.CampusEdit = Backbone.View.extend({
   events: {
     "submit form": "submit"
   },
   initialize: function(){
     this.listenTo(this.model, "sync", this.render)
-    this.model.fetch({data: {instructors: true}})
+    this.model.fetch({data: {admins: true}})
   }, 
-  template: JST["programs/edit"],                             
+  template: JST["campuses/edit"],
   render: function(){              
-    renderedContent = this.template({program: this.model})
+    renderedContent = this.template({campus: this.model})
     this.$el.html(renderedContent)
     return this
   },
@@ -16,11 +16,12 @@ Scbt.Views.ProgramEdit = Backbone.View.extend({
     event.preventDefault()
     var view = this
     params = $(event.currentTarget).serializeJSON()
-
-    this.model.save(params["program"],{
+    console.log(event.currentTarget)
+    this.model.save(params["campus"],{
       success: function(req, res){
-        alert("This program has been updated")
-        Backbone.history.navigate("/programs/" + view.model.get("id"), {trigger: true})
+        alert("This Campus has been updated")
+        Backbone.history.navigate("/campuses/" + view.model.get("id"), {trigger: true})
+        view.render()
       },
       error: function(req, res){
         alert(res.responseJSON || res.responseText)

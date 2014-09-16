@@ -15,29 +15,21 @@ Scbt.Views.ProgramsNew = Backbone.View.extend({
     "submit form": "submit"
   },
   template: JST["programs/new"],
-  templateParams: function(){
-    return {
-      title: "New", 
-      action: "Create",
-      program: this.model
-    }
-  },
   render: function(){
-    renderContent = this.template(this.templateParams())
+    renderContent = this.template({program: this.model})
     this.$el.html(renderContent)
     return this    
   },
   submit: function(event){
-    var view = this
     event.preventDefault()
+    var view = this
     
     var params = $(event.currentTarget).serializeJSON()
     var newProgram = new Scbt.Models.Program()
     newProgram.save(params["program"], {
       success: function(req, res){
         alert("Your program has been created")
-        // view.collection.add(newProgram)
-        Backbone.history.navigate("/#", {trigger: true})
+        Backbone.history.navigate("/programs/" + view.model.get("id"), {trigger: true})
       },
       error: function(req, res){
         alert(res.responseJSON || res.responseText)

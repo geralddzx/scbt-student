@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resource :users, only: [] do
       get "instructors" => "users#index"
     end
-    resources :campuses, only: [:index, :show]
+    resources :campuses, only: [:index, :show, :update]
     resources :users, only:[:index]
   end
 end
