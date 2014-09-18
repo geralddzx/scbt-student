@@ -1,34 +1,37 @@
 <a href="#">Home</a> >
 <a href="#campuses/index">Campuses</a> > 
-<a href="#campuses/<%= campus.get("id") %>"><%= campus.escape("name") %></a> >
-<a href="#campuses/<%= campus.get("id") %>/edit">edit</a><br>
+<a href="#campuses/new">New</a><br>
 
-<h3>Edit Campus</h3><br>
+<h3>New campus</h3><br>
 <form>
-  <label for="name">Name</label>
-  <input type="text" name="campus[name]"
+  <input type="text" name="campus[name]" 
+    placeholder="Name"
     class="form-control"
     value="<%= campus.escape("name") %>" id="name">
   
-  <label for="street">Street</label>
   <input type="text" name="campus[street]"
+    placeholder="Street"
     class="form-control"
     value="<%= campus.escape("street") %>" id="street">
+  </input>
 
-  <label for="city">City</label>
   <input type="text" name="campus[city]"
+    placeholder="City"
     class="form-control"
     value="<%= campus.escape("city") %>" id="city">
+  </input>
 
-  <label for="postal_code">Postal Code</label>
   <input type="text" name="campus[postal_code]"
+    placeholder="Postal Code"
     class="form-control"
     value="<%= campus.escape("postal_code") %>" id="postal_code">
+  </input>
 
-  <label for="country">Country</label>
   <input type="text" name="campus[country]"
+    placeholder="Country"
     class="form-control"
     value="<%= campus.escape("country") %>" id="country">
+  </input>
 
   <% if (Scbt.Models.user.master_admin()){ %>
     <label>Select a Manager
@@ -50,6 +53,6 @@
       </select>
     </label>
   <% } %>
-
-  <input type="submit" class="btn btn-primary btn-block" value="Update campus">
+  
+  <input type="submit" class="btn btn-primary btn-block" value="Create campus">
 </form>

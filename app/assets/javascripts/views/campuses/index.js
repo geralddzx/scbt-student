@@ -1,8 +1,7 @@
 Scbt.Views.CampusesIndex = Backbone.View.extend({
-//   events: {
-//     "click button.remove-program": "programDestroy",
-//     "click button.edit-program": "programEdit"
-//   },
+	events: {
+	  "click button.remove-campus": "campusDestroy",
+	},
   	initialize: function(){
     	this.listenTo(this.collection, "sync", this.render)
    		this.collection.fetch()
@@ -13,21 +12,22 @@ Scbt.Views.CampusesIndex = Backbone.View.extend({
 	    this.$el.html(renderedContent)
 	    return this
   	},
-//   programDestroy: function(event){
-//     event.preventDefault()
-//     view = this
+
+	campusDestroy: function(event){
+    event.preventDefault()
+    view = this
     
-//     var id = $(event.target).attr("id")
-//     var program = this.collection.get(id)
-//     program.destroy({
-//       success: function(req, res){
-//         alert("This program has been deleted")
-//         view.render()
-//       },
-//       error: function(req, res){
-//         alert(res.responseJSON || res.responseText)
-//         // view.collection.fetch()
-//       }
-//     })
-//   }  
+    var id = $(event.target).attr("id")
+    var campus = this.collection.get(id)
+    campus.destroy({
+      success: function(req, res){
+        alert("This campus has been deleted")
+        view.render()
+      },
+      error: function(req, res){
+        alert(res.responseJSON || res.responseText)
+        // view.collection.fetch()
+      }
+    })
+  }  
 })

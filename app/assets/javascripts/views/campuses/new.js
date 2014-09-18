@@ -1,12 +1,19 @@
-Scbt.Views.CampusEdit = Backbone.View.extend({
+Scbt.Views.CampusesNew = Backbone.View.extend({
   events: {
     "submit form": "submit"
   },
   initialize: function(){
-    this.listenTo(this.model, "sync", this.render)
-    this.model.fetch({data: {admins: true}})
-  }, 
-  template: JST["campuses/edit"],
+    if (Scbt.Models.user.master_admin()){
+      this.model.admins = Scbt.Collections.admins
+      this.listenTo(this.model.admins, "sync", this.render)
+      this.model.admins.fetch()
+    } else {
+      this.render()
+    }
+  },
+
+  template: JST["campuses/new"],
+
   render: function(){              
     renderedContent = this.template({campus: this.model})
     this.$el.html(renderedContent)
@@ -16,10 +23,9 @@ Scbt.Views.CampusEdit = Backbone.View.extend({
     event.preventDefault()
     var view = this
     params = $(event.currentTarget).serializeJSON()
-    console.log(event.currentTarget)
     this.model.save(params["campus"],{
       success: function(req, res){
-        alert("This Campus has been updated")
+        alert("This Campus has been created")
         Backbone.history.navigate("/campuses/" + view.model.get("id"), {trigger: true})
       },
       error: function(req, res){

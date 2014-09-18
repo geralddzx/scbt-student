@@ -1,6 +1,8 @@
 class Api::ProgramsController < ApplicationController
   before_action :require_sign_in
   before_action :require_admin, only: [:update, :create, :destroy]
+  before_action :require_student, only: [:user_index]
+
   def create
     @program = Program.new(program_params)
     if @program.save
@@ -53,16 +55,16 @@ class Api::ProgramsController < ApplicationController
   end    
   
   def index
-    if request.url.include?("user")
-      render "api/programs/index"
-    else
-      render json: Program.all
-    end
+    render json: Program.all
+  end
+
+  def user_index
+    render "api/programs/user/index"
   end
   
   def destroy
-    @program = Program.find_by_id(params[:id])
-    return render json: "This program does not exist" if @program.nil?
+    @program = Program.find(params[:id])
+    # return render json: "This program does not exist" if @program.nil?
     @program.destroy!
     render json: @program
   end

@@ -5,14 +5,15 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: {format: :json} do
     resources :programs, except:[:new, :edit]
-    resources :enrollments, only: [:create, :update]
+    resources :enrollments, only: [:create, :update, :destroy]
     resource :user, only: [:show, :update] do
-      resources :programs, only: [:index]
+      get "programs" => "programs#user_index"
     end
-    resource :users, only: [] do
-      get "instructors" => "users#index"
+    resource :users, only: [:index] do
+      get "instructors" => "users#instructors"
+      get "admins" => "users#admins"
     end
-    resources :campuses, only: [:index, :show, :update]
+    resources :campuses, only: [:index, :show, :update, :create, :destroy]
     resources :users, only:[:index]
   end
 end

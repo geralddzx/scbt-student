@@ -4,6 +4,8 @@
     <th>Student Name</th>
     <th>Status</th>
     <th>Approved by</th>
+    <th></th>
+    <th></th>
   </tr>
   
   <% program.enrollments.each(function(enrollment){ %>
@@ -23,12 +25,18 @@
       <% if (enrollment.get("status") == "PENDING"){ %>
         <td></td>
         <td>
-          <button class="approve-enrollment" id="<%= enrollment.get("id") %>">Approve enrollment</button>
+          <button class="approve-enrollment btn btn-success" id="<%= enrollment.get("id") %>">Approve enrollment</button>
+        </td>
+
+        <td>
+          <button class="reject-enrollment btn btn-danger" id="<%= enrollment.get("id") %>">Reject enrollment</button>
         </td>
       <% } else { %>
         <td>
           <%= enrollment.approver.get("email") %>
         </td>
+        <td></td>
+        <td></td>
       <% } %>  
       
     </tr>

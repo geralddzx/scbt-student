@@ -1,3 +1,6 @@
+<a href="#">Home</a> >
+<a href="#campuses/index">Campuses</a><br>
+
 <h3>All Campus</h3>
 
 <% if (Scbt.Models.user.permissionType() == "admin"){ %>
@@ -15,7 +18,7 @@
       
       <% if (Scbt.Models.user.permissionType() === "admin"){ %>
         <td><a class="btn btn-info" href="#campuses/<%= campus.id %>/edit">Edit campus</a></td>
-        <td><button class="remove-campus btn btn-danger" id="<%= campus.id %>">Remove campus</button>
+        <td><button class="remove-campus btn btn-danger" id="<%= campus.id %>">Remove Campus</button>
       <% } %>
     </tr>
   <% }) %>

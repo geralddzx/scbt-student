@@ -1,9 +1,38 @@
-<% if (program.enrollment){ %>
-  Enrollment status: <%= program.enrollment.get("status") %>
-  <br>
-  <% if (program.enrollment.approver){ %>
-    Approved By: <%= program.enrollment.approver.escape("email") %>
-  <% } %>
-<% } else { %>
-  <button class="enroll-program">Enroll in this Program</button>
-<% } %>
+<% var enrollment = program.enrollment %>
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Enrollment Status</th>
+    <th>Approved by</th>
+    <th></th>
+  </tr>
+  
+  <tr
+  	<% if (!enrollment){ %>
+  		class="active"
+    <% } else if (enrollment.get("status") == "PENDING"){ %>
+      class="warning"
+    <% } else { %>
+      class="success"
+    <% } %>
+  >
+  	<% if (!enrollment){ %>
+  		<td>Not Enrolled</td>
+  		<td></td>
+  		<td>
+  			<button class="enroll-program btn btn-primary">Enroll In Course</button>
+  		</td>
+  	<% } else { %>
+    	<td><%= enrollment.get("status") %></td>
+    	<td>
+    		<% if (enrollment.approver){ %>
+        	<%= enrollment.approver.get("email") %>
+      	<% } %>
+      </td>
+      <td>
+    		<% if (enrollment && enrollment.get("status") == "PENDING"){ %>
+      		<button class="cancel-enrollment btn btn-danger" id="<%= program.id %>">Cancel Enrollment</button>
+    		<% } %>
+    	</td>
+    <% } %>	
+  </tr>
+</table>

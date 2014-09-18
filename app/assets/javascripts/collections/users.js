@@ -7,3 +7,4 @@ Scbt.Collections.Users = Backbone.Collection.extend({
 })
 
 Scbt.Collections.instructors = new Scbt.Collections.Users([],{url: "api/users/instructors"})
+Scbt.Collections.admins = new Scbt.Collections.Users([],{url: "api/users/admins"})

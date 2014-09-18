@@ -6,9 +6,8 @@
 </div>
 
 <script>
-
   currentUser = Scbt.Models.user = new Scbt.Models.User(
-    <%= current_user.to_json({except: [:password_digest, :session_token]}).html_safe %>
+    <%= current_user.to_json({only: [:id, :permission]}).html_safe %>
   )
   $(Scbt.initialize)
   // Scbt.Models.user.fetch({success: function(){

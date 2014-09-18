@@ -2,6 +2,7 @@ class Api::EnrollmentsController < ApplicationController
   before_action :require_sign_in
   before_action :require_student, only: [:create]
   before_action :require_admin, only: [:update]
+  
   def create
     @enrollment = Enrollment.new(
       program_id: params[:enrollment][:program_id]
@@ -25,6 +26,17 @@ class Api::EnrollmentsController < ApplicationController
       render "api/enrollments/show"
     else
       render json: @enrollment.errors.full_messages.join(", "), status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @enrollment = Enrollment.find(params[:id])
+    # return render json: "This enrollment does not exist" if @enrollment.nil?
+    if current_user.admin? || @enrollment.student_id == current_user.id
+      @enrollment.destroy!
+      render json: @enrollment
+    else
+      render json: "You must be an admin or enrolled", status: :unauthorized
     end
   end
 end

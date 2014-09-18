@@ -1,10 +1,14 @@
+<a href="#">Home</a> >
+<a href="#">programs</a> > 
+<a href="#programs/<%= program.get("id") %>"><%= program.escape("name") %></a><br>
+
 <h3><%= program.get('name') %></h3>
   
   <% if (Scbt.Models.user.permissionType() == "admin"){ %>
     <a class="btn btn-info btn-head" href="#programs/<%= program.id %>/edit">Edit This Program</a>
   <% } %>
 
-<table class="table" border="0" cellspacing="5" cellpadding="5">  
+<table class="d1" border="0" cellspacing="10" cellpadding="10">  
   <tr>
     <td>Code</td>
     <td><%= program.get('code') %></td>
@@ -34,7 +38,7 @@
     </td>
   </tr>
   
-  <% if (Scbt.Models.user.permissionType() == "admin"){ %>
+  <% if (Scbt.Models.user.admin()){ %>
     <tr>
       <td>
         Number of Students: 

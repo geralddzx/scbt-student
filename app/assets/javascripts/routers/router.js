@@ -1,14 +1,15 @@
 Scbt.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "programsIndex",
-    "my/profile/show": "userShow",
-    "my/profile/edit": "userEdit",
+    "profile": "userShow",
+    "profile/edit": "userEdit",
     // "my/programs": "userPrograms",
     "my/programs/index": "userProgramsIndex",
     "programs/new": "programsNew",
     "programs/:id/edit": "programEdit",
     "programs/:id": "programShow",
     "campuses/index": "campusesIndex",
+    "campuses/new": "campusesNew",
     "campuses/:id/edit": "campusEdit",
     "campuses/:id": "campusShow"
   },
@@ -52,6 +53,12 @@ Scbt.Routers.Router = Backbone.Router.extend({
   campusesIndex: function(){
     var view = new Scbt.Views.CampusesIndex({
       collection: Scbt.Collections.campuses
+    })
+    this.swapView(view)
+  },
+  campusesNew: function(){
+    var view = new Scbt.Views.CampusesNew({
+      model: new Scbt.Models.Campus
     })
     this.swapView(view)
   },
