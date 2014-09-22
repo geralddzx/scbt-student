@@ -3,7 +3,7 @@ class Api::CampusesController < ApplicationController
   before_action :require_admin, only: [:create, :update, :destroy]
   
   def index
-	 render json: Campus.all
+    render json: Campus.all
   end
 
   def create

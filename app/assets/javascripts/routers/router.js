@@ -4,10 +4,13 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "profile": "userShow",
     "profile/edit": "userEdit",
     // "my/programs": "userPrograms",
+    
     "my/programs/index": "userProgramsIndex",
     "programs/new": "programsNew",
     "programs/:id/edit": "programEdit",
+    "programs/:id/files": "programShowFiles",
     "programs/:id": "programShow",
+    
     "campuses/index": "campusesIndex",
     "campuses/new": "campusesNew",
     "campuses/:id/edit": "campusEdit",
@@ -27,6 +30,8 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.UserEdit({model: Scbt.Models.user})
     this.swapView(view)
   },
+
+
   userProgramsIndex: function(){
     var view = new Scbt.Views.ProgramsIndex({
       collection: new Scbt.Collections.Programs([], {url: "api/user/programs"})
@@ -47,9 +52,22 @@ Scbt.Routers.Router = Backbone.Router.extend({
   },
   programShow: function(id){
     var program = new Scbt.Models.Program({id: id})
-    var view = new Scbt.Views.ProgramShow({model: program})
+    var view = new Scbt.Views.ProgramShow({
+      model: program, 
+      content: Scbt.Views.ProgramShowHome  
+    })
     this.swapView(view)
   },
+  programShowFiles: function(id){
+    var program = new Scbt.Models.Program({id: id})
+    var view = new Scbt.Views.ProgramShow({
+      model: program, 
+      content: Scbt.Views.ProgramShowFiles  
+    })
+    this.swapView(view)
+  },
+
+
   campusesIndex: function(){
     var view = new Scbt.Views.CampusesIndex({
       collection: Scbt.Collections.campuses
@@ -72,11 +90,12 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.CampusShow({model: campus})
     this.swapView(view)
   },
+
   swapView: function(newView){
     if (this._currentView){
       this._currentView.remove()
     }
     this._currentView = newView
-    $('#content').html(newView.$el)
+    $('#view').html(newView.$el)
   }
 })

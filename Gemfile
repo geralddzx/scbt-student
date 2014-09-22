@@ -44,6 +44,9 @@ gem 'rails_12factor', group: :production
 
 gem "backbone-on-rails"
 gem 'bootstrap-sass'
+gem "paperclip"
+gem "aws-sdk"
+gem "figaro"
 
 # Use unicorn as the app server
 # gem 'unicorn'

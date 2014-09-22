@@ -16,12 +16,27 @@
 
 @import "bootstrap";
 
-#header form {
-  color: black;
+#auth-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  > * {
+    margin: auto;
+  }
 }
 
-.header-item {
-  margin: 10px;
+form {
+  color: black;
+  display: inline-block;
+  input, select {
+    margin-bottom: 15px;
+    display: inline-block;
+  }
+}
+
+h1, h2, h3 {
+  vertical-align: center;
+  display: inline-block;
 }
 
 #header {
@@ -31,73 +46,78 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-}
-
-#header, #header a {
   color: white;
-}
-
-.header-item {
-  display: inline-block;
-  margin: 10px;
-}
-
-#auth-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-form input, form select {
-  margin-bottom: 15px;
-  display: inline-block;
-}
-
-#auth-content > * {
-  margin: auto;
-}
-
-td, th {
-  padding-bottom: 10px;
-  padding-right: 10px;
-  vertical-align: center;
-}
-
-table.d1 td:first-child{
- font-weight: bold; 
+  a {
+    color: white;
+  }
+  .header-item {
+    margin: 10px;
+    display: inline-block;
+    margin: 10px;
+  }
 }
 
 #banner {
   padding-left: 25px;
+  padding-bottom: 5px;
 }
 
-#content {
-  padding: 25px;
+#view {
+  padding-left: 25px;
+  padding-right: 25px;
+
+  .nav-state {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #menu {
+    width: 200px;
+    padding: 0px;
+    background-color: #F8F8F8;
+    a {
+      color: #787878; 
+    }
+  }
+
+  #content {
+    padding: 0px;
+    padding-left: 20px;
+  }
+
+  h3.menu {
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+
+  table {
+    &.d1 {
+      td:first-child {
+        font-weight: bold; 
+      }
+    }
+    
+    td, th {
+      padding: 10px;
+      vertical-align: center;
+    }
+  }
+  .btn-head {
+    margin: 15px;
+  }
+  .btn {
+    display: inline-block;
+    vertical-align: center;
+  }
+  h5 #address {
+    margin-top: 20px;
+  } 
 }
 
 
-h1, h2, h3 {
-  vertical-align: center;
-  display: inline-block;
-}
 
-.btn-head {
-  margin: 15px
-}
 
-.btn {
-  display: inline-block;
-  vertical-align: center;
-}
 
-form > label {
-  display: block;
-}
 
-h5#address {
-  margin-top: 20px
-}
 
-form {
-  display: inline-block
-}
+
