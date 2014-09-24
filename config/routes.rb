@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     end
     resources :campuses, only: [:index, :show, :update, :create, :destroy]
     resources :users, only:[:index]
+    resources :program_files, only: [:create]
   end
 end

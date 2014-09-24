@@ -1,10 +1,10 @@
 Scbt.Models.Enrollment = Backbone.Model.extend({
-  parse: function(attributes){
-    if (attributes.approver){
-      this.approver = new Scbt.Models.User(attributes.approver)
+  parse: function(res){
+    if (res.approver){
+      this.approver = new Scbt.Models.User(res.approver)
     }
-    delete attributes["approver"]
-    return attributes
+    delete res["approver"]
+    return res
   },
   urlRoot: "api/enrollments"
 })

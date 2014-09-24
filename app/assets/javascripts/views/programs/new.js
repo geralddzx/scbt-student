@@ -29,6 +29,7 @@ Scbt.Views.ProgramsNew = Backbone.View.extend({
     newProgram.save(params["program"], {
       success: function(req, res){
         alert("Your program has been created")
+        console.log(view)
         Backbone.history.navigate("/programs/" + view.model.get("id"), {trigger: true})
       },
       error: function(req, res){

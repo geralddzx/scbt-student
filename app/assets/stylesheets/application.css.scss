@@ -83,9 +83,10 @@ h1, h2, h3 {
   #content {
     padding: 0px;
     padding-left: 20px;
+    vertical-align: top;
   }
 
-  h3.menu {
+  h3.content {
     margin: 0px;
     margin-bottom: 10px;
   }
@@ -96,19 +97,21 @@ h1, h2, h3 {
         font-weight: bold; 
       }
     }
-    
     td, th {
       padding: 10px;
       vertical-align: center;
     }
   }
+
   .btn-head {
     margin: 15px;
   }
+
   .btn {
     display: inline-block;
     vertical-align: center;
   }
+
   h5 #address {
     margin-top: 20px;
   } 

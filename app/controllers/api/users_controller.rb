@@ -4,7 +4,7 @@ class Api::UsersController < ApplicationController
   before_action :require_master_admin, only: [:index, :admins, :instructors]
   def update
     if current_user.update_attributes(user_params)
-      render json: current_user
+      render json: current_user, only: [:id, :first_name, :last_name, :email, :street, :city, :country, :postal_code, :phone]
     else
       render json: current_user.errors.full_messages, status: :unproccessable_entity
     end
