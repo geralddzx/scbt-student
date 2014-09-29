@@ -84,6 +84,13 @@ h1, h2, h3 {
     padding: 0px;
     padding-left: 20px;
     vertical-align: top;
+    #file-field {
+      height: auto;
+      > * {
+        vertical-align: middle;
+        display: inline-block;
+      }
+    }
   }
 
   h3.content {
@@ -116,7 +123,6 @@ h1, h2, h3 {
     margin-top: 20px;
   } 
 }
-
 
 
 

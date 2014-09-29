@@ -6,8 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Scbt
-  class Application < Rails::Application
+module Scbt 
+  class Application < Rails::Application  
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -19,5 +19,14 @@ module Scbt
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.paperclip_defaults = {
+      :storage => :s3,
+      :path => ':id_partition/:filename',
+      :s3_credentials => {                                          
+        :bucket => ENV['AWS_BUCKET'], #these values safely stored in application.yml thanks to figaro!                
+        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],                 
+        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']          
+      }                                   
+    }
   end
 end

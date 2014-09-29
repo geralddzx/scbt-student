@@ -1,6 +1,12 @@
 <h3 class="content">All Files</h3>
-<input 
-	id="file-upload" 
-	class="file"
-	type="file" 
-	enctype="multipart/form-data"bmit>
+
+<div id="file-field" class="form-control">
+	<input type="file">
+	<button id="add-file" class="btn btn-primary" disabled="disabled">Add File</button>
+</div>
+
+<ul>
+	<% files.each(function(file){ %>
+		<li><%= file.escape("name") %></li>
+	<% }) %>
+</ul>

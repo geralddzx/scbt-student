@@ -21,7 +21,6 @@ Scbt.Models.Program = Backbone.Model.extend({
     delete res["enrollments"]
     delete res["instructors"]
     
-    console.log(res)
     return res
   }
 })

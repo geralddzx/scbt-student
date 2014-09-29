@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :users, only:[:new, :create]
   
   namespace :api, defaults: {format: :json} do
-    resources :programs, except:[:new, :edit]
+    resources :programs, except:[:new, :edit] do 
+      get "program_files" => "program_files#program_index"
+    end
     resources :enrollments, only: [:create, :update, :destroy]
     resource :user, only: [:show, :update] do
       get "programs" => "programs#user_index"

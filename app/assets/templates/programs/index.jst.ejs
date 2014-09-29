@@ -3,7 +3,7 @@
 
 <h3>All Programs</h3>
 
-<% if (Scbt.Models.user.permissionType() == "admin"){ %>
+<% if (Scbt.Models.user.admin()){ %>
   <a href="#programs/new" class="btn btn-default btn-head">Create New Program</a>
 <% } %>
 
@@ -15,14 +15,8 @@
           <%= program.escape("name") %>
         </a>
       </td>
-      <% if (programs.url.indexOf("user") != -1){ %>
-        <td>Start Date<%= program.escape("start_date") %></td>
-        <td>End Date<%= program.escape("end_date") %></td>
-        <td>Status <%= program.escape("status") %></td>
-        <td>Grade <%= program.escape("grade") %></td>
-      <% } %>
-      
-      <% if (Scbt.Models.user.permissionType() === "admin"){ %>
+            
+      <% if (Scbt.Models.user.admin()){ %>
         <td><a class="btn btn-info" href="#programs/<%= program.id %>/edit">Edit Program</a></td>
         <td><button class="remove-program btn btn-danger" id="<%= program.id %>">Remove Program</button>
       <% } %>

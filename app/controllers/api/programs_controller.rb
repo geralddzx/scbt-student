@@ -55,6 +55,8 @@ class Api::ProgramsController < ApplicationController
   end    
   
   def index
+    # render "api/programs/test"
+    # fail
     render json: Program.all
   end
 

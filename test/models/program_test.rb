@@ -5,8 +5,6 @@
 #  id            :integer          not null, primary key
 #  name          :string(255)      not null
 #  code          :string(255)
-#  start_date    :date
-#  end_date      :date
 #  hours         :integer
 #  created_at    :datetime
 #  updated_at    :datetime

@@ -1,16 +1,13 @@
 # == Schema Information
 #
-# Table name: programs
+# Table name: announcements
 #
-#  id            :integer          not null, primary key
-#  name          :string(255)      not null
-#  code          :string(255)
-#  start_date    :date
-#  end_date      :date
-#  hours         :integer
-#  created_at    :datetime
-#  updated_at    :datetime
-#  instructor_id :integer
+#  id         :integer          not null, primary key
+#  author_id  :integer
+#  title      :string(255)
+#  content    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

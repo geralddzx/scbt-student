@@ -8,7 +8,7 @@ Scbt.Views.ProgramsIndex = Backbone.View.extend({
     this.collection.fetch()
   },
   template: function(){
-    if (this.collection.url.indexOf("user") === -1){
+    if (!this.collection.user){
       return JST["programs/index"]
     } else {
       return JST["programs/user_index"]

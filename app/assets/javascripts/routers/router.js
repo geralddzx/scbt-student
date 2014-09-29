@@ -30,11 +30,9 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.UserEdit({model: Scbt.Models.user})
     this.swapView(view)
   },
-
-
   userProgramsIndex: function(){
     var view = new Scbt.Views.ProgramsIndex({
-      collection: new Scbt.Collections.Programs([], {url: "api/user/programs"})
+      collection: new Scbt.Collections.Programs([], {user: true})
     })
     this.swapView(view)
   },  
@@ -60,7 +58,9 @@ Scbt.Routers.Router = Backbone.Router.extend({
   },
   programShowFiles: function(){
     var view = new Scbt.Views.ProgramShowFiles({
-      model: this._currentView.model 
+      collection: new Scbt.Collections.ProgramFiles([],{
+        program: this._currentView.model 
+      })
     })
     this._currentView.swapContent(view)
   },

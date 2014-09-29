@@ -1,16 +1,14 @@
 # == Schema Information
 #
-# Table name: program_files
+# Table name: programs
 #
-#  id                :integer          not null, primary key
-#  program_id        :string(255)      not null
-#  file_file_name    :string(255)
-#  file_content_type :string(255)
-#  file_file_size    :integer
-#  file_updated_at   :datetime
-#  created_at        :datetime
-#  updated_at        :datetime
-#  file_name         :string(255)      not null
+#  id            :integer          not null, primary key
+#  name          :string(255)      not null
+#  code          :string(255)
+#  hours         :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  instructor_id :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
