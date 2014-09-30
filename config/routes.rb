@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :programs, except:[:new, :edit] do 
       get "program_files" => "program_files#program_index"
     end
+    resources :program_files, only: [:destroy]
     resources :enrollments, only: [:create, :update, :destroy]
     resource :user, only: [:show, :update] do
       get "programs" => "programs#user_index"

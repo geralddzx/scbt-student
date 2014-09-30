@@ -8,7 +8,7 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "my/programs/index": "userProgramsIndex",
     "programs/new": "programsNew",
     "programs/:id/edit": "programEdit",
-    "program/files": "programShowFiles",
+    "programs/:id/files": "programShowFiles",
     "programs/:id": "programShow",
     
     "campuses/index": "campusesIndex",
@@ -50,13 +50,16 @@ Scbt.Routers.Router = Backbone.Router.extend({
   },
   programShow: function(id){
     var program = new Scbt.Models.Program({id: id})
-    var view = new Scbt.Views.ProgramShow({
-      model: program, 
-      content: Scbt.Views.ProgramShowHome  
-    })
+    var view = new Scbt.Views.ProgramShow({model: program})
     this.swapView(view)
+
+    var homeView = new Scbt.Views.ProgramShowHome({model: program})
+    view.swapContent(homeView)
   },
-  programShowFiles: function(){
+  programShowFiles: function(id){
+    if (!this._currentView){
+      this.programShow(id)
+    }
     var view = new Scbt.Views.ProgramShowFiles({
       collection: new Scbt.Collections.ProgramFiles([],{
         program: this._currentView.model 

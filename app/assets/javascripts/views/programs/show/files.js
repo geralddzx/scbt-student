@@ -1,7 +1,9 @@
 Scbt.Views.ProgramShowFiles = Backbone.View.extend({
   events: {
     'change input[type=file]': 'handleFile',
-    'click #add-file': 'createFile'
+    'click #add-file': 'createFile',
+    'click .remove-file': 'destroyFile',
+    // 'submit form': 'submitForm'
   },
 
   initialize: function(){
@@ -14,7 +16,6 @@ Scbt.Views.ProgramShowFiles = Backbone.View.extend({
   template: JST["programs/show/files"],
   
   render: function(){
-    console.log(this.collection)
     renderedContent = this.template({
       files: this.collection
     })
@@ -39,21 +40,42 @@ Scbt.Views.ProgramShowFiles = Backbone.View.extend({
   },
 
   createFile: function(){
+    view = this
+    var newFile = this.newFile
+    newFile.unset("id")
+    this.toggleUpload()
     if (this.$('input[type=file]')[0].files[0]){
-      view = this
-      this.collection.add(this.newFile)
-      this.newFile.save({},{
+      
+      newFile.save({},{
         success: function(){
-          alert("File has been added")
+          // alert("File has been added")
+          view.collection.add(newFile)
           view.render()
+          view.toggleAddFile()
         }, 
         error: function(req, res){
           alert(res.responseJSON || res.responseText)
+          view.toggleAddFile()
         }
       })
     } else {
       alert("There is no file to upload")
     }
+  },
+
+  destroyFile: function(event){
+    var view = this
+    id = $(event.currentTarget).attr("id")
+    var programFile = this.collection.get(id)
+    programFile.destroy({
+      success: function(req, res){
+        alert("This file has been deleted")
+        view.render()
+      },
+      error: function(req, res){
+        alert(res.responseJSON || res.responseText)
+      }
+    })
   },
 
   disableAddFile: function(){
@@ -62,5 +84,16 @@ Scbt.Views.ProgramShowFiles = Backbone.View.extend({
 
   enableAddFile: function(){
     this.$("#add-file").attr("disabled", false)
+  },
+
+  toggleUpload: function(){
+    this.$("#add-file").html("Uploading...")  
+  },
+
+  toggleAddFile: function(){
+    this.$("#add-file").html("Add File")  
   }
+  // submitForm: function(event){
+  //   console.log($(event.currentTarget).serializeJSON())
+  // }
 })

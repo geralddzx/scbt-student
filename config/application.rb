@@ -21,7 +21,7 @@ module Scbt
     # config.i18n.default_locale = :de
     config.paperclip_defaults = {
       :storage => :s3,
-      :path => ':id_partition/:filename',
+      :path => 'files/:class/:id.:style.:extension',
       :s3_credentials => {                                          
         :bucket => ENV['AWS_BUCKET'], #these values safely stored in application.yml thanks to figaro!                
         :access_key_id => ENV['AWS_ACCESS_KEY_ID'],                 

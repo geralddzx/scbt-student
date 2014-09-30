@@ -1,6 +1,7 @@
 Scbt.Views.ProgramShowHome = Backbone.CompositeView.extend({
   initialize: function(options){
-    this.render()
+    this.listenTo(this.model, "sync", this.render)
+    this.model.fetch()
   },
   
   template: JST["programs/show/home/_"],

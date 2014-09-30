@@ -75,6 +75,7 @@ h1, h2, h3 {
     width: 200px;
     padding: 0px;
     background-color: #F8F8F8;
+    vertical-align: top;
     a {
       color: #787878; 
     }
@@ -106,7 +107,7 @@ h1, h2, h3 {
     }
     td, th {
       padding: 10px;
-      vertical-align: center;
+      vertical-align: middle;
     }
   }
 

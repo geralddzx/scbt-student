@@ -12,8 +12,7 @@ Scbt.Views.ProgramShow = Backbone.CompositeView.extend({
       program: this.model,
     })
     this.$el.html(renderedContent)
-    var contentView = new Scbt.Views.ProgramShowHome({model: this.model})
-    this.swapContent(contentView)
+    this.attachSubviews()
     return this
   },
 
