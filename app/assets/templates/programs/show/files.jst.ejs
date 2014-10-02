@@ -1,29 +1,49 @@
-<h3 class="content">All Files</h3>
+<% if (change_permission){ %>
+	<div id="file-field" class="form-control">
+		<input type="file">
+		<button id="add-file" class="btn btn-primary" disabled="disabled">Add File</button>
+	</div>
+	<br>
+	<br>
+<% } %>
+	
 
-<div id="file-field" class="form-control">
-	<input type="file">
-	<button id="add-file" class="btn btn-primary" disabled="disabled">Add File</button>
-</div>
+<h3 class="content">All Files</h3>
 
 <table class="table">
 	<tr>
 		<th>File Name</th>
 		<th>File Size</th>
+		<th>Date</th>
+		<th>Time</th>
+		<% if (change_permission){ %>
+			<th></th>
+		<% } %>
 	</tr>
 
 	<% files.each(function(file){ %>
 		<tr>
 			<td>
-				<a href='<%= file.escape("url") %>'><%= file.escape("file_name") %></a>
+			<a href='<%= file.escape("url") %>'><%= file.escape("file_name") %></a>
 			</td>
 			
-			<td align="right">
+			<td>
 				<%= file.escape("file_size") %>
 			</td>
 
 			<td>
-				<button id="<%= file.escape("id") %>" class="btn btn-danger remove-file">Remove</button>
+				<%= file.escape("date") %>
 			</td>
+
+			<td>
+				<%= file.escape("time") %>
+			</td>
+
+			<% if (change_permission){ %>
+				<td>
+					<button id="<%= file.escape("id") %>" class="btn btn-danger remove-file">Remove</button>
+				</td>
+			<% } %>
 		</tr>
 	<% }) %>
 </table>

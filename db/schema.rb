@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929045356) do
+ActiveRecord::Schema.define(version: 20141002014028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20140929045356) do
     t.datetime "file_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "file_name",         null: false
   end
 
   create_table "program_offerings", force: true do |t|
@@ -83,20 +82,24 @@ ActiveRecord::Schema.define(version: 20140929045356) do
   add_index "programs", ["instructor_id"], name: "index_programs_on_instructor_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
+    t.string   "email",              null: false
+    t.string   "password_digest",    null: false
+    t.string   "session_token",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "permission",      null: false
-    t.string   "first_name",      null: false
-    t.string   "last_name",       null: false
+    t.string   "permission",         null: false
+    t.string   "first_name",         null: false
+    t.string   "last_name",          null: false
     t.string   "street"
     t.string   "city"
     t.string   "country"
     t.string   "postal_code"
     t.integer  "phone"
     t.string   "referral"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

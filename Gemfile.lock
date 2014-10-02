@@ -201,7 +201,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
-  paperclip
+  paperclip (~> 4.2)
   pg
   pry-rails
   quiet_assets

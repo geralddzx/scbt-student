@@ -44,7 +44,7 @@ gem 'rails_12factor', group: :production
 
 gem "backbone-on-rails"
 gem 'bootstrap-sass'
-gem "paperclip"
+gem "paperclip", "~> 4.2"
 gem "aws-sdk"
 gem "figaro"
 

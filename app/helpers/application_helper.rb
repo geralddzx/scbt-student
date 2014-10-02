@@ -29,4 +29,8 @@ module ApplicationHelper
     best_key = hash.key(hash.values.min)
     hash[best_key].round(1).to_s + " " + best_key
   end
+
+  def to_digit(x, n)
+    ("0" * n + x.to_s)[(-n)..-1]
+  end
 end

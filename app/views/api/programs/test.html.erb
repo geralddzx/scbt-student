@@ -1,4 +1,4 @@
-<%= form_for User.first, :url => users_path, :html => { :multipart => true } do |form| %>
+<%= form_for User.first, method: "POST", :url => api_program_files_url, :html => { :multipart => true } do |form| %>
   <%= form.file_field :avatar %>
   <input type="submit" val="submit">
 <% end %>

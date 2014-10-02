@@ -10,7 +10,6 @@
 #  file_updated_at   :datetime
 #  created_at        :datetime
 #  updated_at        :datetime
-#  file_name         :string(255)      not null
 #
 
 require 'test_helper'

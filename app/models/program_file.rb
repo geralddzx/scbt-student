@@ -10,12 +10,14 @@
 #  file_updated_at   :datetime
 #  created_at        :datetime
 #  updated_at        :datetime
-#  file_name         :string(255)      not null
 #
 
 class ProgramFile < ActiveRecord::Base
-	validates :program_id, :file, presence: true
-	
 	has_attached_file :file
+
+	validates :program, :file, presence: true
+	validates_attachment_size :file, less_than: 1000.kilobytes
 	do_not_validate_attachment_file_type :file
+
+	belongs_to :program
 end

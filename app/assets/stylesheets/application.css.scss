@@ -87,6 +87,8 @@ h1, h2, h3 {
     vertical-align: top;
     #file-field {
       height: auto;
+      display: inline-block;
+      width: auto;
       > * {
         vertical-align: middle;
         display: inline-block;
@@ -104,6 +106,9 @@ h1, h2, h3 {
       td:first-child {
         font-weight: bold; 
       }
+    }
+    &.left {
+      text-align: left;
     }
     td, th {
       padding: 10px;
