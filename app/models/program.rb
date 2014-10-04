@@ -13,7 +13,7 @@
 
 class Program < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
-  validates :instructor, presence: true
+  validate :valid_instructor
   
   belongs_to :instructor, -> {where permission: "INSTRUCTOR"}, class_name: "User"
   
@@ -25,4 +25,10 @@ class Program < ActiveRecord::Base
 
   has_many :students, through: :enrollments, source: :student
   has_many :approved_students, through: :approved_enrollments, source: :student 
+
+  def valid_instructor
+	if self.instructor_id && !self.instructor
+		errors.add(:instructor_id, "must point to an instructor")
+	end
+  end
 end

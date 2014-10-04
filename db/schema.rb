@@ -48,13 +48,10 @@ ActiveRecord::Schema.define(version: 20141002014028) do
   add_index "enrollments", ["status"], name: "index_enrollments_on_status", using: :btree
 
   create_table "program_files", force: true do |t|
-    t.string   "program_id",        null: false
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
+    t.string   "program_id",     null: false
+    t.string   "file_file_name", null: false
+    t.string   "file_file_size", null: false
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "program_offerings", force: true do |t|

@@ -8,11 +8,10 @@ Scbt.Views.ProgramShowFiles = Backbone.View.extend({
 
   initialize: function(){
     this.listenTo(this.collection, "sync", this.render)
+    this.listenTo(this.collection, "add", this.render)
     this.collection.fetch()
-    this.newProgramFile = new Scbt.Models.ProgramFile
+    
     this.reader = new FileReader()
-
-    this.newProgramFile.set("program_id", this.collection.program.get("id"))
   },
 
   template: JST["programs/show/files"],
@@ -27,26 +26,27 @@ Scbt.Views.ProgramShowFiles = Backbone.View.extend({
   },
 
   handleFile: function (event) {
-    var view = this
     this.disableAddFile()
+    var view = this
 
     var file = event.currentTarget.files[0]
-    this.newProgramFile.set("file_name", file.name)
     this.reader.onload = function(e){
-      view.newProgramFile.set("file", this.result)
+      view.setNewFile(file, this.result)
       view.enableAddFile()
     }
     this.read(file)
   },
 
   createFile: function(){
-    view = this
-    this.toggleUpload()
-    if (this.$('input[type=file]')[0].files[0]){
-      this.saveNewFile()
-    } else {
-      alert("There is no file to upload")
-    }
+    if (this.$('#add-file').html() == "Add File"){
+      view = this
+      if (this.$('input[type=file]')[0].files[0]){
+        this.toggleUpload()
+        this.saveNewFile()
+      } else {
+        alert("There is no file to upload")
+      }
+    }  
   },
 
   saveNewFile: function(){
@@ -55,7 +55,6 @@ Scbt.Views.ProgramShowFiles = Backbone.View.extend({
     this.newProgramFile.save({},{
       success: function(){
         view.collection.add(view.newProgramFile)
-        view.render()
         view.toggleAddFile()
       }, 
       error: function(req, res){
@@ -97,13 +96,22 @@ Scbt.Views.ProgramShowFiles = Backbone.View.extend({
   },
 
   toggleUpload: function(){
-    this.$("#add-file").html("Uploading...")  
+    this.$("#add-file").html("Uploading...") 
   },
 
   toggleAddFile: function(){
-    this.$("#add-file").html("Add File")  
+    this.$("#add-file").html("Add File")
+  },
+
+  setNewFile: function(file, content){
+    this.newProgramFile = new Scbt.Models.ProgramFile
+    this.newProgramFile.set("program_id", this.collection.program.get("id"))
+    this.newProgramFile.set("file_file_name", file.name)
+    // this.newProgramFile.set("file_size", file.size)
+    this.newProgramFile.set("file_file_content", content)
+  },
+
+  file: function(){
+    return this.$('input[type=file]')[0].files[0]
   }
-  // submitForm: function(event){
-  //   console.log($(event.currentTarget).serializeJSON())
-  // }
 })
