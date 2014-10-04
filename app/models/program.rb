@@ -27,8 +27,8 @@ class Program < ActiveRecord::Base
   has_many :approved_students, through: :approved_enrollments, source: :student 
 
   def valid_instructor
-	if self.instructor_id && !self.instructor
-		errors.add(:instructor_id, "must point to an instructor")
-	end
+  	if self.instructor_id && !self.instructor
+  		errors.add(:instructor_id, "must point to an instructor")
+  	end
   end
 end

@@ -1,5 +1,5 @@
 class Api::ProgramFilesController < ApplicationController
-	wrap_parameters :program_file, exclude: []
+	wrap_parameters :program_file, include: [:program_id, :file, :name]
 	before_action :require_sign_in
 
 	def program_index
@@ -11,15 +11,11 @@ class Api::ProgramFilesController < ApplicationController
 	end
 
 	def create
-		# render json: params
 		@program_file = ProgramFile.new(program_file_params)
-		content = params[:program_file][:file_file_content]
-		@program_file.set_content(content)
-		# @program_file.file.instance_write(:file_name, file_name_param)
-		
 		if can_change?(@program_file.program)
+			@program_file.file.instance_write(:file_name, file_name_param)
+			
 			if @program_file.save
-				@program_file.save_file(:file)
 			  render "api/program_files/show"
 			else
 			  render json: @program_file.errors.full_messages.join(", "), status: :unprocessable_entity
@@ -30,22 +26,21 @@ class Api::ProgramFilesController < ApplicationController
 	end
 
 	def destroy
-    @program_file = ProgramFile.find(params[:id])
-    # @program_file.file.destroy
-    if can_change?(@program_file.program)
-    	@program_file.destroy!
-    	render json: @program_file
-    else
-    	render json: "You must be an admin or the instructor to delete files in this program", status: :unauthorized
-    end
+		@program_file = ProgramFile.find(params[:id])
+		if can_change?(@program_file.program)
+			@program_file.destroy!
+			render json: @program_file
+		else
+			render json: "You must be an admin or the instructor to delete files in this program", status: :unauthorized
+		end
 	end
 
 	def program_file_params
-		params.require(:program_file).permit(:file_file_name, :program_id)
+		params.require(:program_file).permit(:file, :program_id)
 	end
 
 	def file_name_param
-		file_name = params.require(:program_file)[:file_name]
+		file_name = params.require(:program_file)[:name]
 		if file_name
 			file_name
 		else

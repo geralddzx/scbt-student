@@ -13,3 +13,5 @@ json.program_files do
 	end
 end
 json.change_permission @change_permission
+json.max_file_num ProgramFile::MAX_FILE_NUM
+json.max_file_word ProgramFile::MAX_FILE_WORD

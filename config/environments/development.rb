@@ -36,4 +36,14 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   # config/environments/development.rb
   config.action_mailer.delivery_method = :letter_opener
+
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :path => 'files/:class/:id/:style/:filename',
+      :s3_credentials => {                                          
+        :bucket => ENV['AWS_BUCKET_DEV'], #these values safely stored in application.yml thanks to figaro!                
+        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],                 
+        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']          
+      }                                   
+    }
 end
