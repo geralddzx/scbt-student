@@ -1,5 +1,6 @@
-Scbt.Views.UserShow = Backbone.View.extend({
+Scbt.Views.UserShow = Backbone.CompositeView.extend({
   initialize: function(){
+    this.addSubview("#profile-uploader", new Scbt.Views.UserShowPhoto({model: this.model}))
     this.listenTo(this.model, "sync", this.render)
     this.model.fetch()
   },
@@ -9,7 +10,7 @@ Scbt.Views.UserShow = Backbone.View.extend({
   render: function(){
     renderedContent = this.template({user: this.model})
     this.$el.html(renderedContent)
+    this.attachSubviews()
     return this
   }
-  
 })

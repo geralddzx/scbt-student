@@ -39,6 +39,11 @@ h1, h2, h3 {
   display: inline-block;
 }
 
+.flex-center {
+  justify-content: center;
+  display: flex;
+}
+
 #header {
   display: flex;
   height: 50px;
@@ -102,7 +107,7 @@ h1, h2, h3 {
   }
 
   table {
-    &.d1 {
+    &.th-bold {
       td:first-child {
         font-weight: bold; 
       }
@@ -113,6 +118,40 @@ h1, h2, h3 {
     td, th {
       padding: 10px;
       vertical-align: middle;
+    }
+
+    &#profile-table {
+      #personal-info {
+        vertical-align:top;
+        padding: 10px;
+        padding-left: 0px;
+      }
+
+      #profile-uploader {
+        vertical-align: top;
+        padding-left: 30px;
+
+        #profile-photo-table {
+          padding: 10px;
+          #photo-file {
+            visibility: hidden;
+            height:0px;
+          }
+
+          #profile-photo {
+            background-color: #CCCCCC;
+            width: 200px;
+            height: 200px;
+          }
+
+          #profile-photo-buttons {
+            padding: 5px;
+            button {
+              margin: 5px;
+            }
+          }
+        }
+      }
     }
   }
 

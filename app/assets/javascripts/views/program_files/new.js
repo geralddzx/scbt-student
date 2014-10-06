@@ -1,4 +1,4 @@
-Scbt.Views.ProgramFilesNew = Backbone.View.extend({
+Scbt.Views.ProgramFilesNew = Backbone.FileView.extend({
 	events: {
     'change input[type=file]': 'handleFile',
     'click #add-file': 'createFile'
@@ -50,7 +50,7 @@ Scbt.Views.ProgramFilesNew = Backbone.View.extend({
     newProgramFile.save({},{
       success: function(){
         view.collection.add(newProgramFile)
-        view.toggleAddFile()
+        // view.toggleAddFile()
       }, 
       error: function(req, res){
         alert(res.responseJSON || res.responseText)
@@ -82,9 +82,9 @@ Scbt.Views.ProgramFilesNew = Backbone.View.extend({
 
   toggleAddFile: function(){
     this.$("#add-file").html("Add File")
-    if (this.selectFile() && this._loading === 0){
-      this.enableAddFile()
-    }
+    // if (this.selectFile() && this._loading === 0){
+    //   this.enableAddFile()
+    // }
   },
 
 	setNewFile: function(file, content){
@@ -93,11 +93,7 @@ Scbt.Views.ProgramFilesNew = Backbone.View.extend({
 		this.newProgramFile.set("name", file.name)
 		this.newProgramFile.set("file", content)
 	},
-
-  selectFile: function(){
-    return this.$('input[type=file]')[0].files[0]
-  },
-
+  
   load: function(){
     this.disableAddFile()
     if (this._loading == undefined){
@@ -111,7 +107,7 @@ Scbt.Views.ProgramFilesNew = Backbone.View.extend({
       this._loading = 0
     }
     this._loading = this._loading - 1
-    if (this._loading == 0 && this.$("#add-file").html() == "Add File"){
+    if (this._loading == 0 && this.$("#add-file").html() == "Add File" && this.selectFile()){
       this.enableAddFile()
     }
   }

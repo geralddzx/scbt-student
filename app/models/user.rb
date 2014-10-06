@@ -40,6 +40,9 @@ PERMISSIONS = [
 ]
 
 class User < ActiveRecord::Base
+  MAX_PHOTO_SIZE = 3.megabytes
+  MAX_PHOTO_DES = "3 megabytes"
+
   attr_reader :password
   before_validation :ensure_session_token, :ensure_permission_set
   validates :email, :session_token, :first_name, :last_name, :permission, presence: true
@@ -52,9 +55,10 @@ class User < ActiveRecord::Base
   has_many :enrolled_programs, through: :enrollments, source: :program 
   has_many :taught_programs, class_name: "Program", foreign_key: :instructor_id 
   
-  has_attached_file :photo
+  has_attached_file :photo, :path => 'profile_photos/:id/:attachment/:filename'
   validates_attachment_content_type :photo, :content_type => /\Aimage/
-  validates_attachment_file_name :photo, :matches => [/png\Z/, /jpe?g\Z/, /giff?\Z/]
+  # validates_attachment_file_name :photo, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
+  validates_attachment_size :photo, less_than: User::MAX_PHOTO_SIZE
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
@@ -104,6 +108,15 @@ class User < ActiveRecord::Base
   
   def master_admin?
     self.permission == "MASTER_ADMIN"
+  end
+
+  def set_photo(params)
+    # return if !params[:user].has_key?(:photo)  
+    if params[:user][:photo]
+      name = params[:user][:photo_name] || "photo.jpg"
+      self.photo.instance_write(:file_name, name)
+    end
+    # params[:user][:delete_old] = true
   end
 end
 

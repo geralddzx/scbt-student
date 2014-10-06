@@ -1,0 +1,34 @@
+
+  <table id="profile-photo-table" class="thumbnail">
+    <tr>
+    <% if (user.escape("photo_url")){ %>
+      <td>
+        <image src="<%= user.escape("photo_url") %>" width="300px" height="300px">
+      </td>
+    <% } else { %>
+      <td id="profile-photo">
+        <div class="flex-center">
+          <span id="picture-icon" class="glyphicon glyphicon-picture"></span>
+        </div>
+      </td>
+    <% } %>
+    </tr>
+
+    <tr>
+    <td>
+      <div class="flex-center">
+        <span id="file-name">Upload Your Profile Photo Here</span>
+      </div>
+      <input id="photo-file" type="file">
+    </td>
+    </tr>
+
+    <tr>
+    <td id="profile-photo-buttons" class="flex-center">
+      <% if (user.escape("photo_url")){ %>
+        <button id="remove-photo" class="btn btn-danger">Remove</button>
+      <% } %>
+      <button id="new-photo" class="btn btn-primary">Choose New Photo</button>
+      <button id="replace-photo" class="btn btn-default">Submit</button>
+    </td>
+  </table>
