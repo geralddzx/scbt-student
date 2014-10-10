@@ -1,33 +1,35 @@
 class Api::AnnouncementsController < ApplicationController
 	before_action :require_sign_in
 	before_action :require_author, only: [:update, :destroy]
-	before_action :require_admin_or_instructor, only: [:create]
+	before_action :check_create_permission, only: [:create]
 
 	def index
-    render json: Announcement.all
+    @announcements =  Announcement.where(source: nil).order(:updated_at).reverse
+    render "api/announcements/index"
   end
 
   def create
-    @campus = Campus.new(campus_params)
-    if @campus.save
-      render "api/campuses/show"
+    @announcement = Announcement.new(announcement_params)
+    @announcement.source = @source
+    if @announcement.save
+      render @announcement
     else
-      render json: @campus.errors.full_messages.join(", "), status: :unprocessable_entity
+      render json: @announcement.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
 
   def show
-    @campus = Campus.find(params[:id])
+    @announcement = announcement.find(params[:id])
     # include this user's program_enrollment if any.
-    render "api/campuses/show"
+    render @announcement
   end
 
   def update
-    @campus = Campus.find(params[:id])
-    if @campus.update_attributes(campus_params)
-      render "api/campuses/show"
+    @announcement = announcement.find(params[:id])
+    if @announcement.update_attributes(announcement_params)
+      render "api/announcementes/show"
     else
-      render json: @campus.errors.full_messages.join(", "), status: :unprocessable_entity
+      render json: @announcement.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
 
@@ -44,14 +46,22 @@ class Api::AnnouncementsController < ApplicationController
   	end
   end
 
-  def require_admin_or_instructor
-  	@program = paramsx
-  	# unless current_user.admin? || 
+  def check_create_permission
+    type = params[:announcement][:source_type]
+    id = params[:announcement][:source_id]
+    if type && id
+      @source = type.constantize.find(id)
+    end
+
+    return if current_user.master_admin?
+    return if current_user.admin? && type != "Campus"
+    return if @source.class == Program && @source.instructor == current_user
+    return if @source.class == Campus && @source.manager == current_user
+    @source_phrase = " in this " + @source.class.to_s.downcase if @source
+    render json: "You are not permitted to create announcements" + @source_phrase, status: :unauthorized
   end
 
   def announcement_params
-    params.require(:announcement).permit(:id, :title, :content, :author_id)
+    params.require(:announcement).permit(:title, :content, :source_id, :source_type)
   end
-
-
 end

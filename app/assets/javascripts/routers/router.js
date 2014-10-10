@@ -14,8 +14,14 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "campuses/index": "campusesIndex",
     "campuses/new": "campusesNew",
     "campuses/:id/edit": "campusEdit",
-    "campuses/:id": "campusShow"
+    "campuses/:id": "campusShow",
+
+    "announcements/index": "announcementsIndex",
+    "announcements/new": "announcementsNew",
+    "announcements/:id/edit": "announcementEdit",
+    "announcements/:id": "announcementShow"
   },
+
   programsIndex: function(){
     var view = new Scbt.Views.ProgramsIndex({
       collection: Scbt.Collections.programs
@@ -56,12 +62,13 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var homeView = new Scbt.Views.ProgramShowHome({model: program})
     view.swapContent(homeView)
   },
+
   programShowFiles: function(id){
-    if (!this._currentView){
+    if (!this._currentView || !this._currentView.swapContent){
       this.programShow(id)
     }
     var view = new Scbt.Views.ProgramShowFiles({
-      collection: new Scbt.Collections.ProgramFiles([],{
+        collection: new Scbt.Collections.ProgramFiles([],{
         program: this._currentView.model 
       })
     })
@@ -90,6 +97,29 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.CampusShow({model: campus})
     this.swapView(view)
   },
+
+  announcementsIndex: function(){
+    var view = new Scbt.Views.AnnouncementsIndex({
+      collection: Scbt.Collections.announcements
+    })
+    this.swapView(view)
+  },
+  // announcementsNew: function(){
+  //   var view = new Scbt.Views.announcementsNew({
+  //     model: new Scbt.Models.Campus
+  //   })
+  //   this.swapView(view)
+  // },
+  // announcemnetEdit: function(id){
+  //   var announcemnet = new Scbt.Models.announcemnet({id: id})
+  //   var view = new Scbt.Views.announcemnetEdit({model: announcemnet})
+  //   this.swapView(view)
+  // },
+  // announcemnetShow: function(id){
+  //   var announcemnet = new Scbt.Models.announcemnet({id: id})
+  //   var view = new Scbt.Views.announcemnetShow({model: announcemnet})
+  //   this.swapView(view)
+  // },
 
   swapView: function(newView){
     if (this._currentView){

@@ -1,0 +1,42 @@
+<a href="#">Home</a> >
+<a href="#announcements/index">Announcements</a><br>
+
+<h3>General Announcements</h3>
+
+<% if (Scbt.Models.user.master_admin()){ %>
+  <a href="#announcements/new" class="btn btn-default btn-head">Make New Announcement</a>
+<% } %>
+
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Last Updated</th>
+  </tr>
+
+  <% announcements.each(function(announcement){ %>
+    <tr>
+      <td>
+        <a href="#announcements/<%= announcement.id %>">
+          <%= announcement.escape("title") %>
+        </a>
+      </td>
+
+      <td>
+        <%= announcement.escape("author_name") %>
+      </td>
+
+      <td>
+        <%= announcement.escape("updated_at") %>
+      </td>
+     
+      <% if (Scbt.Models.user.escape("author")){ %>
+        <td><a class="btn btn-info" href="#announcements/<%= announcement.id %>/edit">Edit announcement</a></td>
+        <td><button class="remove-announcement btn btn-danger" id="<%= announcement.id %>">Remove Announcement</button>
+      <% } %>
+    </tr>
+  <% }) %>
+</table>
+
+
+

@@ -11,13 +11,14 @@ Scbt.Collections.ProgramFiles = Backbone.Collection.extend({
   },
 
   parse: function(res){
+    Scbt.check_session(res)
   	this.change_permission = res["change_permission"]
-    this.max_file_num = res["max_file_num"]
-    this.max_file_word = res["max_file_word"]
+    this.maxFileSize = res["maxFileSize"]
+    this.maxFileDes = res["maxFileDes"]
 
     delete res["change_permission"]
-    delete res["max_file_num"]
-    delete res["max_file_word"]
+    delete res["maxFileSize"]
+    delete res["maxFileDes"]
 
   	return res["program_files"]
   }

@@ -17,6 +17,7 @@ class Program < ActiveRecord::Base
   
   belongs_to :instructor, -> {where permission: "INSTRUCTOR"}, class_name: "User"
   
+  has_many :announcements, as: :source, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :approved_enrollments, -> {where status: "APPROVED"}, class_name: "Enrollment"
   

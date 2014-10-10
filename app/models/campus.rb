@@ -20,9 +20,12 @@ class Campus < ActiveRecord::Base
 
 	belongs_to :manager, class_name: "User"
 	has_many :program_offerings
+	has_many :announcements, as: :source, dependent: :destroy
+	
 	has_many :programs, through: :program_offerings, source: :program
 	has_many :students, through: :programs, source: :students
-		
+	
+
 	def valid_manager
 		if self.manager && !self.manager.admin?
 			errors.add(:manager_id, "must be an admin")

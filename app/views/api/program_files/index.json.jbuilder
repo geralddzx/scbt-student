@@ -9,9 +9,9 @@ json.program_files do
 
 		date = program_file.file_updated_at.to_time
 		json.date(date.to_date.to_s)
-		json.time("#{to_digit(date.hour, 2)}:#{to_digit(date.min, 2)}:#{to_digit(date.sec,2)}")
+		json.time(date.to_clock)
 	end
 end
 json.change_permission @change_permission
-json.max_file_num ProgramFile::MAX_FILE_NUM
-json.max_file_word ProgramFile::MAX_FILE_WORD
+json.maxFileSize ProgramFile::MAX_FILE_NUM
+json.maxFileDes ProgramFile::MAX_FILE_WORD

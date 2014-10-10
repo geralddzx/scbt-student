@@ -8,7 +8,6 @@ Scbt.Views.UserShowPhoto = Backbone.FileView.extend({
   },
 
   initialize: function(){
-    console.log(this.model)
     this.listenTo(this.model, "sync", this.render)
   },
   
@@ -39,8 +38,8 @@ Scbt.Views.UserShowPhoto = Backbone.FileView.extend({
   },
 
   checkFile: function(file, content){
-    if (file.size > this.model.maxPhotoSize){
-      alert("File must be smaller than " + this.model.maxPhotoDes)
+    if (file.size > this.model.get("maxPhotoSize")){
+      alert("File must be smaller than " + this.model.get("maxPhotoDes"))
       this.enableReplaceFile()      
     } else if(!file.name.match(/.png$|.jpe?g$|.gif$|.PNG$|.JPG?G$|.GIF$/)){
       alert("File must be a PNG, JPEG or GIF file")
@@ -57,10 +56,9 @@ Scbt.Views.UserShowPhoto = Backbone.FileView.extend({
     this.model.save({}, {
       success: function(){
         alert("your Profile Photo Has Been Updated")
-        view.enableReplaceFile()
+        // view.enableReplaceFile()
       },
-      error: function(res){
-        console.log(res)
+      error: function(model, res){
         alert(res.responseJSON || res.responseText)
         view.enableReplaceFile()
       }
@@ -103,7 +101,7 @@ Scbt.Views.UserShowPhoto = Backbone.FileView.extend({
       success: function(){
         view.enableRemoveFile()
       },
-      error: function(res){
+      error: function(model, res){
         alert(res.responseJSON || res.responseText)
         view.enableRemoveFile()
       }

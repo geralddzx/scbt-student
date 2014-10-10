@@ -90,13 +90,21 @@ h1, h2, h3 {
     padding: 0px;
     padding-left: 20px;
     vertical-align: top;
-    #file-field {
-      height: auto;
-      display: inline-block;
-      width: auto;
-      > * {
-        vertical-align: middle;
-        display: inline-block;
+
+    .file-bar {
+      margin-bottom: 15px;
+
+      #file-name {
+        display: inline;
+      }
+
+      td {
+        padding: 0px;
+      }
+
+      .file-caption {
+        padding: 5px;
+        border: ridge 1px lightgrey;
       }
     }
   }
@@ -133,11 +141,6 @@ h1, h2, h3 {
 
         #profile-photo-table {
           padding: 10px;
-          #photo-file {
-            visibility: hidden;
-            height:0px;
-          }
-
           #profile-photo {
             background-color: #CCCCCC;
             width: 200px;
@@ -153,6 +156,11 @@ h1, h2, h3 {
         }
       }
     }
+  }
+
+  .hidden-input {
+    visibility: hidden;
+    height: 0px;
   }
 
   .btn-head {

@@ -40,8 +40,8 @@ PERMISSIONS = [
 ]
 
 class User < ActiveRecord::Base
-  MAX_PHOTO_SIZE = 3.megabytes
-  MAX_PHOTO_DES = "3 megabytes"
+  MAX_PHOTO_SIZE = 1.megabytes
+  MAX_PHOTO_DES = "1 megabyte"
 
   attr_reader :password
   before_validation :ensure_session_token, :ensure_permission_set
@@ -117,6 +117,10 @@ class User < ActiveRecord::Base
       self.photo.instance_write(:file_name, name)
     end
     # params[:user][:delete_old] = true
+  end
+
+  def name
+    first_name + " " + last_name
   end
 end
 

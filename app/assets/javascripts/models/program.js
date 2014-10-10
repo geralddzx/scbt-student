@@ -1,6 +1,7 @@
 Scbt.Models.Program = Backbone.Model.extend({
   urlRoot: "api/programs",
   parse: function(res){
+    Scbt.check_session(res)
     if (res["enrollments"]){
       this.enrollments = new Scbt.Collections.Enrollments(res["enrollments"], {parse: true})
     }
