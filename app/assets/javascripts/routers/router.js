@@ -1,6 +1,6 @@
 Scbt.Routers.Router = Backbone.Router.extend({
   routes: {
-    "": "programsIndex",
+    "": "Home",
     "profile": "userShow",
     "profile/edit": "userEdit",
     // "my/programs": "userPrograms",
@@ -22,12 +22,11 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "announcements/:id": "announcementShow"
   },
 
-  programsIndex: function(){
-    var view = new Scbt.Views.ProgramsIndex({
-      collection: Scbt.Collections.programs
-    })
+  Home: function(){
+    var view = new Scbt.Views.Home()
     this.swapView(view)
   },
+  
   userShow: function(){
     var view = new Scbt.Views.UserShow({model: Scbt.Models.user})
     this.swapView(view)
@@ -115,11 +114,11 @@ Scbt.Routers.Router = Backbone.Router.extend({
   //   var view = new Scbt.Views.announcemnetEdit({model: announcemnet})
   //   this.swapView(view)
   // },
-  // announcemnetShow: function(id){
-  //   var announcemnet = new Scbt.Models.announcemnet({id: id})
-  //   var view = new Scbt.Views.announcemnetShow({model: announcemnet})
-  //   this.swapView(view)
-  // },
+  announcementShow: function(id){
+    var announcement = new Scbt.Models.Announcement({id: id})
+    var view = new Scbt.Views.AnnouncementShow({model: announcement})
+    this.swapView(view)
+  },
 
   swapView: function(newView){
     if (this._currentView){

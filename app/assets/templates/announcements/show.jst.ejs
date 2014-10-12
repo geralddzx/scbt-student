@@ -1,0 +1,30 @@
+<a href="#">Home</a> >
+<a href="#announcements/index">Announcements</a> >
+<a href="#announcements/<%= announcement.get("id") %>"><%= announcement.escape("title") %></a><br>
+
+<h3><%= announcement.escape("title") %></h3>
+<% if (announcement.escape("author")){ %>
+	<td>
+		<button id="<%= announcement.escape("id") %>" class="btn btn-info edit-announcement btn-head">Edit</button>
+
+		<button id="<%= announcement.escape("id") %>" class="btn btn-danger remove-announcement btn-head">Remove</button>
+	</td>
+<% } %>
+
+<table class="table" id="announcement-table">
+	<tr>
+	<td class="subhead-cell">
+		<h5 class="subhead">
+			Posted <%= announcement.escape("created_at") %> | 
+			Updated <%= announcement.escape("updated_at") %> |
+			By <%= announcement.escape("author_name") %>
+		</h5>
+	</td>
+	</tr>
+
+	<tr>
+	<td>
+		<%= announcement.escape("content") %>
+	</td>
+	</tr>
+</table>

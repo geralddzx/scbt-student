@@ -12,6 +12,8 @@
     <th>Title</th>
     <th>Author</th>
     <th>Last Updated</th>
+    <th></th>
+    <th></th>
   </tr>
 
   <% announcements.each(function(announcement){ %>
@@ -30,7 +32,7 @@
         <%= announcement.escape("updated_at") %>
       </td>
      
-      <% if (Scbt.Models.user.escape("author")){ %>
+      <% if (announcement.escape("author")){ %>
         <td><a class="btn btn-info" href="#announcements/<%= announcement.id %>/edit">Edit announcement</a></td>
         <td><button class="remove-announcement btn btn-danger" id="<%= announcement.id %>">Remove Announcement</button>
       <% } %>

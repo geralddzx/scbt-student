@@ -19,9 +19,9 @@ class Api::AnnouncementsController < ApplicationController
   end
 
   def show
-    @announcement = announcement.find(params[:id])
+    @announcement = Announcement.find(params[:id])
     # include this user's program_enrollment if any.
-    render @announcement
+    render "api/announcements/show"
   end
 
   def update
