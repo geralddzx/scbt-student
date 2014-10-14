@@ -1,9 +1,10 @@
 Scbt.Views.AnnouncementsIndex = Backbone.View.extend({
 	events: {
-	  // "click button.remove-campus": "campusDestroy",
+	  "click .pagination li": "pageNav",
 	},
 
 	initialize: function(){
+		this.collection = new Scbt.Collections.Announcements()
   	this.listenTo(this.collection, "sync", this.render)
  		this.collection.fetch()
  	},
@@ -14,6 +15,17 @@ Scbt.Views.AnnouncementsIndex = Backbone.View.extend({
     renderedContent = this.template({announcements: this.collection})
     this.$el.html(renderedContent)
     return this
+	},
+
+	pageNav: function(event){
+		if ($(event.currentTarget).attr("class") == "disabled"){
+			return
+		}
+		var view = this
+		var page = parseInt($(event.currentTarget).attr("page"))
+		this.collection.page = page
+		this.disablePageNav()
+		this.collection.fetch()
 	}
 
 	// campusDestroy: function(event){

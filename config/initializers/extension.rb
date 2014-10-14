@@ -9,6 +9,11 @@ class ActiveRecord::Base
   # def file_key(file_type)
   # 	"#{self.class.to_s.underscore}/#{self.id}/#{file_type}"
   # end
+  def self.total_pages
+    total = self.count / self.default_per_page
+    total += 1 if self.count % self.default_per_page != 0
+    total
+  end
 end
 
 def to_unit(num)

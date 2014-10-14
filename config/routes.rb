@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       get "admins" => "users#admins"
     end
     resources :campuses, only: [:index, :show, :update, :create, :destroy]
-    resources :announcements, only: [:index, :show, :update, :create, :destroy]
+    resources :announcements, only: [:show, :update, :create, :destroy] do
+      get "page/:page", action: :index, on: :collection
+    end
     resources :users, only:[:index]
     resources :program_files, only: [:create]
   end

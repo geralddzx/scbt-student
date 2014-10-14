@@ -17,4 +17,6 @@ class Announcement < ActiveRecord::Base
 	belongs_to :source, polymorphic: true
 	
 	validates :title, :content, :author_id, presence: true
+
+	paginates_per 2
 end

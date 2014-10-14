@@ -3,7 +3,7 @@
 
 <h3>General Announcements</h3>
 
-<% if (Scbt.Models.user.master_admin()){ %>
+<% if (Scbt.Models.user.admin()){ %>
   <a href="#announcements/new" class="btn btn-default btn-head">Make New Announcement</a>
 <% } %>
 
@@ -35,10 +35,45 @@
       <% if (announcement.escape("author")){ %>
         <td><a class="btn btn-info" href="#announcements/<%= announcement.id %>/edit">Edit announcement</a></td>
         <td><button class="remove-announcement btn btn-danger" id="<%= announcement.id %>">Remove Announcement</button>
+      <% } else { %>
+        <td></td>
+        <td></td>
       <% } %>
     </tr>
   <% }) %>
-</table>
 
+  <tr>
+  <td>
+    <ul class="pagination">
+      <li
+        <% if (announcements.page <= 1){ %>
+          class="disabled"
+        <% } %>
+        page="<%= announcements.page - 1 %>"
+      ><a>&laquo;</a></li>
+
+      <% for (p = 1; p <= announcements.total_pages; p++){ %>
+        <li
+          <% if (announcements.page == p){ %>
+            class="active"
+          <% } %>
+          page="<%= p %>"
+        ><a><%= p %></a></li>
+      <% } %>
+
+      <li 
+        <% if (announcements.page >= announcements.total_pages){ %>
+          class="disabled"
+        <% } %>
+        page="<%= announcements.page + 1 %>"
+      ><a>&raquo;</a></li>
+    </ul>
+  </td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+</table>
 
 

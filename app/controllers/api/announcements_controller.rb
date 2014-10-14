@@ -4,15 +4,17 @@ class Api::AnnouncementsController < ApplicationController
 	before_action :check_create_permission, only: [:create]
 
 	def index
-    @announcements =  Announcement.where(source: nil).order(:updated_at).reverse
+    page_num = params[:page]
+    @announcements = Announcement.where(source: nil).order(:updated_at).reverse_order.page(page_num)
     render "api/announcements/index"
   end
 
   def create
     @announcement = Announcement.new(announcement_params)
+    @announcement.author_id = current_user.id
     @announcement.source = @source
     if @announcement.save
-      render @announcement
+      render json: @announcement, only: [:id]
     else
       render json: @announcement.errors.full_messages.join(", "), status: :unprocessable_entity
     end
@@ -25,16 +27,14 @@ class Api::AnnouncementsController < ApplicationController
   end
 
   def update
-    @announcement = announcement.find(params[:id])
     if @announcement.update_attributes(announcement_params)
-      render "api/announcementes/show"
+      render "api/announcements/show"
     else
       render json: @announcement.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
 
   def destroy
-    @announcement = Announcement.find(params[:id])
     @announcement.destroy!
     render json: @announcement
   end
@@ -58,10 +58,10 @@ class Api::AnnouncementsController < ApplicationController
     return if @source.class == Program && @source.instructor == current_user
     return if @source.class == Campus && @source.manager == current_user
     @source_phrase = " in this " + @source.class.to_s.downcase if @source
-    render json: "You are not permitted to create announcements" + @source_phrase, status: :unauthorized
+    render json: "You are not permitted to create announcements" + @source_phrase.to_s, status: :unauthorized
   end
 
   def announcement_params
-    params.require(:announcement).permit(:title, :content, :source_id, :source_type)
+    params.require(:announcement).permit(:title, :content)
   end
 end

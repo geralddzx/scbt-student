@@ -26,11 +26,14 @@
 }
 
 form {
+  width: 50%;
   color: black;
   display: inline-block;
-  input, select {
+  input, select, textarea {
     margin-bottom: 15px;
-    display: inline-block;
+  }
+  .form-textarea{
+    padding: 12px;
   }
 }
 
@@ -107,6 +110,10 @@ h1, h2, h3 {
         border: ridge 1px lightgrey;
       }
     }
+  }
+
+  .pagination li {
+    cursor: pointer;
   }
 
   h3.content {

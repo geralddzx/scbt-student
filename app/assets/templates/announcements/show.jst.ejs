@@ -5,7 +5,7 @@
 <h3><%= announcement.escape("title") %></h3>
 <% if (announcement.escape("author")){ %>
 	<td>
-		<button id="<%= announcement.escape("id") %>" class="btn btn-info edit-announcement btn-head">Edit</button>
+		<a href="#announcements/<%= announcement.get("id") %>/edit" class="btn btn-info edit-announcement btn-head">Edit</a>
 
 		<button id="<%= announcement.escape("id") %>" class="btn btn-danger remove-announcement btn-head">Remove</button>
 	</td>

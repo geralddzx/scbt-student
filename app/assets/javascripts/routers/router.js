@@ -16,8 +16,8 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "campuses/:id/edit": "campusEdit",
     "campuses/:id": "campusShow",
 
-    "announcements/index": "announcementsIndex",
     "announcements/new": "announcementsNew",
+    "announcements/index": "announcementsIndex",
     "announcements/:id/edit": "announcementEdit",
     "announcements/:id": "announcementShow"
   },
@@ -98,22 +98,20 @@ Scbt.Routers.Router = Backbone.Router.extend({
   },
 
   announcementsIndex: function(){
-    var view = new Scbt.Views.AnnouncementsIndex({
-      collection: Scbt.Collections.announcements
+    var view = new Scbt.Views.AnnouncementsIndex()
+    this.swapView(view)
+  },
+  announcementsNew: function(){
+    var view = new Scbt.Views.AnnouncementsNew({
+      model: new Scbt.Models.Announcement
     })
     this.swapView(view)
   },
-  // announcementsNew: function(){
-  //   var view = new Scbt.Views.announcementsNew({
-  //     model: new Scbt.Models.Campus
-  //   })
-  //   this.swapView(view)
-  // },
-  // announcemnetEdit: function(id){
-  //   var announcemnet = new Scbt.Models.announcemnet({id: id})
-  //   var view = new Scbt.Views.announcemnetEdit({model: announcemnet})
-  //   this.swapView(view)
-  // },
+  announcementEdit: function(id){
+    var announcement = new Scbt.Models.Announcement({id: id})
+    var view = new Scbt.Views.AnnouncementEdit({model: announcement})
+    this.swapView(view)
+  },
   announcementShow: function(id){
     var announcement = new Scbt.Models.Announcement({id: id})
     var view = new Scbt.Views.AnnouncementShow({model: announcement})

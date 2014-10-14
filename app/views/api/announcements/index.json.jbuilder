@@ -1,4 +1,6 @@
-json.(@announcements) do |announcement|
+json.total_pages Announcement.total_pages
+
+json.announcements (@announcements) do |announcement|
 	json.id announcement.id
 	json.title announcement.title
 
