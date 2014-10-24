@@ -36,6 +36,8 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (3.1.2.20141016)
+      execjs
     aws-sdk (1.53.0)
       aws-sdk-v1 (= 1.53.0)
     aws-sdk-v1 (1.53.0)
@@ -192,12 +194,13 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  autoprefixer-rails
   aws-sdk
   backbone-on-rails
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
-  bootstrap-sass
+  bootstrap-sass (~> 3.2.0)
   coffee-rails (~> 4.0.0)
   email_validator
   figaro
@@ -205,6 +208,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   letter_opener
+  nokogiri (~> 1.6.3.1)
   paperclip (~> 4.2)
   pg
   pry-rails

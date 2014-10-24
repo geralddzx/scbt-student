@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009235853) do
+ActiveRecord::Schema.define(version: 20141024025355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20141009235853) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "source_id"
     t.string   "source_type"
+    t.integer  "source_id"
   end
 
   create_table "campuses", force: true do |t|
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20141009235853) do
     t.string   "city",        null: false
     t.string   "country"
     t.string   "postal_code", null: false
+    t.integer  "survey_id"
   end
 
   create_table "enrollments", force: true do |t|
@@ -77,9 +78,36 @@ ActiveRecord::Schema.define(version: 20141009235853) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "instructor_id"
+    t.integer  "survey_id"
   end
 
   add_index "programs", ["instructor_id"], name: "index_programs_on_instructor_id", using: :btree
+
+  create_table "survey_answers", force: true do |t|
+    t.string   "comment"
+    t.integer  "rating"
+    t.integer  "question_id"
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_questions", force: true do |t|
+    t.string   "question",    null: false
+    t.string   "answer_type", null: false
+    t.integer  "survey_id"
+    t.integer  "min_rating"
+    t.integer  "max_rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "surveys", force: true do |t|
+    t.string   "title",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",              null: false
@@ -100,6 +128,7 @@ ActiveRecord::Schema.define(version: 20141009235853) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "survey_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

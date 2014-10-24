@@ -25,7 +25,14 @@ enrollment.save
 
 User.last.enrolled_programs.create({name: "Modern Arts"})
 User.create(:first_name => "Master", :last_name => "Admin", :password => "turtle", :email => "master@gmail.com", permission: "MASTER_ADMIN")
-User.create(:first_name => "Dababa", :last_name => "Lalaala", :password => "turtle", :email => "haha@gmail.com", permission: "INSTRUCTOR")
+User.create(:first_name => "Dababa", :last_name => "Lalaala", :password => "turtle", :email => "haha@gmail.com", permission: "INSTRUCTOR", survey_id: 1)
 
 Campus.create(name: "North York", street: "150 Consumers Rd.", city: "North York", postal_code: "M2J 1P9")
 Announcement.create(title: "Web App on Development", author_id: 1, content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+
+Survey.create(title: "Test survey")
+Survey.first.questions.create(question: "What is your fav color", answer_type: "RATING", min_rating: 1, max_rating: 5)
+Survey.first.questions.create(question: "Why is that your fav color", answer_type: "COMMENT") 
+
+SurveyQuestion.first.answers.create(student_id: 4, rating: 1)
+SurveyQuestion.second.answers.create(student_id: 4, comment: 123)

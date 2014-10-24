@@ -16,6 +16,11 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "campuses/:id/edit": "campusEdit",
     "campuses/:id": "campusShow",
 
+    "surveys/index": "surveysIndex",
+    // "surveys/new": "surveysNew",
+    // "surveys/:id/edit": "surveyEdit",
+    "surveys/:id": "survey",
+
     "announcements/new": "announcementsNew",
     "announcements/index": "announcementsIndex",
     "announcements/:id/edit": "announcementEdit",
@@ -35,6 +40,7 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.UserEdit({model: Scbt.Models.user})
     this.swapView(view)
   },
+
   userProgramsIndex: function(){
     var view = new Scbt.Views.ProgramsIndex({
       collection: new Scbt.Collections.Programs([], {user: true})
@@ -96,6 +102,26 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.CampusShow({model: campus})
     this.swapView(view)
   },
+
+  surveysIndex: function(){
+    var view = new Scbt.Views.SurveysIndex({
+      collection: Scbt.Collections.surveys
+    })
+    this.swapView(view)
+  },
+
+  survey: function(id){
+    var survey = new Scbt.Models.Survey({id: id})
+    var view = new Scbt.Views.Survey({model: survey})
+    this.swapView(view)
+  },
+
+  // surveyEdit: function(id){
+  //   var survey = new Scbt.Models.survey({id: id})
+  //   var view = new Scbt.Views.surveyEdit({model: survey})
+  //   this.swapView(view)
+  // },
+ 
 
   announcementsIndex: function(){
     var view = new Scbt.Views.AnnouncementsIndex()

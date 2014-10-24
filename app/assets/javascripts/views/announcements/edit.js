@@ -24,6 +24,6 @@ Scbt.Views.AnnouncementEdit = Backbone.View.extend({
       error: function(req, res){
         alert(res.responseJSON || res.responseText)
       }     
-   }) 
+    }) 
   }  
 })

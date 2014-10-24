@@ -5,7 +5,7 @@ class Api::AnnouncementsController < ApplicationController
 
 	def index
     page_num = params[:page]
-    @announcements = Announcement.where(source: nil).order(:updated_at).reverse_order.page(page_num)
+    @announcements = Announcement.where(source: nil).order("updated_at DESC").page(page_num)
     render "api/announcements/index"
   end
 
@@ -35,8 +35,13 @@ class Api::AnnouncementsController < ApplicationController
   end
 
   def destroy
+    @announcements = Announcement.where(source: nil).order("updated_at DESC").to_a
+    pos = 1 + @announcements.index {|announcement| announcement.id == @announcement.id}
+    @page = Announcement.new_page_num(pos, @announcements.count)
+
     @announcement.destroy!
-    render json: @announcement
+    @announcements = Announcement.where(source: nil).order("updated_at DESC").page(@page)
+    render "api/announcements/destroy"
   end
 
   def require_author

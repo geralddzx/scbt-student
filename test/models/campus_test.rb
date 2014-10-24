@@ -11,6 +11,7 @@
 #  city        :string(255)      not null
 #  country     :string(255)
 #  postal_code :string(255)      not null
+#  survey_id   :integer
 #
 
 require 'test_helper'

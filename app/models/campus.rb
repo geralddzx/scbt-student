@@ -11,14 +11,19 @@
 #  city        :string(255)      not null
 #  country     :string(255)
 #  postal_code :string(255)      not null
+#  survey_id   :integer
 #
 
 class Campus < ActiveRecord::Base
 	validates :name, uniqueness: true
 	validates :name, :street, :city, :postal_code, presence: true
+	
 	validate :valid_manager
+	validate :valid_survey
 
 	belongs_to :manager, class_name: "User"
+	belongs_to :survey
+
 	has_many :program_offerings
 	has_many :announcements, as: :source, dependent: :destroy
 	
@@ -31,4 +36,10 @@ class Campus < ActiveRecord::Base
 			errors.add(:manager_id, "must be an admin")
 		end
 	end
+
+	def valid_survey
+	    if self.survey_id && !self.survey
+	      errors.add(:survey_id, "must point to a survey")
+	    end
+  	end
 end

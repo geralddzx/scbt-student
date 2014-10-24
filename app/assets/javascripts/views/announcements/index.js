@@ -1,6 +1,7 @@
 Scbt.Views.AnnouncementsIndex = Backbone.View.extend({
 	events: {
 	  "click .pagination li": "pageNav",
+	  "click .remove-announcement": "announcementDestroy"
 	},
 
 	initialize: function(){
@@ -26,23 +27,25 @@ Scbt.Views.AnnouncementsIndex = Backbone.View.extend({
 		this.collection.page = page
 		this.disablePageNav()
 		this.collection.fetch()
-	}
+	},
 
-	// campusDestroy: function(event){
- //    event.preventDefault()
- //    view = this
+	announcementDestroy: function(event){
+    view = this
     
- //    var id = $(event.target).attr("id")
- //    var campus = this.collection.get(id)
- //    campus.destroy({
- //      success: function(req, res){
- //        alert("This campus has been deleted")
- //        view.render()
- //      },
- //      error: function(req, res){
- //        alert(res.responseJSON || res.responseText)
- //        // view.collection.fetch()
- //      }
- //    })
- //  }  
+    var id = $(event.currentTarget).attr("id")
+    var announcement = this.collection.get(id)
+    announcement.destroy({
+      success: function(req, res){
+        alert("This announcement has been deleted")
+        view.collection.set(res.announcements)
+        view.collection.total_pages = res.total_pages
+        view.collection.page = res.page
+        view.render()
+      },
+      error: function(req, res){
+        alert(res.responseJSON || res.responseText)
+        // view.collection.fetch()
+      }
+    })
+  }  
 })

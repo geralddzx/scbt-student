@@ -26,7 +26,6 @@
 }
 
 form {
-  width: 50%;
   color: black;
   display: inline-block;
   input, select, textarea {
@@ -35,6 +34,10 @@ form {
   .form-textarea{
     padding: 12px;
   }
+}
+
+.form-control {
+  min-width: 250px;
 }
 
 h1, h2, h3 {
@@ -61,8 +64,12 @@ h1, h2, h3 {
   .header-item {
     margin: 10px;
     display: inline-block;
-    margin: 10px;
+    margin: 15px;
   }
+}
+
+.top {
+  margin-top: 10px;
 }
 
 #banner {
@@ -87,6 +94,11 @@ h1, h2, h3 {
     a {
       color: #787878; 
     }
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-around;
   }
 
   #content {
@@ -133,6 +145,14 @@ h1, h2, h3 {
     td, th {
       padding: 10px;
       vertical-align: middle;
+    }
+    &.horizontal-form {
+      td {
+        padding-left: 0;
+        .form-control {
+          margin-top: 2px;
+        }
+      }
     }
 
     &#announcement-table {
@@ -189,12 +209,48 @@ h1, h2, h3 {
 
   .btn {
     display: inline-block;
-    vertical-align: center;
   }
 
   h5 #address {
     margin-top: 20px;
   } 
+
+  .survey-list-table {
+    margin-bottom: 15px;
+    .scroll-list {
+      vertical-align: top;
+      height: 200px;
+      overflow: scroll;
+      border: ridge 1px lightgrey;
+      padding: 5px;
+      margin: 15px;
+
+      .btn {
+        padding: 5px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        display: inline-block
+      }
+
+      span {
+        margin-bottom: 10px;
+      }
+
+      label {
+        vertical-align: top;
+        padding: 3px;
+        margin: 0;
+        input {
+          margin-top: 4px;
+        }
+      }
+
+      > * {
+        display: block;
+      }
+    }
+  
+  }   
 }
 
 

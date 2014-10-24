@@ -1,0 +1,68 @@
+<a href="#">Home</a> >
+<a href="#surveys/index">Surveys</a> > 
+<a href="#surveys/new">New</a><br>
+
+<h3>New Survey</h3><br>
+<form>
+  <input type="text" name="survey[title]" 
+    placeholder="Title"
+    class="form-control"
+    value="<%= survey.escape("title") %>">
+  
+  <table class="survey-list-table">
+  <tr>
+    <td id="programs" class="scroll-list">
+      <span>Select programs that use this survey</span>
+      <div id="select-all-programs" class="btn btn-success">Select All</div>
+      <div id="deselect-all-programs" class="btn btn-danger">Deselect All</div>
+
+      <% survey.programs.each(function(program){ %>
+        <label>
+          <input 
+            type="checkbox" 
+            name="survey[program_hosts][<%= program.get("id") %>]" 
+          >
+          <%= program.escape("name") %>
+        </label>
+      <% }) %>
+    </td>
+
+    <td id="campuses" class="scroll-list">
+      <span>Select campuses that use this survey</span>
+      <div id="select-all-campuses" class="btn btn-success">Select All</div>
+      <div id="deselect-all-campuses" class="btn btn-danger">Deselect All</div>
+
+      <% survey.campuses.each(function(campus){ %>
+        <label>
+          <input 
+            type="checkbox" 
+            name="survey[campus_hosts][<%= campus.get("id") %>]"
+            value="<%= campus.get("id") %>"
+          >
+          <%= campus.escape("name") %>
+        </label>
+      <% }) %>
+    </td>
+
+    <td id="instructors" class="scroll-list">
+      <span>Select instructors that use this survey</span>
+      <div id="select-all-instructors" class="btn btn-success">Select All</div>
+      <div id="deselect-all-instructors" class="btn btn-danger">Deselect All</div>
+
+      <% survey.instructors.each(function(instructor){ %>
+        <label>
+          <input 
+            type="checkbox" 
+            name="survey[instructor_hosts][<%= instructor.get("id") %>]"
+            value="<%= instructor.get("id") %>"
+          >
+          <%= instructor.escape("name") %>
+        </label>
+      <% }) %>
+    </td>
+  </tr>
+  </table>
+
+  <input type="submit" class="btn btn-primary btn-block form-control" value="Create Survey">
+</form>
+

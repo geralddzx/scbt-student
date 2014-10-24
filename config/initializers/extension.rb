@@ -14,6 +14,11 @@ class ActiveRecord::Base
     total += 1 if self.count % self.default_per_page != 0
     total
   end
+
+  def self.new_page_num(pos, count)
+    pos = pos - 1 if count == pos
+    page = ((pos) / 1.0 / self.default_per_page).ceil
+  end
 end
 
 def to_unit(num)
@@ -40,5 +45,11 @@ class Time
 
   def to_date_clock
     to_s(:full_english)
+  end
+end
+
+class String
+  def is_i?
+    return self.to_i.to_s == self
   end
 end

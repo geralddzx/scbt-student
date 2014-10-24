@@ -21,6 +21,7 @@
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  survey_id          :integer
 #
 
 REFERRALS = [
@@ -45,6 +46,7 @@ class User < ActiveRecord::Base
 
   attr_reader :password
   before_validation :ensure_session_token, :ensure_permission_set
+  
   validates :email, :session_token, :first_name, :last_name, :permission, presence: true
   validates :email, uniqueness: true, email: true
   validates :permission, inclusion: {in: PERMISSIONS}
@@ -55,9 +57,11 @@ class User < ActiveRecord::Base
   has_many :enrolled_programs, through: :enrollments, source: :program 
   has_many :taught_programs, class_name: "Program", foreign_key: :instructor_id 
   
+  belongs_to :survey
+  validate :valid_survey_id
+
   has_attached_file :photo, :path => 'profile_photos/:id/:attachment/:filename'
   validates_attachment_content_type :photo, :content_type => /\Aimage/
-  # validates_attachment_file_name :photo, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
   validates_attachment_size :photo, less_than: User::MAX_PHOTO_SIZE
 
   def self.find_by_credentials(email, password)
@@ -121,6 +125,13 @@ class User < ActiveRecord::Base
 
   def name
     first_name + " " + last_name
+  end
+
+  def valid_survey_id
+    if self.survey_id
+      errors.add(:survey_id, "does not point to a survey") unless self.survey
+      errors.add(:survey, "can only be hosted by instructors") unless self.instructor?
+    end
   end
 end
 

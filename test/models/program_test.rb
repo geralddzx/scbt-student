@@ -9,6 +9,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  instructor_id :integer
+#  survey_id     :integer
 #
 
 require 'test_helper'

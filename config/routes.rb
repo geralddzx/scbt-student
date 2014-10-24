@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :announcements, only: [:show, :update, :create, :destroy] do
       get "page/:page", action: :index, on: :collection
     end
+    resources :surveys, only: [:index, :show, :new, :create, :update, :destroy]
     resources :users, only:[:index]
     resources :program_files, only: [:create]
   end
