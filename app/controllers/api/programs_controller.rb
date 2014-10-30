@@ -2,6 +2,7 @@ class Api::ProgramsController < ApplicationController
   before_action :require_sign_in
   before_action :require_admin, only: [:update, :create, :destroy]
   before_action :require_student, only: [:user_index]
+  before_action :require_admin, only: [:reset_survey]
 
   def create
     @program = Program.new(program_params)
@@ -14,35 +15,7 @@ class Api::ProgramsController < ApplicationController
   
   def show
     @program = Program.find(params[:id])
-    # include this user's program_enrollment if any.
     render "api/programs/show"
-
-    # P1: To start, lets 
-    
-    # P2: Instructor approval of enrollment. More complicated, because when instructor queries to SHOW a program needs to get **alll** student enrollments.
-
-    # 1. Use JBuilder to ship program_enrollment in show page.
-    # 2. Backbone model for ProgramEnrollment
-    # 3. Parse method of Program should build a ProgramEnrollment if supplied.
-    # 4. Update ProgramShow view to allow enrollment, approval of pending enrollment...
-    
-    # {
-    #   id: 123
-    #   name: "Physics",
-    #   credit_hours: 10,
-    #   program_enrollment: {
-    #     status: "PENDING",
-    #     program_id: 123,
-    #     student_id: 456
-    #   }
-    # }
-    
-    # JBuilder template:
-    # json.(@program, Program.attribute_names)
-    # json.program_enrollment do
-    #   @program_enrollment = @program.enrollments.find_by(user_id: current_user.id)
-    #   json.(@program_enrollment, ProgramEnrollment.attribute_names)
-    # end
   end
   
   def update
@@ -55,13 +28,27 @@ class Api::ProgramsController < ApplicationController
   end    
   
   def index
-    # render "api/programs/test"
-    # fail
     render json: Program.all
   end
 
   def user_index
     render "api/programs/user/index"
+  end
+
+  def survey_index
+    @programs = Program.all
+    @program_hosts = Program.where(survey_id: params[:survey_id])
+    render "api/programs/survey_index"
+  end
+
+  def reset_survey
+    Survey.find(params[:survey_id])
+    @programs = Program.where(survey_id: params[:survey_id])
+    @programs.update_all(survey_id: nil)
+
+    @program_hosts = Program.where(id: params[:host_ids].keys)
+    @program_hosts.update_all(survey_id: params[:survey_id])
+    render "api/programs/survey_index"
   end
   
   def destroy

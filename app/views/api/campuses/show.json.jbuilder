@@ -1,4 +1,4 @@
-json.(@campus, :id, :name, :street, :city, :postal_code, :country)
+json.(@campus, :id, :name, :street, :city, :postal_code, :country, :survey_id)
 
 @manager = @campus.manager
 if @manager

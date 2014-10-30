@@ -2,13 +2,15 @@
 #
 # Table name: survey_answers
 #
-#  id          :integer          not null, primary key
-#  comment     :string(255)
-#  rating      :integer
-#  question_id :integer
-#  student_id  :integer
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id           :integer          not null, primary key
+#  comment      :string(255)
+#  rating       :integer
+#  question_id  :integer
+#  student_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  subject_type :string(255)      not null
+#  subject_id   :integer          not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

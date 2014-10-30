@@ -2,6 +2,7 @@ class Api::UsersController < ApplicationController
   include UsersHelper
   wrap_parameters :user, include: [:email, :password, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo, :photo_name]
   before_action :require_master_admin, only: [:index, :admins, :instructors]
+  before_action :require_admin, only: [:reset_survey]
   before_action :require_sign_in
 
   def update
@@ -29,6 +30,22 @@ class Api::UsersController < ApplicationController
 
   def instructors
     render json: User.where(permission: ["INSTRUCTOR"]), only: [:id, :first_name, :last_name, :email]
+  end
+
+  def survey_index
+    @instructors = User.where(permission: "INSTRUCTOR")
+    @instructor_hosts = User.where(survey_id: params[:survey_id])
+    render "api/users/survey_index"
+  end
+
+  def reset_survey
+    Survey.find(params[:survey_id])
+    @instructors = User.where(survey_id: params[:survey_id])
+    @instructors.update_all(survey_id: nil)
+
+    @instructor_hosts = User.where(permission: "INSTRUCTOR").where(id: params[:host_ids].keys)
+    @instructor_hosts.update_all(survey_id: params[:survey_id])
+    render "api/users/survey_index"
   end
 
   def user_params

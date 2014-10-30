@@ -26,7 +26,9 @@ class Campus < ActiveRecord::Base
 
 	has_many :program_offerings
 	has_many :announcements, as: :source, dependent: :destroy
-	
+	has_many :survey_answers, as: :subject, dependent: :destroy
+
+	has_many :survey_questions, through: :survey, source: :questions
 	has_many :programs, through: :program_offerings, source: :program
 	has_many :students, through: :programs, source: :students
 	

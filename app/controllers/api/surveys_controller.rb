@@ -6,10 +6,6 @@ class Api::SurveysController < ApplicationController
   	render json: Survey.all, only: [:id, :title, :created_at, :updated_at]
   end
 
-  def new
-  	render "api/surveys/new"
-  end
-
   def show
     render json: Survey.find(params[:id])
   end

@@ -14,10 +14,11 @@
 
 class SurveyQuestion < ActiveRecord::Base
 	belongs_to :survey
-	has_many :answers, class_name: "SurveyAnswer", foreign_key: :question_id
+	has_many :answers, class_name: "SurveyAnswer", foreign_key: :question_id, dependent: :destroy
 
 	validates :question, presence: true
 	validates :answer_type, inclusion: {in: ["COMMENT", "RATING"]}
+	validates :question, uniqueness: {scope: :survey_id}
 	validate :valid_rating_bounds
 
 	def type_rating?

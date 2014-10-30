@@ -1,7 +1,7 @@
-json.(@program, :id, :name, :code, :hours)
+json.(@program, :id, :name, :code, :hours, :survey_id)
 
 if @program.instructor
-  json.instructor(@program.instructor, :id, :first_name, :last_name)
+  json.instructor(@program.instructor, :id, :first_name, :last_name, :survey_id)
 else
   json.instructor nil
 end

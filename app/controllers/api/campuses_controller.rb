@@ -1,7 +1,8 @@
 class Api::CampusesController < ApplicationController
   before_action :require_sign_in
   before_action :require_admin, only: [:create, :update, :destroy]
-  
+  before_action :require_admin, only: [:reset_survey]
+
   def index
     render json: Campus.all
   end
@@ -30,6 +31,21 @@ class Api::CampusesController < ApplicationController
     end
   end
   
+  def survey_index
+    @campuses = Campus.all
+    @campus_hosts = Campus.where(survey_id: params[:survey_id])
+    render "api/campuses/survey_index"
+  end
+
+  def reset_survey
+    Survey.find(params[:survey_id])
+    @campuses = Campus.where(survey_id: params[:survey_id])
+    @campuses.update_all(survey_id: nil)
+
+    @campus_hosts = Campus.where(id: params[:host_ids].keys)
+    @campus_hosts.update_all(survey_id: params[:survey_id])
+    render "api/campuses/survey_index"
+  end
 
   def destroy
     @campus = Campus.find(params[:id])

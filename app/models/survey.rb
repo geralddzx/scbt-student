@@ -10,7 +10,7 @@
 #
 
 class Survey < ActiveRecord::Base
-	has_many :questions, class_name: "SurveyQuestion"
+	has_many :questions, class_name: "SurveyQuestion", dependent: :nullify
 	has_many :answers, through: :questions, source: :answers
 
 	has_many :instructor_hosts, class_name: "User", dependent: :nullify

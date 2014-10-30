@@ -53,10 +53,13 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :referral, inclusion: {in: REFERRALS}
 
+  has_many :survey_answers, as: :subject, dependent: :destroy
   has_many :enrollments, foreign_key: :student_id, dependent: :destroy
+  
   has_many :enrolled_programs, through: :enrollments, source: :program 
   has_many :taught_programs, class_name: "Program", foreign_key: :instructor_id 
-  
+  has_many :survey_questions, through: :survey, source: :questions
+
   belongs_to :survey
   validate :valid_survey_id
 
@@ -132,6 +135,10 @@ class User < ActiveRecord::Base
       errors.add(:survey_id, "does not point to a survey") unless self.survey
       errors.add(:survey, "can only be hosted by instructors") unless self.instructor?
     end
+  end
+
+  def current_survey_answers(subject)
+    subject.survey_questions.answers.where(subject: subject).where(student_id: self.id)
   end
 end
 

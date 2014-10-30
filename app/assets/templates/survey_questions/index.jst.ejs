@@ -1,0 +1,40 @@
+<h4>All Questions</h4>
+
+<table class="table">
+  <tr>
+    <th>Question</th>
+    <th>Type</th>
+    <th>Min Rating</th>
+    <th>Max Rating</th>
+    <th></th>
+  </tr>
+
+  <% questions.each(function(question){ %>
+    <tr>
+      <td>
+        <%= question.escape("question") %>
+      </td>
+
+      <td>
+        <%= question.escape("answer_type") %>
+      </td>
+
+      <td>
+        <%= question.escape("min_rating") %>
+      </td>
+
+      <td>
+        <%= question.escape("max_rating") %>
+      </td>
+      
+      <% if (Scbt.Models.user.admin()){ %>
+        <td>
+          <div class="remove-question btn btn-danger" id="<%= question.get("id") %>">Remove Question</div>
+        </td>
+      <% } %>
+    </tr>
+  <% }) %>
+</table>
+
+
+
