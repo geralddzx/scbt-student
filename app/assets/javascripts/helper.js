@@ -8,3 +8,9 @@ var pluralize = {
 	"user": "users",
 	"instructor": "instructors"
 }
+
+var singularize = {
+	"campuses": "campus",
+	"programs": "program",
+	"users": "user",
+}

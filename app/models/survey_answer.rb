@@ -59,8 +59,16 @@ class SurveyAnswer < ActiveRecord::Base
 			return errors.add(:subject, "must be a user, campus or program")
 		end
 		self.valid_question
+		# self.valid_affiliation
 		if subject.class.to_s == "User" && !subject.instructor?
 			errors.add(:subject, "is a user but not an instructor") 
 		end
 	end
+
+	# def valid_affiliation
+	# 	return unless student = self.student
+	# 	if self.subject.class == Program 
+	# 		errors.add(:subject, "must be an enrolled program") unless student.enrolled_programs.include?(self.subject)
+	# 	elsif self.subject.class == Program 
+	# end
 end

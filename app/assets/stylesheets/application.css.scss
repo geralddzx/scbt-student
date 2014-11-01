@@ -155,6 +155,16 @@ h1, h2, h3 {
       }
     }
 
+    &.table-form {
+      margin-bottom: 10px;
+      td {
+        padding-left: 0;
+        .form-control, label {
+          margin: 0;
+        }
+      }
+    }
+
     &#announcement-table {
       td {
         &.subhead-cell {

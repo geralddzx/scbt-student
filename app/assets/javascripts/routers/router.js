@@ -4,6 +4,8 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "profile": "userShow",
     "profile/edit": "userEdit",
     // "my/programs": "userPrograms",
+
+    ":subject_class/:subject_id/survey": "surveyAnswersIndex", 
     
     "my/programs/index": "userProgramsIndex",
     "programs/new": "programsNew",
@@ -141,6 +143,15 @@ Scbt.Routers.Router = Backbone.Router.extend({
   announcementShow: function(id){
     var announcement = new Scbt.Models.Announcement({id: id})
     var view = new Scbt.Views.AnnouncementShow({model: announcement})
+    this.swapView(view)
+  },
+
+  surveyAnswersIndex: function(subjectClass, subjectID){
+    var collection = new Scbt.Collections.SurveyAnswers([],{
+      subjectClass: subjectClass,
+      subjectID: subjectID
+    })
+    var view = new Scbt.Views.SurveyAnswersIndex({collection: collection})
     this.swapView(view)
   },
 

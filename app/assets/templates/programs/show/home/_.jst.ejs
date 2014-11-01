@@ -1,17 +1,23 @@
 <h3 class="content"><%= program.get('name') %></h3>
 <% if (Scbt.Models.user.admin()){ %>
   <a class="btn btn-info btn-head" href="#programs/<%= program.id %>/edit">Edit This Program</a>
+<% } else if (program.enrollment){ %>
+  <a class="btn btn-success btn-head" href="#programs/<%= program.id %>/survey">Take Program Survey</a>
+
+  <% if (program.instructor){ %>
+    <a class="btn btn-success btn-head" href="#users/<%= program.instructor.get("id") %>/survey">Take Instructor Survey</a>
+  <% } %>
 <% } %>
 
 <table class="d1" border="0" cellspacing="10" cellpadding="10">  
   <tr>
     <td>Code</td>
-    <td><%= program.get('code') %></td>
+    <td><%= program.escape('code') %></td>
   </tr>
   
   <tr>
     <td>Start Date</td>
-    <td><%= program.get('start_date') %></td>
+    <td><%= program.escape('start_date') %></td>
   </tr>
   
   <tr>
@@ -28,7 +34,7 @@
     <td>Instructor</td>
     <td>
       <% if (program.instructor){ %>
-        <%= program.instructor.get('first_name') %> <%= program.instructor.get('last_name') %>
+        <%= program.instructor.escape('first_name') %> <%= program.instructor.escape('last_name') %>
       <% } %>
     </td>
   </tr>

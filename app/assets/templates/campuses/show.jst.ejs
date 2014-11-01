@@ -3,8 +3,10 @@
 <a href="#campuses/<%= campus.get("id") %>"><%= campus.escape("name") %></a><br>
 
 <h3><%= campus.get('name') %></h3>
-<% if (Scbt.Models.user.permissionType() == "admin"){ %>
+<% if (Scbt.Models.user.admin()){ %>
   <a class="btn btn-info btn-head" href="#campuses/<%= campus.id %>/edit">Edit This Program</a>
+<% } else if (Scbt.Models.user.student()) { %>
+  <a class="btn btn-success btn-head" href="#campuses/<%= campus.id %>/survey">Take Campus Survey</a>
 <% } %>
 
 <table class="table" border="0" cellspacing="5" cellpadding="5">  

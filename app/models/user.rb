@@ -136,10 +136,6 @@ class User < ActiveRecord::Base
       errors.add(:survey, "can only be hosted by instructors") unless self.instructor?
     end
   end
-
-  def current_survey_answers(subject)
-    subject.survey_questions.answers.where(subject: subject).where(student_id: self.id)
-  end
 end
 
 

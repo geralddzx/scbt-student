@@ -1,0 +1,34 @@
+<a href="#">Home</a> >
+<a href="#<%= answers.subjectClass %>/index"><%= capitalize(answers.subjectClass) %></a> > 
+<a href="#<%= answers.subjectURL() %>"><%= capitalize(answers.subject.escape("name")) %></a> > 
+<a href="#<%= answers.subjectURL() %>/survey"><%= capitalize(answers.survey.escape("title")) %></a><br>
+
+<h3><%= answers.survey.escape("title") %></h3><br>
+<div><%= answers.survey.escape("description") %></div><hr>
+
+<h4>Survey Questions</h4>
+<form>
+	<table class="table-form">
+	  <% answers.each(function(answer){ %>
+	  	<tr>
+	  		<td>
+	    		<label for="answer <%= answer.cid %>"><%= answer.question.escape("question") %><label>
+	    	</td>
+	    	<td>
+			    <input 
+			      type="<%= answer.inputType() %>" 
+			      min="<%= answer.minRating() %>"
+			      max="<%= answer.maxRating() %>"
+
+			      name="answers[<%= answer.cid %>]" 
+			      placeholder="<%= answer.description()%>"
+			      value="<%= answer.answer() %>"
+			      class="form-control"
+			      id="answer <%= answer.cid %>">
+			  </td>
+			</tr>		  
+	  <% }) %>
+	</table>
+
+  <input type="submit" class="btn btn-primary btn-block" value="Submit Answers">
+</form>
