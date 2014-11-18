@@ -1,6 +1,7 @@
 class Api::AnnouncementsController < ApplicationController
 	before_action :require_sign_in
-	before_action :require_author, only: [:update, :destroy]
+	before_action :require_author, only: [:update]
+  before_action :require_author_or_admin, only: [:destroy]
 	before_action :check_create_permission, only: [:create]
 
 	def index
@@ -35,6 +36,7 @@ class Api::AnnouncementsController < ApplicationController
   end
 
   def destroy
+    @announcement = Announcement.find(params[:id])
     @announcements = Announcement.where(source: nil).order("updated_at DESC").to_a
     pos = 1 + @announcements.index {|announcement| announcement.id == @announcement.id}
     @page = Announcement.new_page_num(pos, @announcements.count)
@@ -49,6 +51,11 @@ class Api::AnnouncementsController < ApplicationController
   	if @announcement.author_id != current_user.id
   		render json: "You must be the author to make this request", status: :unauthorized
   	end
+  end
+
+  def require_author_or_admin
+    return if current_user.admin?
+    require_author
   end
 
   def check_create_permission

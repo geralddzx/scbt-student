@@ -36,6 +36,7 @@ group :development do
   gem 'quiet_assets'
   gem "letter_opener"
   gem 'annotate'
+  gem 'capistrano-rails'
 end
 
 gem 'email_validator'
@@ -54,10 +55,9 @@ gem "figaro"
 gem "kaminari"
 gem 'nokogiri', '~> 1.6.3.1'
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'thin'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

@@ -19,5 +19,5 @@ Scbt.Models.User = Backbone.Model.extend({
       return "admin";
     }
     return permission.toLowerCase();
-  }
+  },
 })

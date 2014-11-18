@@ -17,12 +17,7 @@ Scbt.Views.ProgramShow = Backbone.CompositeView.extend({
   },
 
   swapContent: function(newContentView){
-    var contentView = this.subviews("#content")[0]
-    if (contentView){
-      this.removeSubview("#content", contentView)
-    }
-    this.$("#content").empty()
-    this.addSubview("#content", newContentView)
+    this.swapSubview("#content", newContentView)
   }
 })
 

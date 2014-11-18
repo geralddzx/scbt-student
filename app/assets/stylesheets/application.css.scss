@@ -37,10 +37,10 @@ form {
 }
 
 .form-control {
-  min-width: 250px;
+  min-width: 200px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   vertical-align: center;
   display: inline-block;
 }
@@ -207,6 +207,12 @@ h1, h2, h3 {
     }
   }
 
+  .tight-table {
+    td {
+      padding: 5px;
+    }
+  }
+
   .row-form {
     width: 100%;
     .form-control {
@@ -220,6 +226,12 @@ h1, h2, h3 {
     }
     input[type=radio] {
       margin-right: 2px;
+    }
+  }
+
+  .column-form {
+    > * {
+      display: block;
     }
   }
 

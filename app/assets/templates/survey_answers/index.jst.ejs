@@ -11,6 +11,7 @@
 	<table class="table-form">
 	  <% answers.each(function(answer){ %>
 	  	<tr>
+	  		<td><%= answer.get("number") %></td>
 	  		<td>
 	    		<label for="answer <%= answer.cid %>"><%= answer.question.escape("question") %><label>
 	    	</td>
@@ -26,7 +27,14 @@
 			      class="form-control"
 			      id="answer <%= answer.cid %>">
 			  </td>
-			</tr>		  
+			  <% if (answer.minRating() && answer.maxRating()){ %>
+			  	<td>
+			  		<%= answer.minRating() %>-<%= answer.maxRating() %>
+			  	<td>
+			  <% } %>
+			</tr>	
+			
+
 	  <% }) %>
 	</table>
 

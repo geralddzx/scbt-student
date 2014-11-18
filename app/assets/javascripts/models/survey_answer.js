@@ -3,7 +3,10 @@ Scbt.Models.SurveyAnswer = Backbone.Model.extend({
 
   parse: function(res){
   	this.question = new Scbt.Models.SurveyQuestion(res.survey_answer.question)
-  	return res.survey_answer.answer
+    this.set("subject_id", this.collection.subjectID)
+    this.set("subject_type", this.collection.subjectClassName())
+    this.set("question_id", this.question.get("id"))
+    return res.survey_answer.answer
   },
 
   inputType: function(){
@@ -19,8 +22,18 @@ Scbt.Models.SurveyAnswer = Backbone.Model.extend({
   	return this.question.get("max_rating")
   },
 
-  answer: function(){
-  	return (this.escape("comment") || this.escape("rating"))
+  answer: function(answer){
+    if (answer == undefined){
+      return (this.escape("comment") || this.escape("rating"))
+    } else if (this.question.get("answer_type") == "COMMENT") {
+      this.set("comment", answer)
+    } else if (this.question.get("answer_type") == "RATING") {
+      this.set("rating", answer)
+    }
+  },
+  
+  answered: function(){
+    return (this.escape("comment") || this.escape("rating"))
   },
 
   description: function(){

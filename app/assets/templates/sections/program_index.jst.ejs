@@ -1,0 +1,41 @@
+<h4>
+  <a href="#programs/<%= sections.program.get("id") %>"><%= sections.program.escape("name") %></a>
+</h4>
+
+<% if (Scbt.Models.user.admin()){ %>
+  <div id="<%= sections.program.get("id") %>" class="btn btn-default btn-head new-section">New Section</div>
+<% } %>
+
+<div id="new-section-view"></div>
+
+<table>
+  <% sections.each(function(section){ %>
+    <tr>
+      <td>
+        <a href="#sections/<%= section.get("id") %>">Section <%= section.escape("code") %></a>
+      </td>
+
+      <td>
+        <a href="#campuses/<%= section.campus.get("id") %>"><%= section.campus.escape("name") %></a>
+      </td>
+
+      <td>
+        <%= section.instructor.escape("name") %>
+      </td>
+
+      <td>
+        <%= section.weekdays() %>
+      </td>
+
+      <td>
+        <%= section.time() %>
+      </td>
+
+      <td>
+        <% if (Scbt.Models.user.admin()){ %>
+          <div class="remove-section btn btn-danger" id="<%= section.get("id") %>">Remove Section</div>
+        <% } %>
+      </td>
+    </tr>
+  <% }) %>  
+</table>

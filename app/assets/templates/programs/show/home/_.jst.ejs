@@ -2,10 +2,10 @@
 <% if (Scbt.Models.user.admin()){ %>
   <a class="btn btn-info btn-head" href="#programs/<%= program.id %>/edit">Edit This Program</a>
 <% } else if (program.enrollment){ %>
-  <a class="btn btn-success btn-head" href="#programs/<%= program.id %>/survey">Take Program Survey</a>
+  <a class="btn btn-success btn-head" href="#programs/<%= program.id %>/survey"><%= program.programSurveyInstruction() %></a>
 
   <% if (program.instructor){ %>
-    <a class="btn btn-success btn-head" href="#users/<%= program.instructor.get("id") %>/survey">Take Instructor Survey</a>
+    <a class="btn btn-success btn-head" href="#users/<%= program.instructor.get("id") %>/survey"><%= program.instructorSurveyInstruction() %></a>
   <% } %>
 <% } %>
 

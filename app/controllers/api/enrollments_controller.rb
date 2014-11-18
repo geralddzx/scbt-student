@@ -39,6 +39,10 @@ class Api::EnrollmentsController < ApplicationController
       render json: "You must be an admin or enrolled", status: :unauthorized
     end
   end
+
+  def search_index
+    render "api/enrollments/search_index"
+  end
 end
 
 # Backbone Enrollment model:

@@ -1,8 +1,9 @@
 Scbt.Routers.Router = Backbone.Router.extend({
   routes: {
-    "": "Home",
+    "": "home",
     "profile": "userShow",
     "profile/edit": "userEdit",
+    "profile/password": "passwordEdit",
     // "my/programs": "userPrograms",
 
     ":subject_class/:subject_id/survey": "surveyAnswersIndex", 
@@ -12,6 +13,8 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "programs/:id/edit": "programEdit",
     "programs/:id/files": "programShowFiles",
     "programs/:id": "programShow",
+
+    "sections/index": "allSections",
     
     "campuses/index": "campusesIndex",
     "campuses/new": "campusesNew",
@@ -26,10 +29,12 @@ Scbt.Routers.Router = Backbone.Router.extend({
     "announcements/new": "announcementsNew",
     "announcements/index": "announcementsIndex",
     "announcements/:id/edit": "announcementEdit",
-    "announcements/:id": "announcementShow"
+    "announcements/:id": "announcementShow",
+
+    "enrollments/index": "enrollments",
   },
 
-  Home: function(){
+  home: function(){
     var view = new Scbt.Views.Home()
     this.swapView(view)
   },
@@ -40,6 +45,10 @@ Scbt.Routers.Router = Backbone.Router.extend({
   },
   userEdit: function(){
     var view = new Scbt.Views.UserEdit({model: Scbt.Models.user})
+    this.swapView(view)
+  },
+   passwordEdit: function(){
+    var view = new Scbt.Views.Password
     this.swapView(view)
   },
 
@@ -80,6 +89,13 @@ Scbt.Routers.Router = Backbone.Router.extend({
       })
     })
     this._currentView.swapContent(view)
+  },
+
+  allSections: function(){
+    var view = new Scbt.Views.AllSections({
+      collection: new Scbt.Collections.SectionPrograms
+    })
+    this.swapView(view)
   },
 
   campusesIndex: function(){
@@ -152,6 +168,11 @@ Scbt.Routers.Router = Backbone.Router.extend({
       subjectID: subjectID
     })
     var view = new Scbt.Views.SurveyAnswersIndex({collection: collection})
+    this.swapView(view)
+  },
+
+  enrollments: function(){
+    var view = new Scbt.Views.Enrollments
     this.swapView(view)
   },
 

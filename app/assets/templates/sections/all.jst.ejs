@@ -1,0 +1,7 @@
+<a href="#">Home</a> >
+<a href="#sections/index">Sections</a><br>
+
+<% Object.keys(programs).forEach(function(key){ %>
+	<div id="<%= programs[key].subviewId() %>"></div>
+	<hr>
+<% }) %>

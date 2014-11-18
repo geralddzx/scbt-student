@@ -3,13 +3,18 @@
 <a href="#announcements/<%= announcement.get("id") %>"><%= announcement.escape("title") %></a><br>
 
 <h3><%= announcement.escape("title") %></h3>
-<% if (announcement.escape("author")){ %>
 	<td>
-		<a href="#announcements/<%= announcement.get("id") %>/edit" class="btn btn-info edit-announcement btn-head">Edit Announcement</a>
-
-		<button id="<%= announcement.escape("id") %>" class="btn btn-danger remove-announcement btn-head">Remove Announcement</button>
+		<% if (announcement.escape("author")){ %>
+			<a href="#announcements/<%= announcement.get("id") %>/edit" class="btn btn-info edit-announcement btn-head">Edit Announcement</a>
+		<% } %>
 	</td>
-<% } %>
+
+	<td>
+		<% if (announcement.escape("author") || Scbt.Models.user.admin()){ %>
+			<button id="<%= announcement.escape("id") %>" class="btn btn-danger remove-announcement btn-head">Remove Announcement</button>
+		<% } %>
+	</td>
+
 
 <table class="table" id="announcement-table">
 	<tr>

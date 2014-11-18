@@ -45,21 +45,27 @@ class User < ActiveRecord::Base
   MAX_PHOTO_DES = "1 megabyte"
 
   attr_reader :password
+  attr_accessor :password_confirm
   before_validation :ensure_session_token, :ensure_permission_set
   
   validates :email, :session_token, :first_name, :last_name, :permission, presence: true
   validates :email, uniqueness: true, email: true
   validates :permission, inclusion: {in: PERMISSIONS}
   validates :password, length: { minimum: 6, allow_nil: true }
+  validate :password_confirmation
+  validate :password_exist
   validates :referral, inclusion: {in: REFERRALS}
 
   has_many :survey_answers, as: :subject, dependent: :destroy
   has_many :enrollments, foreign_key: :student_id, dependent: :destroy
-  
-  has_many :enrolled_programs, through: :enrollments, source: :program 
-  has_many :taught_programs, class_name: "Program", foreign_key: :instructor_id 
-  has_many :survey_questions, through: :survey, source: :questions
 
+  has_many :enrolled_sections, through: :enrollments, source: :section 
+  has_many :enrolled_programs, through: :enrolled_sections, source: :program
+
+  has_many :taught_sections, class_name: "Section", foreign_key: :instructor_id, dependent: :destroy
+  has_many :taught_programs, through: :taught_sections, source: :program
+  has_many :survey_questions, through: :survey, source: :questions
+  
   belongs_to :survey
   validate :valid_survey_id
 
@@ -75,12 +81,12 @@ class User < ActiveRecord::Base
   end
   
   def password?(password)
-    BCrypt::Password.new(self.password_digest).is_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password.to_s)
   end
   
   def password=(password)
-    @password = password
-    self.password_digest = BCrypt::Password.create(password)
+    @password = password.to_s
+    self.password_digest = BCrypt::Password.create(password.to_s)
   end
 
   def self.generate_token
@@ -135,6 +141,27 @@ class User < ActiveRecord::Base
       errors.add(:survey_id, "does not point to a survey") unless self.survey
       errors.add(:survey, "can only be hosted by instructors") unless self.instructor?
     end
+  end
+
+  def taken_survey?(subject)
+    return false unless subject
+    return !!SurveyAnswer.find_by(student_id: self.id, subject: subject)
+  end
+
+  def password_confirmation
+    errors.add(:password, "does not match with confirmed password") unless password == password_confirm
+  end
+
+  def password_exist
+    errors.add(:password, "cannot be blank") if password_digest.nil?
+  end
+
+  def self.students
+    User.where(permission: "STUDENT")
+  end
+
+  def self.admins
+    User.where(permission: "ADMIN")
   end
 end
 

@@ -35,13 +35,26 @@ Backbone.CompositeView = Backbone.View.extend({
     subviews.splice(subviews.indexOf(subview), 1)
   },
 
-  remove: function (){
+  remove: function(){
     Backbone.View.prototype.remove.call(this)
+    this.removeAllSubviews()
+  },
+
+  removeSubviews: function (selector){
+    this.subviews(selector).forEach(function(subview){
+      subview.remove()
+    })
+    this._subviews[selector] = [] 
+    this.$(selector).empty()
+  },
+
+  removeAllSubviews: function(){
     _(this.subviews()).each(function (subviews){
       _(subviews).each(function (subview){ 
         subview.remove()
       })
     })
+    this._subviews = {}
   },
 
   delegateEvents: function(){
@@ -51,5 +64,10 @@ Backbone.CompositeView = Backbone.View.extend({
         subview.delegateEvents()
       })
     })
+  },
+
+  swapSubview: function(selector, newView){
+    this.removeSubviews(selector)
+    this.addSubview(selector, newView)
   }
 })

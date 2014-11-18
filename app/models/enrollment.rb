@@ -15,15 +15,16 @@
 class Enrollment < ActiveRecord::Base
   before_validation :ensure_status_set
   
-  validates :program_id, uniqueness: {scope: :student_id}
+  validates :section, uniqueness: {scope: :student_id}
   validates :status, inclusion: {in: ["PENDING", "APPROVED", "COMPLETED"]}
-  validates :program, presence: true
+  validates :section, presence: true
   validate :is_student
   validate :valid_approver
 
   belongs_to :student, class_name: "User", foreign_key: :student_id
   belongs_to :approver, class_name: "User", foreign_key: :approver_id
-  belongs_to :program
+  belongs_to :section
+  has_one :program, through: :section, source: :program
   
   def is_student
     unless self.student && self.student.student?

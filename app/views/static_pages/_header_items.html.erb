@@ -10,6 +10,12 @@
   <% if current_user.admin? %>
     <div class="header-item"><a href="#surveys/index">Surveys</a></div>
   <% end %>
+
+  <div class="header-item"><a href="#sections/index">Sections</a></div>
+
+  <% if current_user.admin? %>
+    <div class="header-item"><a href="#enrollments/index">Enrollments</a></div>
+  <% end %>
 </div>
 
 <div id="right-items">

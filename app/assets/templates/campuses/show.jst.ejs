@@ -6,7 +6,7 @@
 <% if (Scbt.Models.user.admin()){ %>
   <a class="btn btn-info btn-head" href="#campuses/<%= campus.id %>/edit">Edit This Program</a>
 <% } else if (Scbt.Models.user.student()) { %>
-  <a class="btn btn-success btn-head" href="#campuses/<%= campus.id %>/survey">Take Campus Survey</a>
+  <a class="btn btn-success btn-head" href="#campuses/<%= campus.id %>/survey"><%= campus.surveyInstruction() %></a>
 <% } %>
 
 <table class="table" border="0" cellspacing="5" cellpadding="5">  

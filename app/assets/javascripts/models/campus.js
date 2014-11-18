@@ -8,7 +8,16 @@ Scbt.Models.Campus = Backbone.Model.extend({
 		if (res['admins']){
 			this.admins = new Scbt.Collections.Users(res["admins"], {parse: true})
 		}
+		this.takenSurvey = res["taken_survey"]
 		delete res["manager"]
+		delete res["taken_survey"]
 		return res
-	}
+	},
+	surveyInstruction: function(){
+		if (this.takenSurvey){
+			return "Retake Campus Survey"
+		} else {
+			return "Take Campus Survey"
+		}
+	},
 })

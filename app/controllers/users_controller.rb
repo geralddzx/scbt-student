@@ -9,8 +9,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @controller = "users"
+    
     if @user.save
-      flash[:notices] = "You have created the user: #{@user.email}"
+      # flash[:notices] = "You have created the user: #{@user.email}"
       sign_in(@user)
     else
       flash[:errors] = @user.errors.full_messages.join(", ")
@@ -19,6 +20,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral)
+    params.require(:user).permit(:email, :password, :password_confirm, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral)
   end
 end

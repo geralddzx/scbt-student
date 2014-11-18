@@ -2,15 +2,15 @@
 #
 # Table name: survey_answers
 #
-#  id          :integer          not null, primary key
-#  comment     :string(255)
-#  rating      :integer
-#  question_id :integer
-#  student_id  :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  host_type   :string(255)      not null
-#  host_id     :integer          not null
+#  id           :integer          not null, primary key
+#  comment      :string(255)
+#  rating       :integer
+#  question_id  :integer
+#  student_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  subject_type :string(255)      not null
+#  subject_id   :integer          not null
 #
 
 class SurveyAnswer < ActiveRecord::Base
@@ -28,10 +28,10 @@ class SurveyAnswer < ActiveRecord::Base
 	def valid_answer
 		return if !self.question
 		if self.question.type_rating?
-			errors.add(:rating, "must be present") if self.rating.nil?
-			errors.add(:comment, "cannot be filled in a rating question") if self.comment
+			errors.add(:rating, "must be present") if (self.rating.nil?)
+			errors.add(:comment, "cannot be filled in a rating question") if self.comment != nil
 		else 
-			errors.add(:comment, "must be present") if self.comment.nil?
+			errors.add(:comment, "must be present") if (self.comment.to_s.empty?)
 			errors.add(:rating, "cannot be filled in a comment question") if self.rating
 		end
 	end

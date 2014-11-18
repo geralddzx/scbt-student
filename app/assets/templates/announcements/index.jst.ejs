@@ -32,13 +32,17 @@
         <%= announcement.escape("updated_at") %>
       </td>
      
-      <% if (announcement.escape("author")){ %>
-        <td><a class="btn btn-info" href="#announcements/<%= announcement.id %>/edit">Edit announcement</a></td>
-        <td><button class="remove-announcement btn btn-danger" id="<%= announcement.id %>">Remove Announcement</button>
-      <% } else { %>
-        <td></td>
-        <td></td>
-      <% } %>
+      <td>
+        <% if (announcement.escape("author")){ %>
+          <a class="btn btn-info" href="#announcements/<%= announcement.id %>/edit">Edit announcement</a>
+        <% } %>
+      </td>
+
+      <td>
+        <% if (announcement.escape("author") || Scbt.Models.user.admin()){ %>
+          <button class="remove-announcement btn btn-danger" id="<%= announcement.id %>">Remove Announcement</button>
+        <% } %>
+      </td>
     </tr>
   <% }) %>
 

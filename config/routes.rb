@@ -6,18 +6,25 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :programs, except:[:new, :edit] do 
       get "program_files" => "program_files#program_index"
-      
+      get "sections" => "sections#program_index"
+
       get "survey_answers" => "survey_answers#subject_index"
       post "survey_answers" => "survey_answers#answer_questions"
     end
+    resources :sections, only: [:index, :new, :create, :destroy]
     resources :program_files, only: [:destroy]
     resources :enrollments, only: [:create, :update, :destroy]
+    resource :enrollments, only: [] do 
+      get "search" => "enrollments#search_index"
+    end
     resource :user, only: [:show, :update] do
       get "programs" => "programs#user_index"
+      post "password" => "users#change_password"
     end
     resource :users, only: [:index] do
       get "instructors" => "users#instructors"
       get "admins" => "users#admins"
+      get "sections" => "sections#users_index"
     end
     resources :campuses, only: [:index, :show, :update, :create, :destroy] do 
       get "survey_answers" => "survey_answers#subject_index"

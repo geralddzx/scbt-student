@@ -25,6 +25,15 @@ Backbone.Collection.prototype.fetchWithError = function(successCallback){
 	})
 }
 
+Backbone.Collection.prototype.syncWithError = function(successCallback){
+	this.sync("create", this, {
+		success: successCallback,
+		error: function(req, res){
+		  alert(res.responseJSON || res.responseText)
+		}
+	})
+}
+
 Backbone.Model.prototype.destroyWithError = function(successCallback){
 	this.destroy({
 		success: successCallback,

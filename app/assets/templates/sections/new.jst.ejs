@@ -1,0 +1,57 @@
+<form 
+  <% if (section.program){ %>
+    id="program_id-<%= section.program.get("id") %>"
+  <% } %>
+  class="row-form">
+
+    <input type="text" name="section[code]" 
+      placeholder="Code"
+      class="form-control">
+  
+    <label>Program
+      <select name="section[program_id]" class="form-control">
+        <% section.programs.each(function(program){ %>
+          <option value="<%= program.get("id") %>" 
+            <% if (section.program && section.program.get("id") == program.get("id")) { %>
+              selected="selected"
+            <% } %>
+          >
+            <%= program.get("name") %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>Campus
+      <select name="section[campus_id]" class="form-control">
+        <% section.campuses.each(function(campus){ %>
+          <option value="<%= campus.get("id") %>" 
+            <% if (section.campus && section.campus.get("id") == campus.get("id")) { %>
+              selected="selected"
+            <% } %>
+          >
+            <%= campus.get("name") %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>Instructor
+      <select name="section[instructor_id]" class="form-control">
+        <% section.instructors.each(function(instructor){ %>
+          <option value="<%= instructor.get("id") %>" 
+            <% if (section.instructor && section.instructor.get("id") == instructor.get("id")) { %>
+              selected="selected"
+            <% } %>
+          >
+            <%= instructor.get("name") %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+
+
+  <input type="submit" class="form-control btn btn-primary btn-block" value="Create Section">
+
+  <div class="cancel-new-section form-control btn btn-warning btn-block">Cancel</div>
+</form>

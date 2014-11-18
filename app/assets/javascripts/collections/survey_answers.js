@@ -14,9 +14,13 @@ Scbt.Collections.SurveyAnswers = Backbone.Collection.extend({
   	return this.subjectClass +"/" + this.subjectID
   },
 
+  subjectClassName: function(){
+    return capitalize(singularize[this.subjectClass])
+  },
+
   parse: function(res){
   	this.survey = new Scbt.Models.Survey(res.survey)
-  	this.subject = new Scbt.Models[capitalize(singularize[this.subjectClass])](res.subject)
+  	this.subject = new Scbt.Models[this.subjectClassName()](res.subject)
   	return res.answers
   }
 })

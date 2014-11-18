@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
   include UsersHelper
-  wrap_parameters :user, include: [:email, :password, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo, :photo_name]
+  wrap_parameters :user, include: [:email, :password, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo, :photo_name, :old, :new, :new_confirm]
   before_action :require_master_admin, only: [:index, :admins, :instructors]
   before_action :require_admin, only: [:reset_survey]
   before_action :require_sign_in
@@ -21,7 +21,17 @@ class Api::UsersController < ApplicationController
   end
   
   def index
-    render json: User.all, only: [:id, :first_name, :last_name, :email]
+    render "api/users/index"
+  end
+
+   def change_password
+    return render json: "old password is incorrect", status: :unauthorized unless current_user.password?(params[:user][:old])
+    current_user.assign_attributes(password: params[:user][:new], password_confirm: params[:user][:new_confirm])
+    if current_user.save
+      render json: {}
+    else
+      render json: current_user.errors.full_messages, status: :unproccessable_entity
+    end
   end
 
   def admins
@@ -49,6 +59,6 @@ class Api::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo)
+    params.require(:user).permit(:email, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo)
   end
 end

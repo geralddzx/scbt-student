@@ -1,10 +1,6 @@
 json.(@program, :id, :name, :code, :hours, :survey_id)
 
-if @program.instructor
-  json.instructor(@program.instructor, :id, :first_name, :last_name, :survey_id)
-else
-  json.instructor nil
-end
+json.taken_program_survey current_user.taken_survey?(@program)
 
 if params[:instructors] && current_user.master_admin?
   json.instructors User.where(permission: "INSTRUCTOR")

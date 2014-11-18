@@ -53,7 +53,6 @@ class Api::CampusesController < ApplicationController
     render json: @campus
   end
 
-
   def campus_params
     attributes = params.require(:campus).permit(:name, :street, :city, :postal_code, :country, :manager_id)
   	attributes.delete(:manager_id) unless current_user.master_admin?

@@ -39,16 +39,19 @@ ActiveRecord::Schema.define(version: 20141030005509) do
   end
 
   create_table "enrollments", force: true do |t|
+    t.integer  "student_id",  null: false
+    t.integer  "section_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",      null: false
-    t.integer  "student_id",  null: false
-    t.integer  "program_id",  null: false
     t.integer  "grade"
     t.integer  "approver_id"
   end
 
+  add_index "enrollments", ["section_id"], name: "index_enrollments_on_section_id", using: :btree
   add_index "enrollments", ["status"], name: "index_enrollments_on_status", using: :btree
+  add_index "enrollments", ["student_id", "section_id"], name: "index_enrollments_on_student_id_and_section_id", unique: true, using: :btree
+  add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id", using: :btree
 
   create_table "program_files", force: true do |t|
     t.string   "program_id",        null: false
@@ -58,30 +61,39 @@ ActiveRecord::Schema.define(version: 20141030005509) do
     t.datetime "file_updated_at"
   end
 
-  create_table "program_offerings", force: true do |t|
-    t.integer  "program_id", null: false
-    t.integer  "campus_id",  null: false
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "program_offerings", ["campus_id"], name: "index_program_offerings_on_campus_id", using: :btree
-  add_index "program_offerings", ["program_id", "campus_id"], name: "index_program_offerings_on_program_id_and_campus_id", using: :btree
-  add_index "program_offerings", ["program_id"], name: "index_program_offerings_on_program_id", using: :btree
-
   create_table "programs", force: true do |t|
-    t.string   "name",          null: false
+    t.string   "name",       null: false
     t.string   "code"
     t.integer  "hours"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "instructor_id"
     t.integer  "survey_id"
   end
 
-  add_index "programs", ["instructor_id"], name: "index_programs_on_instructor_id", using: :btree
+  create_table "sections", force: true do |t|
+    t.integer  "program_id",    null: false
+    t.integer  "campus_id",     null: false
+    t.integer  "instructor_id", null: false
+    t.string   "code",          null: false
+    t.boolean  "monday"
+    t.boolean  "tuesday"
+    t.boolean  "wednesday"
+    t.boolean  "thursday"
+    t.boolean  "friday"
+    t.boolean  "saturday"
+    t.boolean  "sunday"
+    t.integer  "start_hour"
+    t.integer  "start_minute"
+    t.integer  "end_hour"
+    t.integer  "end_minute"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sections", ["campus_id"], name: "index_sections_on_campus_id", using: :btree
+  add_index "sections", ["code", "program_id"], name: "index_sections_on_code_and_program_id", unique: true, using: :btree
+  add_index "sections", ["instructor_id"], name: "index_sections_on_instructor_id", using: :btree
+  add_index "sections", ["program_id"], name: "index_sections_on_program_id", using: :btree
 
   create_table "survey_answers", force: true do |t|
     t.string   "comment"
