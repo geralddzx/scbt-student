@@ -3,7 +3,10 @@ Scbt.Views.EnrollmentSearch = Backbone.View.extend({
     'keyup #campus-search': 'renderSelect',
     'keyup #program-search': 'renderSelect',
     'keyup #student-search': 'renderSelect',
-    // 'submit form': 'submitForm'
+    
+    'change #campus-select': 'updateIndexView',
+    'change #student-select': 'updateIndexView',
+    'change #program-select': 'updateIndexView',
   },
 
   initialize: function(){
@@ -17,8 +20,35 @@ Scbt.Views.EnrollmentSearch = Backbone.View.extend({
   render: function(){
     renderedContent = this.template({criteria: this.model})
     this.$el.html(renderedContent)
+
     this.populate()
+    this.listenTo(this.model.enrollments, "sync add remove", this.updateIndexView)
+    this.updateIndexView()
     return this
+  },
+
+  filterCollection: function(collection, attribute, value){
+    if (!value || value.length == 0){
+      return new collection.constructor(collection.models)
+    }
+    var filter = {}
+    filter[attribute] = value
+    return new collection.constructor(collection.where(filter))
+  },
+
+  updateIndexView: function(){
+    var collection = this.buildCollection()
+    var view = new Scbt.Views.EnrollmentsIndex({collection: collection, model: this.model})
+    this.parentView.swapSubview("#index", view)
+  },
+
+  buildCollection: function(){
+    var campus_id = parseInt(this.$("#campus-select").val())
+    var campusFilter = this.filterCollection(this.model.enrollments, "campus_id", campus_id)
+    var student_id = parseInt(this.$("#student-select").val())
+    var studentFilter = this.filterCollection(campusFilter, "student_id", student_id)
+    var program_id = parseInt(this.$("#program-select").val())
+    return this.filterCollection(studentFilter, "program_id", program_id)
   },
 
   populate: function(){
@@ -40,6 +70,7 @@ Scbt.Views.EnrollmentSearch = Backbone.View.extend({
         select.append(view.modelOption(model))
       }
     })
+    this.updateIndexView()
   },
 
   selectOption: function(modelClass){
@@ -61,14 +92,5 @@ Scbt.Views.EnrollmentSearch = Backbone.View.extend({
     var id = $(event.target).attr("id")
     var model = id.slice(0, id.length - 7)
     this.populateSelect(model)
-    // var selector = "#" + model + "-select"
-    // this.showSelect(selector)
   },
-
-  showSelect: function(selector){
-    var select = this.$(selector)[0]
-    var event = document.createEvent('MouseEvents');
-    event.initMouseEvent('mousedown', true, true, window);
-    select.dispatchEvent(event);
-  }
 })

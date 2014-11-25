@@ -49,9 +49,9 @@ class Api::ProgramFilesController < ApplicationController
 	end
 
 	def can_change?(program)
-		unless current_user.admin? || program.instructor_id == current_user.id
-			return false
+		if current_user.admin? || program.instructors.include?(current_user)
+			return true
 		end
-		true
+		false
 	end
 end

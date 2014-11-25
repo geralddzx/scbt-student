@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @controller = "users"
     
     if @user.save
-      # flash[:notices] = "You have created the user: #{@user.email}"
+      flash[:alerts] = 'alert("You have created the user: ' + ERB::Util.html_escape(@user.email) + '")'
       sign_in(@user)
     else
       flash[:errors] = @user.errors.full_messages.join(", ")

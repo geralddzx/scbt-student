@@ -1,12 +1,12 @@
-<form 
+<form
   <% if (section.program){ %>
     id="program_id-<%= section.program.get("id") %>"
   <% } %>
-  class="row-form">
+  class="row-form new-section-form">
 
     <input type="text" name="section[code]" 
       placeholder="Code"
-      class="form-control">
+      class="form-control" id="code-input">
   
     <label>Program
       <select name="section[program_id]" class="form-control">

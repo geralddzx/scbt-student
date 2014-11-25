@@ -6,7 +6,7 @@
 <h3><%= answers.survey.escape("title") %></h3><br>
 <div><%= answers.survey.escape("description") %></div><hr>
 
-<h4>Survey Questions</h4>
+<h4 class="header">Survey Questions</h4>
 <form>
 	<table class="table-form">
 	  <% answers.each(function(answer){ %>
@@ -38,5 +38,5 @@
 	  <% }) %>
 	</table>
 
-  <input type="submit" class="btn btn-primary btn-block" value="Submit Answers">
+  <input type="submit" class="btn btn-primary" value="Submit Answers">
 </form>

@@ -1,6 +1,6 @@
 Scbt.Views.AllSections = Backbone.CompositeView.extend({
   events: {
-    "submit form": "submit"
+    "submit form.new-section-form": "submit"
   },
 
   initialize: function(){

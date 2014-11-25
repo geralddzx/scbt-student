@@ -29,6 +29,7 @@ class Program < ActiveRecord::Base
   has_many :students, through: :enrollments, source: :student
   has_many :approved_students, through: :approved_enrollments, source: :student 
 
+  has_many :instructors, through: :sections, source: :instructor
 
   def valid_survey
     if self.survey_id && !self.survey

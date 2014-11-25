@@ -50,7 +50,7 @@
       <div id="deselect-all-instructors" class="btn btn-danger">Deselect All</div>
 
       <% survey.instructors.each(function(instructor){ %>
-        <label>
+        <label class="check">
           <input 
             type="checkbox" 
             name="survey[instructor_hosts][<%= instructor.get("id") %>]"

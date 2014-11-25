@@ -9,7 +9,7 @@ Scbt.Collections.Programs = Backbone.Collection.extend({
   	if (!this.user){
   		return "api/programs"
   	} else {
-  		return "api/user/programs"
+  		return "api/user/enrollments"
   	}
   }
 })

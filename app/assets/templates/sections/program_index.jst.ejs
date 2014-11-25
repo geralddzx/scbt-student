@@ -1,16 +1,18 @@
-<h4>
-  <a href="#programs/<%= sections.program.get("id") %>"><%= sections.program.escape("name") %></a>
-</h4>
-
 <% if (Scbt.Models.user.admin()){ %>
   <div id="<%= sections.program.get("id") %>" class="btn btn-default btn-head new-section">New Section</div>
 <% } %>
 
 <div id="new-section-view"></div>
 
-<table>
+<table class="table">
   <% sections.each(function(section){ %>
-    <tr>
+    <tr
+      <% if (section.enrollment && section.enrollment.pending()){ %>
+        class="warning"
+      <% } else if (section.enrollment){ %>
+        class="success"
+      <% } %>
+    >
       <td>
         <a href="#sections/<%= section.get("id") %>">Section <%= section.escape("code") %></a>
       </td>
@@ -31,11 +33,28 @@
         <%= section.time() %>
       </td>
 
-      <td>
-        <% if (Scbt.Models.user.admin()){ %>
+      <% if (Scbt.Models.user.admin()){ %>
+        <td>
+          <a class="btn btn-info" href="#sections/<%= section.id %>/edit">Edit Section</a>
+        </td>
+        <td>
           <div class="remove-section btn btn-danger" id="<%= section.get("id") %>">Remove Section</div>
+        </td>
+      <% } else if (Scbt.Models.user.student()) { %>
+        <% if (section.enrollment){ %>
+          <td><%= section.enrollment.get("status") %></td>
+          <td>
+            <% if (section.enrollment.pending()){ %>
+              <div class="cancel-enrollment btn btn-danger" id="<%= section.get("id") %>">Cancel Enrollment</div>
+            <% } %>
+          </td>
+        <% } else { %>
+          <td>Not Enrolled</td>
+          <td>
+            <div class="enroll-section btn btn-primary" id="<%= section.get("id") %>">Enroll In Section</div>
+          </td>
         <% } %>
-      </td>
+      <% } %>   
     </tr>
   <% }) %>  
 </table>

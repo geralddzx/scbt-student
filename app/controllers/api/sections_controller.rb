@@ -1,34 +1,39 @@
 class Api::SectionsController < ApplicationController
   before_action :require_sign_in
-  before_action :require_admin, only: [:new, :update, :create, :destroy]
+  before_action :require_admin, only: [:new, :edit, :update, :create, :destroy]
 #   before_action :require_student, only: [:user_index]
 #   before_action :require_admin, only: [:reset_survey]
 
   def create
     @section = Section.new(section_params)
     if @section.save
-      render "api/sections/show"
+      render "api/sections/_show"
     else
       render json: @section.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
   
   def new
-    render "api/sections/new"
+    render "api/sections/_new"
+  end
+
+  def edit
+    @section = Section.find(params[:id])
+    render "api/sections/edit"
   end
   
-#   def update
-#     @program = Program.find(params[:id])
-#     if @program.update_attributes(program_params)
-#       render "api/programs/show"
-#     else
-#       render json: @program.errors.full_messages.join(", "), status: :unprocessable_entity
-#     end
-#   end    
+  def update
+    @section = Section.find(params[:id])
+    if @section.update_attributes(section_params)
+      render "api/sections/_show"
+    else
+      render json: @section.errors.full_messages.join(", "), status: :unprocessable_entity
+    end
+  end    
   
   def index
     @programs = Program.all
-    render "api/sections/index"
+    render "api/sections/programs_index"
   end
 
 #   def user_index
@@ -36,13 +41,13 @@ class Api::SectionsController < ApplicationController
 #   end
 
   def program_index
-    @programs = Program.where(id: :program_id)
-    render "api/sections/index"
+    @sections = Section.where(program_id: params[:program_id])
+    render "api/sections/_index"
   end
 
-  def users_index
-    @users = User.all
-    render "api/sections/users_index"
+  def user_index
+    @sections = current_user.enrolled_sections
+    render "api/sections/_index"
   end
 
 #   def reset_survey

@@ -31,6 +31,9 @@ class Section < ActiveRecord::Base
 	belongs_to :program
 	belongs_to :instructor, -> {where permission: "INSTRUCTOR"}, class_name: "User" 
 
+	has_many :enrollments, dependent: :destroy
+	has_many :enrolled_students, through: :enrollments, source: :student
+	
 	def complete_schedule
 		filled_fields = 0
 		filled_fields += 1 if start_hour
@@ -44,9 +47,9 @@ class Section < ActiveRecord::Base
 	end
 
 	def valid_schedule
-		errors.add(:start_hour, "is not valid, choose between 0 to 23") unless start_hour.between?(0, 23)
-		errors.add(:end_hour, "is not valid, choose between 0 to 23") unless end_hour.between?(0, 23)
-		errors.add(:start_minute, "is not valid, choose between 0 to 59") unless start_minute.between?(0, 59)
-		errors.add(:end_minute, "is not valid, choose between 0 to 59") unless end_minute.between?(0, 59)
+		errors.add(:start_hour, "is not valid, choose between 0 to 23") unless start_hour.between?(8, 20)
+		errors.add(:end_hour, "is not valid, choose between 0 to 23") unless end_hour.between?(8, 20)
+		errors.add(:start_minute, "is not valid, choose between 0 to 59") unless [0, 30].include?(start_minute)
+		errors.add(:end_minute, "is not valid, choose between 0 to 59") unless [0, 30].include?(end_minute)
 	end
 end

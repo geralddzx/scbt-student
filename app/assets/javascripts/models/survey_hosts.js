@@ -12,6 +12,8 @@ Scbt.Models.SurveyHosts = Backbone.Model.extend({
   }, 
 
   parse: function(res){
+    Backbone.Model.prototype.parse(res)
+    
     this.allHosts = new this.collection(res[pluralize[this.hostType]])
     this.currentHosts = new this.collection(res[this.hostType + "_hosts"])
   }

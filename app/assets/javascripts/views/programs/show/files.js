@@ -1,4 +1,4 @@
-Scbt.Views.ProgramShowFiles = Backbone.CompositeView.extend({
+Scbt.Views.ProgramFiles = Backbone.CompositeView.extend({
   initialize: function(){
     this.listenTo(this.collection, "sync", this.render)
     this.addSubview("#new", new Scbt.Views.ProgramFilesNew({collection: this.collection}))

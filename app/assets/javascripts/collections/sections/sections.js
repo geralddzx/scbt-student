@@ -1,7 +1,8 @@
 Scbt.Collections.Sections = Backbone.Collection.extend({
   initialize: function(models, options){
-    if(options && options.program){
-       this.program = options.program
+    if(options){
+      this.program = options.program
+      this.user = options.user
     }
   },
 
@@ -13,5 +14,15 @@ Scbt.Collections.Sections = Backbone.Collection.extend({
 
   subviewId: function(){
   	return "program_id-" + this.program.get("id")
-  }
+  },
+
+  url: function(){
+    if(this.program){
+      return "api/programs/" + this.program.get("id") + "/sections"
+    } else if (this.user){
+      return "api/user/sections"
+    } else {
+      return "api/sections"
+    }
+  }  
 })

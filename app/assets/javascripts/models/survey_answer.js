@@ -2,6 +2,8 @@ Scbt.Models.SurveyAnswer = Backbone.Model.extend({
   urlRoot: "api/survey_answers",
 
   parse: function(res){
+    Backbone.Model.prototype.parse(res)
+    
   	this.question = new Scbt.Models.SurveyQuestion(res.survey_answer.question)
     this.set("subject_id", this.collection.subjectID)
     this.set("subject_type", this.collection.subjectClassName())

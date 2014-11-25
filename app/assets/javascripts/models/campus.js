@@ -1,7 +1,8 @@
 Scbt.Models.Campus = Backbone.Model.extend({
   urlRoot: "api/campuses",
 	parse: function(res){
-		Scbt.check_session(res)
+		Backbone.Model.prototype.parse(res)
+		
 		if (res["manager"]){
 		  this.manager = new Scbt.Models.User(res["manager"], {parse: true})
 		}

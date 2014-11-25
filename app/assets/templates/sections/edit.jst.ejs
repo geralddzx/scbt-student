@@ -1,0 +1,111 @@
+<a href="#">Home</a> >
+<a href="#">sections</a> > 
+<a href="#sections/<%= section.get("id") %>"><%= section.escape("name") %></a> >
+<a href="#sections/<%= section.get("id") %>/edit">edit</a><br>
+
+<h3>Edit Section</h3><br>
+<form class="column-form">
+  <table class="align-top">
+  <tr>
+    <td>
+      <input type="text" name="section[code]" 
+        placeholder="Code"
+        value="<%= section.get("code") %>"
+        class="form-control" id="code-input">
+    
+      <label>Program
+        <select name="section[program_id]" class="form-control">
+          <% sectionEdit.programs.each(function(program){ %>
+            <option value="<%= program.get("id") %>" 
+              <% if (section.get("program_id") == program.get("id")) { %>
+                selected="selected"
+              <% } %>
+            >
+              <%= program.get("name") %>
+            </option>
+          <% }) %>
+        </select>
+      </label>
+
+      <label>Campus
+        <select name="section[campus_id]" class="form-control">
+          <% sectionEdit.campuses.each(function(campus){ %>
+            <option value="<%= campus.get("id") %>" 
+              <% if (section.get("campus_id") == campus.get("id")) { %>
+                selected="selected"
+              <% } %>
+            >
+              <%= campus.get("name") %>
+            </option>
+          <% }) %>
+        </select>
+      </label>
+
+      <label>Instructor
+        <select name="section[instructor_id]" class="form-control">
+          <% sectionEdit.instructors.each(function(instructor){ %>
+            <option value="<%= instructor.get("id") %>" 
+              <% if (section.get("instructor_id") == instructor.get("id")) { %>
+                selected="selected"
+              <% } %>
+            >
+              <%= instructor.get("name") %>
+            </option>
+          <% }) %>
+        </select>
+      </label>
+
+      <input type="submit" class="form-control btn btn-primary btn-block" value="Update Section">
+    </td>
+
+    <td></td>
+    <td></td>
+
+    <td>
+      <label>Start Time
+        <select id="start-time" class="form-control">
+          <% Scbt.DayTimes.collection.each(function(time){ %>
+            <option value="<%= time.to_s() %>" 
+              <% if (section.isStartTime(time)){ %>
+                selected="selected"
+              <% } %>
+            >
+              <%= time.to_s() %>
+            </option>
+          <% }) %>
+        </select>
+      </label>
+
+      <label>End Time
+        <select id="end-time" class="form-control">
+          <% Scbt.DayTimes.collection.each(function(time){ %>
+            <option value="<%= time.to_s() %>" 
+              <% if (section.isEndTime(time)){ %>
+                selected="selected"
+              <% } %>
+            >
+              <%= time.to_s() %>
+            </option>
+          <% }) %>
+        </select>
+      </label>
+    </td>
+    
+    <td>
+      <% Object.keys(weekdays).forEach(function(key){ %>
+        <label class="check">
+          <input 
+            type="checkbox" 
+            name="section[<%= key %>]"
+            value="true"
+            <% if(section.get(key)){ %>
+              checked="checked"
+            <% } %>
+          >
+          <%= key %>
+        </label>
+      <% }) %>
+    </td>
+  <tr>
+  <table>
+</form>

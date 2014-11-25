@@ -8,13 +8,15 @@ Scbt.Routers.Router = Backbone.Router.extend({
 
     ":subject_class/:subject_id/survey": "surveyAnswersIndex", 
     
-    "my/programs/index": "userProgramsIndex",
+    "programs/index": "programsIndex",
     "programs/new": "programsNew",
     "programs/:id/edit": "programEdit",
     "programs/:id/files": "programShowFiles",
-    "programs/:id": "programShow",
+    "programs/:id": "programShowProgram",
 
     "sections/index": "allSections",
+    "sections/:id/edit": "sectionEdit",
+    "my/sections/index": "userSectionsIndex",
     
     "campuses/index": "campusesIndex",
     "campuses/new": "campusesNew",
@@ -47,17 +49,17 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.UserEdit({model: Scbt.Models.user})
     this.swapView(view)
   },
-   passwordEdit: function(){
+  passwordEdit: function(){
     var view = new Scbt.Views.Password
     this.swapView(view)
   },
 
-  userProgramsIndex: function(){
+  programsIndex: function(){
     var view = new Scbt.Views.ProgramsIndex({
-      collection: new Scbt.Collections.Programs([], {user: true})
+      collection: Scbt.Collections.programs
     })
     this.swapView(view)
-  },  
+  },
   programsNew: function(){
     var view = new Scbt.Views.ProgramsNew({
       model: new Scbt.Models.Program()
@@ -70,31 +72,42 @@ Scbt.Routers.Router = Backbone.Router.extend({
     var view = new Scbt.Views.ProgramEdit({model: program})
     this.swapView(view)
   },
+
   programShow: function(id){
-    var program = new Scbt.Models.Program({id: id})
-    var view = new Scbt.Views.ProgramShow({model: program})
-    this.swapView(view)
-
-    var homeView = new Scbt.Views.ProgramShowHome({model: program})
-    view.swapContent(homeView)
-  },
-
-  programShowFiles: function(id){
-    if (!this._currentView || !this._currentView.swapContent){
-      this.programShow(id)
+    if(!(this.currentView && this._currentView.programView && this.currentView.model.get("id") == parseInt(id))){
+      var program = new Scbt.Models.Program({id: id})
+      var view = new Scbt.Views.Program({model: program})
+      this.swapView(view)  
+      return view
     }
-    var view = new Scbt.Views.ProgramShowFiles({
-        collection: new Scbt.Collections.ProgramFiles([],{
-        program: this._currentView.model 
-      })
-    })
-    this._currentView.swapContent(view)
+    return this._currentView
+  },
+  programShowProgram: function(id){
+    var view = this.programShow(id)  
+    var showView = new Scbt.Views.ProgramShow({model: view.model})
+    view.swapContent(showView)
+  },
+  programShowFiles: function(id){
+    var view = this.programShow(id) 
+    var collection = new Scbt.Collections.ProgramFiles([],{program: view.model})
+
+    var fileView = new Scbt.Views.ProgramFiles({collection: collection})
+    view.swapContent(fileView)
   },
 
+  sectionEdit: function(id){
+    var model = new Scbt.Models.SectionEdit({section_id: id})
+    var view = new Scbt.Views.SectionEdit({model: model})
+    this.swapView(view)
+  },
   allSections: function(){
     var view = new Scbt.Views.AllSections({
       collection: new Scbt.Collections.SectionPrograms
     })
+    this.swapView(view)
+  },
+  userSectionsIndex: function(){
+    var view = new Scbt.Views.UserSectionsIndex
     this.swapView(view)
   },
 

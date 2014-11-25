@@ -5,6 +5,7 @@ if @manager
 	json.manager(@manager, :id, :first_name, :last_name, :email)
 end
 
+json.survey_exist !!@campus.survey
 json.taken_survey current_user.taken_survey?(@campus)
 
 if current_user.master_admin? && params[:admins]

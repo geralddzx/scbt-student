@@ -11,6 +11,7 @@
   <%= render partial: "layouts/header" %>
   <p><%= flash[:notices] %></p>
   <p><%= flash[:errors] %></p>
+  <script><%= flash[:alerts].to_s.html_safe %></script>
 
 <%= yield %>
 

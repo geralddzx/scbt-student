@@ -3,6 +3,8 @@ Scbt.Views.ProgramSections = Backbone.CompositeView.extend({
     "click .new-section": "newSection",
     "click .cancel-new-section": "cancelNew",
     "click .remove-section": "sectionDestroy",
+    "click .enroll-section": "enroll",
+    "click .cancel-enrollment": "cancel",
   },
 
   initialize: function(){
@@ -47,4 +49,33 @@ Scbt.Views.ProgramSections = Backbone.CompositeView.extend({
 	    alert("This section has been deleted")
 	  })
 	},
+
+  enroll: function(event){
+    var view = this
+    var id = $(event.currentTarget).attr("id")
+    var section = this.collection.get(id)
+    var enrollment = new Scbt.Models.Enrollment({}, {section: section})
+    enrollment.save({}, {
+      url: enrollment.enrollUrl(),
+      success: function(req, res){
+        alert("You have applied for this section. our staff will contact you within 24 hours")
+        section.enrollment = enrollment
+        view.render()
+      },
+      error: function(req, res){
+        alert(res.responseJSON || res.responseText)
+      }
+    })
+  },
+
+  cancel: function(event){
+    view = this
+    var id = $(event.currentTarget).attr("id")
+    var section = this.collection.get(id)
+    section.enrollment.destroyWithError(function(req, res){
+      alert("You have cancelled this enrollment request")
+    })
+    section.enrollment = null
+    view.render()
+  },
 })

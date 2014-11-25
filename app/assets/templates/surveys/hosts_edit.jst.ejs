@@ -5,7 +5,7 @@
 
 <form>
 	<% hosts.allHosts.each(function(host){ %>
-	  <label>
+	  <label class="check">
 	    <input 
 	      type="checkbox" 
 	      name="host_ids[<%= host.get("id") %>]" 

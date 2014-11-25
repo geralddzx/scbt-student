@@ -1,8 +1,9 @@
 class Api::EnrollmentsController < ApplicationController
   before_action :require_sign_in
-  before_action :require_student, only: [:create]
-  before_action :require_admin, only: [:update]
-  
+  before_action :require_student, only: [:enroll]
+  before_action :require_admin, only: [:update, :search_index, :approve]
+  before_action :require_student, only: [:user_index]
+
   def create
     @enrollment = Enrollment.new(
       program_id: params[:enrollment][:program_id]
@@ -17,9 +18,7 @@ class Api::EnrollmentsController < ApplicationController
   end
   
   def update
-    @enrollment = Enrollment.find(params[:enrollment][:id])
-    status = params[:enrollment][:status]
-    attributes = {status: status}
+    @enrollment = Enrollment.find(params[:id])
     attributes[:approver_id] = current_user.id if status == "APPROVED"
     attributes[:approved_id] = nil if status == "PENDING"
     if @enrollment.update_attributes(attributes)
@@ -27,6 +26,31 @@ class Api::EnrollmentsController < ApplicationController
     else
       render json: @enrollment.errors.full_messages.join(", "), status: :unprocessable_entity
     end
+  end
+
+  def approve
+    @enrollment = Enrollment.find(params[:id])
+    if @enrollment.status == "PENDING" 
+      @enrollment.status = "APPROVED"
+      @enrollment.approver_id = current_user.id
+      @enrollment.save
+      render "api/enrollments/show"
+    else 
+      render json: "This enrollment is already approved", status: :unprocessable_entity
+    end
+  end 
+
+  def enroll
+    @enrollment = Enrollment.new(student_id: current_user.id, section_id: params[:section_id])
+    if @enrollment.save
+      render json: @enrollment
+    else
+      render json: @enrollment.errors.full_messages.join(", "), status: :unprocessable_entity
+    end
+  end
+
+  def user_index
+    render "api/enrollments/user_index"
   end
 
   def destroy
@@ -42,6 +66,10 @@ class Api::EnrollmentsController < ApplicationController
 
   def search_index
     render "api/enrollments/search_index"
+  end
+
+  def enrollment_params
+    params.require(:enrollment).permit(:status)
   end
 end
 

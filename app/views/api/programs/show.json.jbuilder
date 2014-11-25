@@ -1,12 +1,4 @@
 json.(@program, :id, :name, :code, :hours, :survey_id)
 
-json.taken_program_survey current_user.taken_survey?(@program)
-
-if params[:instructors] && current_user.master_admin?
-  json.instructors User.where(permission: "INSTRUCTOR")
-end
-
-json.partial!("api/programs/show_student") if current_user.student?
-json.partial!("api/programs/show_instructor") if @program.instructor == current_user
-json.partial!("api/programs/show_admin") if current_user.admin?
+current_user.student? && current_user.taken_survey?(@program) && json.taken_program_survey 
 

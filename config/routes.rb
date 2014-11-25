@@ -11,14 +11,18 @@ Rails.application.routes.draw do
       get "survey_answers" => "survey_answers#subject_index"
       post "survey_answers" => "survey_answers#answer_questions"
     end
-    resources :sections, only: [:index, :new, :create, :destroy]
+    resources :sections, only: [:index, :update, :edit, :new, :create, :destroy] do
+      post "enroll" => "enrollments#enroll"
+    end
     resources :program_files, only: [:destroy]
-    resources :enrollments, only: [:create, :update, :destroy]
+    resources :enrollments, only: [:create, :update, :destroy] do
+      put "approve" => "enrollments#approve"
+    end
     resource :enrollments, only: [] do 
       get "search" => "enrollments#search_index"
     end
     resource :user, only: [:show, :update] do
-      get "programs" => "programs#user_index"
+      get "sections" => "sections#user_index"
       post "password" => "users#change_password"
     end
     resource :users, only: [:index] do

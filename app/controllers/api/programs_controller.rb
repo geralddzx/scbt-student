@@ -1,7 +1,6 @@
 class Api::ProgramsController < ApplicationController
   before_action :require_sign_in
   before_action :require_admin, only: [:update, :create, :destroy]
-  before_action :require_student, only: [:user_index]
   before_action :require_admin, only: [:reset_survey]
 
   def create
@@ -29,10 +28,6 @@ class Api::ProgramsController < ApplicationController
   
   def index
     render json: Program.all
-  end
-
-  def user_index
-    render "api/programs/user/index"
   end
 
   def survey_index
