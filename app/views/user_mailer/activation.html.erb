@@ -1,1 +1,4 @@
-Dear User, you have just signed up an account on Stanford College. Please click this link to activate your account.
+Dear User, you have just signed up an account on Stanford College. 
+Please click this link to activate your account:
+
+<%= "#{ENV["HOST"]}/activation/#{@user.id}/#{@user.activation_code}" %>

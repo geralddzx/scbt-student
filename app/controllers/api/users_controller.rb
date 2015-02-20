@@ -17,14 +17,18 @@ class Api::UsersController < ApplicationController
   end
   
   def show
-    render "api/users/show"
+    render "api/user/show"
+  end
+
+  def show_photo
+    render "api/user/show_photo"
   end
   
   def index
     render "api/users/index"
   end
 
-   def change_password
+  def change_password
     return render json: "old password is incorrect", status: :unauthorized unless current_user.password?(params[:user][:old])
     current_user.assign_attributes(password: params[:user][:new], password_confirm: params[:user][:new_confirm])
     if current_user.save

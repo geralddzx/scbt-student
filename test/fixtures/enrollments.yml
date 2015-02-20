@@ -3,11 +3,11 @@
 # Table name: enrollments
 #
 #  id          :integer          not null, primary key
+#  student_id  :integer          not null
+#  section_id  :integer          not null
 #  created_at  :datetime
 #  updated_at  :datetime
 #  status      :string(255)      not null
-#  student_id  :integer          not null
-#  program_id  :integer          not null
 #  grade       :integer
 #  approver_id :integer
 #

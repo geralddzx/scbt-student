@@ -39,6 +39,10 @@ group :development do
   gem 'capistrano-rails'
 end
 
+group :development do
+  gem 'newrelic_rpm'
+end
+
 gem 'email_validator'
 
 gem 'rails_12factor', group: :production

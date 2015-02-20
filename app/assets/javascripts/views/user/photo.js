@@ -8,13 +8,16 @@ Scbt.Views.UserShowPhoto = Backbone.FileView.extend({
   },
 
   initialize: function(){
+    this.model = new Scbt.Models.Photo()
     this.listenTo(this.model, "sync", this.render)
+    // this.model.fetch()
+    this.render()
   },
   
   template: JST["user/photo"],
   
   render: function(){
-    renderedContent = this.template({user: this.model})
+    renderedContent = this.template({photo: this.model})
     this.$el.html(renderedContent)
     return this
   }, 

@@ -4,7 +4,7 @@
 #
 #  id                 :integer          not null, primary key
 #  email              :string(255)      not null
-#  password_digest    :string(255)      not null
+#  password_digest    :string(255)
 #  session_token      :string(255)      not null
 #  created_at         :datetime
 #  updated_at         :datetime
@@ -22,6 +22,7 @@
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
 #  survey_id          :integer
+#  activation_code    :string(255)
 #
 
 REFERRALS = [
@@ -98,6 +99,12 @@ class User < ActiveRecord::Base
     self.save!
     self.session_token
   end
+
+  def set_activation_code
+    self.activation_code = User.generate_token
+    self.save!
+    self.activation_code
+  end
   
   def ensure_session_token
     self.session_token || self.session_token = User.generate_token
@@ -162,6 +169,10 @@ class User < ActiveRecord::Base
 
   def self.admins
     User.where(permission: "ADMIN")
+  end
+
+  def activated?
+    !self.activation_code
   end
 end
 

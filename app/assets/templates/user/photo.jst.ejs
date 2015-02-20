@@ -1,8 +1,8 @@
 <table id="profile-photo-table" class="thumbnail">
   <tr>
-  <% if (user.escape("photo_url")){ %>
+  <% if (photo.escape("photo_url")){ %>
     <td>
-      <image src="<%= user.escape("photo_url") %>" width="300px" height="300px">
+      <image src="<%= photo.escape("photo_url") %>" width="300px" height="300px">
     </td>
   <% } else { %>
     <td id="profile-photo">
@@ -24,7 +24,7 @@
 
   <tr>
   <td id="profile-photo-buttons" class="flex-center">
-    <% if (user.escape("photo_url")){ %>
+    <% if (photo.escape("photo_url")){ %>
       <button id="remove-photo" class="btn btn-danger">Remove</button>
     <% } %>
     <button id="new-photo" class="btn btn-primary">Choose New Photo</button>

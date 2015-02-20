@@ -21,4 +21,7 @@ Scbt.Models.Campus = Backbone.Model.extend({
 			return "Take Campus Survey"
 		}
 	},
+	address: function(){
+		return this.get("street") + "," + this.get('city') + "," + this.get('postal_code')
+	}
 })

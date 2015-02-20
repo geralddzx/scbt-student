@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get "search" => "enrollments#search_index"
     end
     resource :user, only: [:show, :update] do
+      get "photo" => "users#show_photo"
       get "sections" => "sections#user_index"
       post "password" => "users#change_password"
     end

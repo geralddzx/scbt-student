@@ -7,12 +7,5 @@ json.city(current_user.city)
 json.country(current_user.country)
 json.postal_code(current_user.postal_code)
 json.phone(current_user.phone)
-
-if current_user.photo.exists?
-	json.photo_url(current_user.photo.url)
-else
-	json.photo_url(nil)
-end
-	
 json.maxPhotoSize User::MAX_PHOTO_SIZE
 json.maxPhotoDes User::MAX_PHOTO_DES

@@ -4,6 +4,12 @@ module ApplicationHelper
     render json: {require_auth: true} unless current_user
   end
 
+  def require_activation
+    # redirect_to new_session_url unless current_user 
+    require_sign_in
+    render json: {require_activation: true} unless current_user.activated? || @performed_render
+  end
+
   def sign_in(user)
     session[:session_token] = user.reset_token
     redirect_to root_url
