@@ -54,11 +54,10 @@ ActiveRecord::Schema.define(version: 20150219221238) do
   add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id", using: :btree
 
   create_table "program_files", force: true do |t|
-    t.string   "program_id",        null: false
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
+    t.string   "program_id", null: false
+    t.string   "url",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "programs", force: true do |t|
@@ -124,24 +123,21 @@ ActiveRecord::Schema.define(version: 20150219221238) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",              null: false
+    t.string   "email",           null: false
     t.string   "password_digest"
-    t.string   "session_token",      null: false
+    t.string   "session_token",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "permission",         null: false
-    t.string   "first_name",         null: false
-    t.string   "last_name",          null: false
+    t.string   "permission",      null: false
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
     t.string   "street"
     t.string   "city"
     t.string   "country"
     t.string   "postal_code"
     t.integer  "phone"
     t.string   "referral"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
+    t.string   "photo_url"
     t.integer  "survey_id"
     t.string   "activation_code"
   end

@@ -14,14 +14,9 @@
 	<% files.each(function(file){ %>
 		<tr>
 			<td>
-			<a 
-				href='<%= file.escape("url") %>' 
-				download='<%= file.escape("file_name") %>'
-			><%= file.escape("file_name") %></a>
-			</td>
-			
-			<td>
-				<%= file.escape("file_size") %>
+				<a 
+					href='<%= file.escape("url") %>?dl=true'
+				>asd</a>
 			</td>
 
 			<td>

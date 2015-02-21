@@ -1,5 +1,5 @@
-if current_user.photo.exists?
-	json.photo_url(current_user.photo.url)
+if current_user.photo_url
+	json.photo_url(current_user.photo_url)
 else
 	json.photo_url(nil)
 end

@@ -1,7 +1,14 @@
 <% if (change_permission){ %>
 	<table class="file-bar">
 		<tr>
-			<td class="file-caption">
+			<input 
+				type="filepicker"
+				data-fp-services="COMPUTER"
+				data-fp-button-text="Add a File"
+				data-fp-button-class="btn btn-info"
+			>
+
+			<!-- <td class="file-caption">
 				<span id="choose-file" class="glyphicon glyphicon-file"></span>
 				<span id="file-name">Add New File Here</span>
 				<input type="file" id="file-input" class="hidden-input">
@@ -11,7 +18,7 @@
 				<button id="choose-file" class="btn btn-primary">Choose File</button>
 
 				<button id="add-file" class="btn btn-default">Add File</button>
-			</td>
+			</td> -->
 		</tr>
 	</table>
 	<br>

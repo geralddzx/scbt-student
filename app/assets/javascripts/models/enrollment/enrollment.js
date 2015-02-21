@@ -5,9 +5,7 @@ Scbt.Models.Enrollment = Backbone.Model.extend({
     }
   },
 
-  parse: function(res){
-  	Backbone.Model.prototype.parse(res)
-  	
+  parse: function(res){  	
     res.approver && (this.approver = new Scbt.Models.User(res.approver))
     this.section = new Scbt.Models.Section(res.section)
     delete res["approver"]

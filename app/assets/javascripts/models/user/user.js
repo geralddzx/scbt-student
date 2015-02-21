@@ -20,4 +20,7 @@ Scbt.Models.User = Backbone.Model.extend({
     }
     return permission.toLowerCase();
   },
+  mailProvider: function(){
+    return this.get("email").split("@")[1]
+  }
 })

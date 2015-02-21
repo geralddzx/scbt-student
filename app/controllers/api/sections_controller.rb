@@ -1,5 +1,5 @@
 class Api::SectionsController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_activation
   before_action :require_admin, only: [:new, :edit, :update, :create, :destroy]
 #   before_action :require_student, only: [:user_index]
 #   before_action :require_admin, only: [:reset_survey]

@@ -1,5 +1,5 @@
 class Api::SurveysController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_activation
   before_action :require_admin, only: [:new, :create, :update, :destroy]
   
   def index

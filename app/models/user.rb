@@ -2,27 +2,24 @@
 #
 # Table name: users
 #
-#  id                 :integer          not null, primary key
-#  email              :string(255)      not null
-#  password_digest    :string(255)
-#  session_token      :string(255)      not null
-#  created_at         :datetime
-#  updated_at         :datetime
-#  permission         :string(255)      not null
-#  first_name         :string(255)      not null
-#  last_name          :string(255)      not null
-#  street             :string(255)
-#  city               :string(255)
-#  country            :string(255)
-#  postal_code        :string(255)
-#  phone              :integer
-#  referral           :string(255)
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
-#  photo_file_size    :integer
-#  photo_updated_at   :datetime
-#  survey_id          :integer
-#  activation_code    :string(255)
+#  id              :integer          not null, primary key
+#  email           :string(255)      not null
+#  password_digest :string(255)
+#  session_token   :string(255)      not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#  permission      :string(255)      not null
+#  first_name      :string(255)      not null
+#  last_name       :string(255)      not null
+#  street          :string(255)
+#  city            :string(255)
+#  country         :string(255)
+#  postal_code     :string(255)
+#  phone           :integer
+#  referral        :string(255)
+#  photo_url       :string(255)
+#  survey_id       :integer
+#  activation_code :string(255)
 #
 
 REFERRALS = [
@@ -42,8 +39,8 @@ PERMISSIONS = [
 ]
 
 class User < ActiveRecord::Base
-  MAX_PHOTO_SIZE = 1.megabytes
-  MAX_PHOTO_DES = "1 megabyte"
+  # MAX_PHOTO_SIZE = 1.megabytes
+  # MAX_PHOTO_DES = "1 megabyte"
 
   attr_reader :password
   attr_accessor :password_confirm
@@ -70,9 +67,9 @@ class User < ActiveRecord::Base
   belongs_to :survey
   validate :valid_survey_id
 
-  has_attached_file :photo, :path => 'profile_photos/:id/:attachment/:filename'
-  validates_attachment_content_type :photo, :content_type => /\Aimage/
-  validates_attachment_size :photo, less_than: User::MAX_PHOTO_SIZE
+  # has_attached_file :photo, :path => 'profile_photos/:id/:attachment/:filename'
+  # validates_attachment_content_type :photo, :content_type => /\Aimage/
+  # validates_attachment_size :photo, less_than: User::MAX_PHOTO_SIZE
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)

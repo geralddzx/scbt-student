@@ -7,5 +7,3 @@ json.city(current_user.city)
 json.country(current_user.country)
 json.postal_code(current_user.postal_code)
 json.phone(current_user.phone)
-json.maxPhotoSize User::MAX_PHOTO_SIZE
-json.maxPhotoDes User::MAX_PHOTO_DES

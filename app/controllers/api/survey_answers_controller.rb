@@ -1,5 +1,5 @@
 class Api::SurveyAnswersController < ApplicationController
-	before_action :require_sign_in
+	before_action :require_activation
 	# before_action :require_student, only: [:answer_questions]
 	def subject_index
 		@subject = request_root_class.find(request_id.to_i)

@@ -51,7 +51,6 @@ gem "backbone-on-rails"
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
-gem "paperclip", "~> 4.2"
 gem "aws-sdk"
 
 gem "figaro"
@@ -60,6 +59,8 @@ gem "kaminari"
 gem 'nokogiri', '~> 1.6.3.1'
 # Use unicorn as the app server
 gem 'thin'
+
+gem 'filepicker-rails'
 
 # Use Capistrano for deployment
 

@@ -11,7 +11,6 @@ Scbt.Collections.ProgramFiles = Backbone.Collection.extend({
   },
 
   parse: function(res){
-    Scbt.check_session(res)
   	this.change_permission = res["change_permission"]
     this.maxFileSize = res["maxFileSize"]
     this.maxFileDes = res["maxFileDes"]

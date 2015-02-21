@@ -1,7 +1,5 @@
 Scbt.Models.EnrollmentSearch = Backbone.Model.extend({
   parse: function(res){
-  	Backbone.Model.prototype.parse(res)
-
   	this.students = new Scbt.Collections.Users(res.students)
   	this.programs = new Scbt.Collections.Programs(res.programs)
   	this.campuses = new Scbt.Collections.Campuses(res.campuses)

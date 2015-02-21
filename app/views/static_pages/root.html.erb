@@ -7,8 +7,11 @@
 
 <script>
   currentUser = Scbt.Models.user = new Scbt.Models.User(
-    <%= current_user.to_json({only: [:id, :permission]}).html_safe %>
+    <%= current_user.to_json({only: [:id, :permission, :email]}).html_safe %>
   )
+
+  filepicker.setKey('<%= ENV["FILE_PICKER_API_KEY"] %>')
+
   $(Scbt.initialize)
 
   // Scbt.Models.user.fetch({success: function(){

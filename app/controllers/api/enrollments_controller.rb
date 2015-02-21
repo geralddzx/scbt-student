@@ -1,5 +1,5 @@
 class Api::EnrollmentsController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_activation
   before_action :require_student, only: [:enroll]
   before_action :require_admin, only: [:update, :search_index, :approve]
   before_action :require_student, only: [:user_index]

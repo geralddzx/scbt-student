@@ -1,5 +1,5 @@
 class Api::CampusesController < ApplicationController
-  before_action :require_sign_in
+  before_action :require_activation
   before_action :require_admin, only: [:create, :update, :destroy]
   before_action :require_admin, only: [:reset_survey]
 

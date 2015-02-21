@@ -1,6 +1,5 @@
 class Api::ProgramFilesController < ApplicationController
-	wrap_parameters :program_file, include: [:program_id, :file, :name]
-	before_action :require_sign_in
+	before_action :require_activation
 
 	def program_index
 		@program = Program.find(params[:program_id])
@@ -13,8 +12,6 @@ class Api::ProgramFilesController < ApplicationController
 	def create
 		@program_file = ProgramFile.new(program_file_params)
 		if can_change?(@program_file.program)
-			@program_file.file.instance_write(:file_name, file_name_param)
-			
 			if @program_file.save
 			  render "api/program_files/show"
 			else
@@ -36,17 +33,17 @@ class Api::ProgramFilesController < ApplicationController
 	end
 
 	def program_file_params
-		params.require(:program_file).permit(:file, :program_id)
+		params.require(:program_file).permit(:url, :program_id)
 	end
 
-	def file_name_param
-		file_name = params.require(:program_file)[:name]
-		if file_name
-			file_name
-		else
-			file_name = "file.exe"
-		end
-	end
+	# def file_name_param
+	# 	file_name = params.require(:program_file)[:name]
+	# 	if file_name
+	# 		file_name
+	# 	else
+	# 		file_name = "file.exe"
+	# 	end
+	# end
 
 	def can_change?(program)
 		if current_user.admin? || program.instructors.include?(current_user)

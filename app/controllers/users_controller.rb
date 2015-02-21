@@ -11,10 +11,10 @@ class UsersController < ApplicationController
     @controller = "users"
     
     if @user.save
-      flash[:alerts] = 'alert("You have created the user: ' + ERB::Util.html_escape(@user.email) + '")'
-      sign_in(@user)
+      add_alert('You have created the user: ' + ERB::Util.html_escape(@user.email) + ".")
       @user.set_activation_code
       UserMailer.activation(@user)
+      sign_in(@user)
     else
       flash[:errors] = @user.errors.full_messages.join(", ")
       render :new
@@ -23,5 +23,15 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:email, :password, :password_confirm, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral)
+  end
+
+  def activate
+    @user = User.find(params[:user_id])
+    if(@user.activation_code == params[:activation_code])
+      @user.activation_code = nil
+      @user.save
+      @activation_success = true
+    end
+    render :activation
   end
 end

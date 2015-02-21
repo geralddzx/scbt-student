@@ -10,8 +10,6 @@ Scbt.Models.SectionNew = Backbone.Model.extend({
   url: "api/sections/new",
 
   parse: function(res){
-    Backbone.Model.prototype.parse(res)
-    
     this.campuses = new Scbt.Collections.Campuses(res.campuses)
     this.instructors = new Scbt.Collections.Users(res.instructors)
     this.programs = new Scbt.Collections.Programs(res.programs)

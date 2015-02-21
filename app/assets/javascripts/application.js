@@ -17,6 +17,8 @@
 //= require backbone
 //= require bootstrap
 //= require scbt
+//= require check_session
+
 //= require helper
 //= require_tree ../templates
 //= require_tree ./backbone

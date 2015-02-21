@@ -1,5 +1,5 @@
 class AddPhotoInUser < ActiveRecord::Migration
   def change
-  	add_attachment :users, :photo
+  	add_column :users, :photo_url, :string
   end
 end
