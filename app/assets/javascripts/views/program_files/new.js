@@ -25,10 +25,9 @@ Scbt.Views.ProgramFilesNew = Backbone.FileView.extend({
   //   $("#file-input").click()
   // },
 
-  submitFile: function(e){
-    debugger
+  submitFile: function(){
     var view = this
-    var url = this.$('input[type=filepicker]').val()
+    var url = event.currentTarget.value
     var newFile = new Scbt.Models.ProgramFile()
     newFile.set("url", url)
     newFile.set("program_id", this.collection.program.get("id"))

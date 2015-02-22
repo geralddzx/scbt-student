@@ -56,6 +56,11 @@ h1, h2, h3, h4 {
   display: flex;
 }
 
+.flex-space-between {
+  justify-content: space-between;
+  display: flex;
+}
+
 #header {
   display: flex;
   height: 50px;

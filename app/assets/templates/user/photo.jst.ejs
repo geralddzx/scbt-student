@@ -1,8 +1,8 @@
 <table id="profile-photo-table" class="thumbnail">
   <tr>
-  <% if (photo.escape("photo_url")){ %>
+  <% if (user.escape("photo_url")){ %>
     <td>
-      <image src="<%= photo.escape("photo_url") %>" width="300px" height="300px">
+      <image src="<%= user.escape("photo_url") %>" width="300px" height="300px">
     </td>
   <% } else { %>
     <td id="profile-photo">
@@ -14,20 +14,19 @@
   </tr>
 
   <tr>
-  <td>
-    <div class="flex-center">
-      <span id="file-name">Upload Your Profile Photo Here</span>
-    </div>
-    <input id="photo-file" class="hidden-input" type="file">
+  <td class="flex-space-between">
+      <input 
+        type="filepicker"
+        data-fp-services="COMPUTER"
+        data-fp-button-text="Choose New Photo"
+        data-fp-button-class="btn btn-info"
+        data-fp-mimetype="image/*"
+      >
+      <button style="margin-left:10px" id="remove-photo" class="btn btn-danger"
+        <% if(!user.get("photo_url")){ %>
+          disabled="disabled"
+        <% } %> 
+      >Remove</button>
   </td>
   </tr>
-
-  <tr>
-  <td id="profile-photo-buttons" class="flex-center">
-    <% if (photo.escape("photo_url")){ %>
-      <button id="remove-photo" class="btn btn-danger">Remove</button>
-    <% } %>
-    <button id="new-photo" class="btn btn-primary">Choose New Photo</button>
-    <button id="replace-photo" class="btn btn-default">Submit</button>
-  </td>
 </table>

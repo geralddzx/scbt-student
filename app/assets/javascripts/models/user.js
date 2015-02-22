@@ -22,5 +22,26 @@ Scbt.Models.User = Backbone.Model.extend({
   },
   mailProvider: function(){
     return this.get("email").split("@")[1]
-  }
+  },
+
+  removePhotoFp: function(url){
+    if (url && url != ""){
+      filepicker.remove({url: url})
+      // {}, function(){
+      //   alert("Your old photo has been removed")
+      // })
+    } 
+  },
+
+  changePhoto: function(url){
+    var user = this
+    var old_url = this.get("photo_url")
+    this.set("photo_url", url)
+    this.saveWithError({}, function(){
+      alert("Your profile photo has been updated")
+      user.removePhotoFp(old_url)
+    })
+  },
+
+
 })

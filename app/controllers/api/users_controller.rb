@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
   include UsersHelper
-  wrap_parameters :user, include: [:email, :password, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo, :photo_name, :old, :new, :new_confirm]
+  # wrap_parameters :user, include: [:email, :password, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo, :photo_name, :old, :new, :new_confirm]
   before_action :require_master_admin, only: [:index, :admins, :instructors]
   before_action :require_admin, only: [:reset_survey]
   before_action :require_sign_in
@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
     current_user.set_photo(params)
     if current_user.save
       # old_photo.destroy if params[:user][:delete_old] && old_photo.exists?
-      render "api/users/show"
+      render "api/user/show"
     else
       render json: current_user.errors.full_messages, status: :unproccessable_entity
     end
@@ -20,10 +20,6 @@ class Api::UsersController < ApplicationController
     render "api/user/show"
   end
 
-  def show_photo
-    render "api/user/show_photo"
-  end
-  
   def index
     render "api/users/index"
   end
@@ -63,6 +59,6 @@ class Api::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo)
+    params.require(:user).permit(:email, :first_name, :last_name, :street, :city, :country, :postal_code, :phone, :referral, :photo_url)
   end
 end

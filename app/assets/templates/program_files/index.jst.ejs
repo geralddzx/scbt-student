@@ -12,11 +12,10 @@
 	</tr>
 
 	<% files.each(function(file){ %>
-		<tr>
+		<tr id="file-<%= file.get("id") %>" style="display:none">
 			<td>
-				<a 
-					href='<%= file.escape("url") %>?dl=true'
-				>asd</a>
+				<a class="file-name" href='<%= file.escape("url") %>?dl=true'
+				></a>
 			</td>
 
 			<td>

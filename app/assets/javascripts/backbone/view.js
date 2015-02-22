@@ -8,8 +8,9 @@ Backbone.View.prototype.enablePageNav = function(){
 
 Backbone.View.prototype.buildUploader = function(){
 	$this = this
-	filepicker.constructWidget(this.$('input[type=filepicker]')[0])
-	$('input[type=filepicker]').change(function(e){
-		$this.submitFile(e)
+	var $el = this.$('input[type=filepicker]')
+	filepicker.constructWidget($el[0])
+	$el.change(function(){
+		$this.submitFile()
 	})
 }
