@@ -9,7 +9,6 @@ Survey.create!(title: "Test survey")
 Survey.first.questions.create!(question: "What is your fav color", answer_type: "RATING", min_rating: 1, max_rating: 5)
 Survey.first.questions.create!(question: "Why is that your fav color", answer_type: "COMMENT") 
 
-User.create!(:first_name => "Guest", :last_name => "Master", :password => "guest1", :password_confirm => "guest1", :email => "guest@gmail.com", permission: "ADMIN")
 User.create!(:first_name => "Gerald", :last_name => "Ding", :password => "turtle", :password_confirm => "turtle", :email => "geralddzx@gmail.com", permission: "ADMIN")
 User.create!(:first_name => "David", :last_name => "Ding", :password => "turtle", :password_confirm => "turtle", :email => "davidd@scbt.ca", permission: "ADMIN")
 User.create!(:first_name => "Johnny", :last_name => "Depp", :password => "turtle", :password_confirm => "turtle", :email => "johnny@hotmail.com")
@@ -19,6 +18,7 @@ User.create!(:first_name => "Master", :last_name => "Admin", :password => "turtl
 User.create!(:first_name => "Jack", :last_name => "Smith", :password => "turtle", :password_confirm => "turtle", :email => "jack@hotmail.com", permission: "STUDENT")
 User.create!(:first_name => "Joe", :last_name => "Smash", :password => "turtle", :password_confirm => "turtle", :email => "joe@gmail.com")
 User.create!(:first_name => "Moe", :last_name => "Smash", :password => "turtle", :password_confirm => "turtle", :email => "moe@gmail.com")
+User.create!(:first_name => "Guest", :last_name => "Master", :password => "guest1", :password_confirm => "guest1", :email => "guest@gmail.com", permission: "ADMIN")
 
 Program.create!(name: "Science", survey_id: 1)
 Program.create!(name: "Math")
