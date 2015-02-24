@@ -5,5 +5,4 @@ class UserMailer < ActionMailer::Base
     msg = mail(to: user.email, subject: "Please activate your account")
     msg.deliver
   end
-  
 end
