@@ -9,3 +9,7 @@ heroku run rake db:seed
 
 figaro heroku:set
 heroku run rails c
+
+Program.find_each(&:save)
+
+foreman start

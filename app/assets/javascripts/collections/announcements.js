@@ -12,7 +12,11 @@ Scbt.Collections.Announcements = Backbone.Collection.extend({
   parse: function(res){
   	this.total_pages = res.total_pages
   	return res.announcements
-  }
+  },
+
+  // fetch: function(){
+  //   Backbone.Collection.prototype.fetch.apply(this, [{remove: false}])
+  // },
 })
 
 // Scbt.Collections.announcements = new Scbt.Collections.Announcements

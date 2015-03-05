@@ -9,9 +9,13 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  survey_id  :integer
+#  slug       :string(255)
 #
 
 class Program < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   validates :name, presence: true, uniqueness: true
   validate :valid_survey
   

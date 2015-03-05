@@ -9,6 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  survey_id  :integer
+#  slug       :string(255)
 #
 
 require 'test_helper'

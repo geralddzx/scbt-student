@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.serializeJSON
 //= require underscore
@@ -18,6 +19,8 @@
 //= require bootstrap
 //= require scbt
 //= require check_session
+
+
 
 //= require helper
 //= require_tree ../templates

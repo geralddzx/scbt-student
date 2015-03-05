@@ -14,6 +14,7 @@ Scbt.Views.CampusesIndex = Backbone.View.extend({
     renderedContent = this.template({campuses: this.collection})
     this.$el.html(renderedContent)
     $(document).ready(this.loadMap.bind(this))
+    // this.$("table").sortable();
     return this
 	},
 

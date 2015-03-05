@@ -62,6 +62,11 @@ gem 'thin'
 
 gem 'filepicker-rails'
 
+gem 'jquery-ui-rails'
+gem 'friendly_id'
+# gem 'delayed_job'
+gem 'delayed_job_active_record'
+
 # Use Capistrano for deployment
 
 # Use debugger
