@@ -13,3 +13,5 @@ heroku run rails c
 Program.find_each(&:save)
 
 foreman start
+
+heroku ps
