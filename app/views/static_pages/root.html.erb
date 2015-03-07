@@ -5,23 +5,20 @@
 <div id="view">
 </div>
 
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <script>
   currentUser = Scbt.Models.user = new Scbt.Models.User(
     <%= current_user.to_json({only: [:id, :permission, :email]}).html_safe %>
   )
-
-  filepicker.setKey('<%= ENV["FILE_PICKER_API_KEY"] %>')
-
   $(Scbt.initialize)
+</script>
 
-  // Scbt.Models.user.fetch({success: function(){
-  // }});us
-  //
-  // var permission = "<%= current_user.permission %>"
-  // if (permission == "ADMIN" || permission == "MASTER_ADMIN"){
-  //   permissionType = "admin"
-  // } else {
-  //   permissionType = permission.toLowerCase()
-  // }
-  // var userId = "<%= current_user.id %>"
+<!-- File picker -->
+<%= filepicker_js_include_tag %>
+<script type="text/javascript">
+  filepicker.setKey('<%= ENV["FILE_PICKER_API_KEY"] %>')
+</script>
+
+<!-- Google Map -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>">
 </script>
