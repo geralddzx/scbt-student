@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       add_alert('You have created the user: ' + ERB::Util.html_escape(@user.email) + ".")
       @user.set_activation_code
-      UserMailer.activation(@user)
+      UserMailer.activation(@user, request.host_with_port)
       sign_in(@user)
     else
       flash[:errors] = @user.errors.full_messages.join(", ")
