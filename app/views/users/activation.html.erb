@@ -1,6 +1,6 @@
 <% if @activation_success %>
 	You have successfully activated your account. You can return to the website to continue browsing as an activated user. Click 
-	<a href="<%= ENV["HOST"] %>">here</a> to go to the home page.
+	<a href="<%= request.host_with_port %>">here</a> to go to the home page.
 <% else %>
 	Your activation has failed, please try again
 <% end %>
