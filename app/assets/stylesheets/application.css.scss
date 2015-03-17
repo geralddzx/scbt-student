@@ -18,6 +18,15 @@
 
 @import "bootstrap";
 
+body {
+  padding: 20px;
+  .space-table {
+    td {
+      padding: 30px;
+    }
+  }
+}
+
 #auth-content {
   display: flex;
   flex-direction: column;

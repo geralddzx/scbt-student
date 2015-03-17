@@ -67,6 +67,7 @@ gem 'friendly_id'
 # gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'rack-zippy'
+gem 'yui-compressor'
 
 # Use Capistrano for deployment
 
