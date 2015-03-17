@@ -8,12 +8,27 @@
     </div>
 </nav>
 
-<div style="width:300px; height:300px; padding:20px">
-    <a href="#" class="thumbnail">
-      <%= image_tag("root/profile_photo.jpg") %>
-    </a>
-</div>
-<br>
+<table>
+<tr>
+	<td>
+		<div style="width:300px; height:300px; padding:20px">
+		    <a href="#" class="thumbnail">
+		      <%= image_tag("root/profile_photo.jpg") %>
+		    </a>
+		</div>
+	</td>
+	
+	<td>
+		<a href="http://ca.linkedin.com/pub/gerald-ding/73/3b/a70/en">
+			<%= image_tag("root/linkedin.gif", size: "50x50") %>
+		</a>
+
+		<a href="https://github.com/geralddzx">
+			<%= image_tag("root/github.png", size: "50x50") %>
+		</a>
+	</td>
+</tr>
+</table>
 
 <div style="width:500px; height:100px; padding:20px">
 	Hello. My name is Gerald Ding. I specialize in building full stack web applications with Ruby on Rails. I am also experienced in building real-time applications with node. I worked with SQL and Mongo databases. I am graduating in April and I am looking for a full time position.
@@ -52,13 +67,3 @@
 	</td>
 </tr>
 </table>
-
-<script>
-	// var webThumbs = $('.web-thumb')
-	// webThumbs.each(function(index){
-	// 	var thumb = webThumbs[index]
-	// 	html2canvas($('body'), {proxy: $(thumb).prop('src')}, function(canvas){
-	// 		thumb.append(canvas)
-	// 	})
-	// })
-</script>
