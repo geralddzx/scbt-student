@@ -24,6 +24,7 @@
 
 //= require helper
 //= require_tree ../templates
+//= require_tree ./utils
 //= require_tree ./backbone
 //= require_tree ./models
 //= require_tree ./collections

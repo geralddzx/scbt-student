@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       UserMailer.activation(@user, request.host_with_port)
       sign_in(@user)
     else
-      flash[:errors] = @user.errors.full_messages.join(", ")
+      flash.now[:errors] = @user.errors.full_messages.join(", ")
       render :new
     end 
   end

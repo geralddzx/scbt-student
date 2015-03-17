@@ -1,3 +1,16 @@
+<div id="header" text-align="left">
+  <h4>
+    <a href="/">Stanford International College</a>
+  </h4>
+  <div class="header-item">
+    <%= link_to "Sign Up", new_user_url %>
+  </div>
+</div>
+
+<p><%= flash[:notices] %></p>
+<p><%= flash[:errors] %></p>
+
+
 <div id="auth-content">
   <h3>Welcome to the demo, to sign in use: </h3>
   <strong>email: guest@gmail.com </br> password: guest1</strong>

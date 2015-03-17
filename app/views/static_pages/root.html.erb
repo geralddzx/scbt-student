@@ -1,24 +1,64 @@
-<div id="banner">
-   Welcome <%= current_user.first_name %> to Stanford College Student Space
-</div>
+<nav id="nav-container" class="navbar navbar-default">
+    <div class="container-fluid">
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      	<ul class="nav navbar-nav">
+	        	<li class="tab"><a href="#">Profile</a></li>
+	      	</ul>
+	    </div>
+    </div>
+</nav>
 
-<div id="view">
+<div style="width:300px; height:300px">
+    <a href="#" class="thumbnail">
+      <%= image_tag("root/profile_photo.jpg") %>
+    </a>
 </div>
+<br>
+
+<div style="width:500px; height:100px">
+	Hello. My name is Gerald Ding. I specialize in building full stack web applications with Ruby on Rails. I am also experienced in building real-time applications with node. I worked with SQL and Mongo databases. I am graduating in April and I am looking for a full time position.
+</div> 
 
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+<center><h2>Projects</h2></center>
+<table class="space-table">
+<tr>
+	<td>
+		<div style="width:200px; height:200px" class="web-thumb">
+			<center><h4>Student Portal</h4></center>
+			<a href="http://www.gerald-ding.com" class="thumbnail">
+		      <%= image_tag("root/projects/scbt.jpg") %>
+		    </a>
+		</div>
+	</td>
+
+	<td>
+		<div style="width:200px; height:200px" class="web-thumb">
+			<center><h4>Timeline Monitor</h4></center>
+			<a href="http://geralddzx.github.io/?tm" class="thumbnail">
+		      <%= image_tag("root/projects/monitor.jpg") %>
+		    </a>
+		</div>
+	</td>
+
+	<td>
+		<div style="width:200px; height:200px" class="web-thumb">
+			<center><h4>Student Portal</h4></center>
+			<a href="http://geralddzx.github.io/?sw" class="thumbnail">
+		      <%= image_tag("root/projects/space.jpg") %>
+		    </a>
+		</div>
+	</td>
+</tr>
+</table>
+
 <script>
-  currentUser = Scbt.Models.user = new Scbt.Models.User(
-    <%= current_user.to_json({only: [:id, :permission, :email]}).html_safe %>
-  )
-  $(Scbt.initialize)
-</script>
-
-<!-- File picker -->
-<%= filepicker_js_include_tag %>
-<script type="text/javascript">
-  filepicker.setKey('<%= ENV["FILE_PICKER_API_KEY"] %>')
-</script>
-
-<!-- Google Map -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>">
+	// var webThumbs = $('.web-thumb')
+	// webThumbs.each(function(index){
+	// 	var thumb = webThumbs[index]
+	// 	html2canvas($('body'), {proxy: $(thumb).prop('src')}, function(canvas){
+	// 		thumb.append(canvas)
+	// 	})
+	// })
 </script>

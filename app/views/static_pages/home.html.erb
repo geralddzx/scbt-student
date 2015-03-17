@@ -1,0 +1,59 @@
+<div id="header" text-align="left">
+  <h4>
+  	<a href="/">Stanford International College</a>
+  </h4>
+  <div id="left-items">
+	  <div class="header-item"><a href="#">Home</a></div>
+	  <div class="header-item"><a href="#profile">My Profile</a></div>
+	  <% if current_user.student? %>
+	    <div class="header-item"><a href="#my/sections/index">My Sections</a></div>
+	  <% end %>
+	  <div class="header-item"><a href="#campuses/index">Campuses</a></div>
+	  <div class="header-item"><a href="#announcements/index">Announcements</a></div>
+
+	  <% if current_user.admin? %>
+	    <div class="header-item"><a href="#surveys/index">Surveys</a></div>
+	  <% end %>
+
+	  <div class="header-item"><a href="#sections/index">Sections</a></div>
+
+	  <% if current_user.admin? %>
+	    <div class="header-item"><a href="#enrollments/index">Enrollments</a></div>
+	  <% end %>
+	</div>
+
+	<div id="right-items">
+	  <div class="header-item">Permission: <%= current_user.permission %></div>
+	  <div class="header-item">
+	    <%= button_to "Sign Out", session_url, method: :delete, class: "btn btn-warning"%>
+	  </div>
+	</div>
+</div>
+
+<p><%= flash[:notices] %></p>
+<p><%= flash[:errors] %></p>
+
+<div id="banner">
+   Welcome <%= current_user.first_name %> to Stanford College Student Space
+</div>
+
+<div id="view">
+</div>
+
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<script>
+  currentUser = Scbt.Models.user = new Scbt.Models.User(
+    <%= current_user.to_json({only: [:id, :permission, :email]}).html_safe %>
+  )
+  $(Scbt.initialize)
+</script>
+
+<!-- File picker -->
+<%= filepicker_js_include_tag %>
+<script type="text/javascript">
+  filepicker.setKey('<%= ENV["FILE_PICKER_API_KEY"] %>')
+</script>
+
+<!-- Google Map -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>" async>
+</script>

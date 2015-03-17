@@ -1,3 +1,17 @@
+<div id="header" text-align="left">
+  <h4>
+    <a href="/">Stanford International College</a>
+  </h4>
+  <div class="header-item">
+    <div class="header-item">
+      <%= link_to "Sign In", new_session_url %>
+    </div>
+  </div>
+</div>
+
+<p><%= flash[:notices] %></p>
+<p><%= flash[:errors] %></p>
+
 <div id="auth-content">
   <form action="<%= users_url %>" method="post">
     <h1>Sign Up</h1>
