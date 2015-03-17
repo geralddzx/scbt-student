@@ -8,14 +8,14 @@
     </div>
 </nav>
 
-<div style="width:300px; height:300px">
+<div style="width:300px; height:300px; padding:20px">
     <a href="#" class="thumbnail">
       <%= image_tag("root/profile_photo.jpg") %>
     </a>
 </div>
 <br>
 
-<div style="width:500px; height:100px">
+<div style="width:500px; height:100px; padding:20px">
 	Hello. My name is Gerald Ding. I specialize in building full stack web applications with Ruby on Rails. I am also experienced in building real-time applications with node. I worked with SQL and Mongo databases. I am graduating in April and I am looking for a full time position.
 </div> 
 
@@ -27,7 +27,7 @@
 	<td>
 		<div style="width:200px; height:200px" class="web-thumb">
 			<center><h4>Student Portal</h4></center>
-			<a href="<%= request.host_with_port %>/home" class="thumbnail">
+			<a href="http://<%= request.host_with_port %>/home" class="thumbnail">
 		      <%= image_tag("root/projects/scbt.jpg") %>
 		    </a>
 		</div>
