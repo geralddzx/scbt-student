@@ -1,0 +1,58 @@
+<a href="#">Home</a> >
+<a href="#campuses/index">Campuses</a> > 
+<a href="#campuses/new">New</a><br>
+
+<h3>New campus</h3><br>
+<form>
+  <input type="text" name="campus[name]" 
+    placeholder="Name"
+    class="form-control"
+    value="<%= campus.escape("name") %>" id="name">
+  
+  <input type="text" name="campus[street]"
+    placeholder="Street"
+    class="form-control"
+    value="<%= campus.escape("street") %>" id="street">
+  </input>
+
+  <input type="text" name="campus[city]"
+    placeholder="City"
+    class="form-control"
+    value="<%= campus.escape("city") %>" id="city">
+  </input>
+
+  <input type="text" name="campus[postal_code]"
+    placeholder="Postal Code"
+    class="form-control"
+    value="<%= campus.escape("postal_code") %>" id="postal_code">
+  </input>
+
+  <input type="text" name="campus[country]"
+    placeholder="Country"
+    class="form-control"
+    value="<%= campus.escape("country") %>" id="country">
+  </input>
+
+  <% if (Scbt.Models.user.master_admin()){ %>
+    <label>Select a Manager
+      <select name="campus[manager_id]" class="form-control">
+        <option value=""
+          <% if (!campus.manager){ %>
+            selected="selected"
+          <% } %>
+        >No Manager</option>
+        <% campus.admins.each(function(admin){ %>
+          <option value="<%= admin.get("id") %>" 
+            <% if (campus.manager && campus.manager.get("id") == admin.get("id")) { %>
+              selected="selected"
+            <% } %>
+          >
+            <%= admin.get("first_name") %> <%= admin.get("last_name") %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+  <% } %>
+  
+  <input type="submit" class="btn btn-primary btn-block" value="Create campus">
+</form>

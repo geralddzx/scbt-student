@@ -1,0 +1,47 @@
+<a href="#">Home</a> >
+<a href="#surveys/index">Surveys</a><br>
+
+<% if (Scbt.Models.user.permissionType() == "admin"){ %>
+  <table class="horizontal-form">
+  <tr>
+    <td>
+      <input type="text" class="form-control"
+        placeholder="Enter new survey title here"
+        id="title-field">
+    </td>
+    <td>
+     <div id="create-survey" class="btn btn-primary btn-head">Create Survey</div>
+    </td>
+  </tr>
+  </table>
+<% } %>
+
+<h3>All Surveys</h3>
+
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Title</th>
+    <th>Date Created</th>
+    <th>Date Updated</th>
+    <th></th>
+  </tr>
+
+  <% surveys.each(function(survey){ %>
+    <tr>
+      <td>
+        <a href="#surveys/<%= survey.id %>">
+          <%= survey.escape("title") %>
+        </a>
+      </td>
+      <td><%= survey.escape("created_at") %></td>
+      <td><%= survey.escape("updated_at") %></td>
+      
+      <% if (Scbt.Models.user.permissionType() === "admin"){ %>
+        <td><button class="remove-survey btn btn-danger" id="<%= survey.id %>">Remove Survey</button>
+      <% } %>
+    </tr>
+  <% }) %>
+</table>
+
+
+

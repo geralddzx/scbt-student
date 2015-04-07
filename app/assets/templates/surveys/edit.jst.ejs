@@ -1,0 +1,15 @@
+<form class="top">
+  <input type="text" name="survey[title]"
+    class="form-control"
+    value="<%= survey.escape("title") %>" id="title">
+  
+  <textarea rows="3" name="survey[description]" placeholder="Enter description here" class="form-control form-textarea"
+  ><%= survey.escape("description") %></textarea> 
+
+  <div class="button-group"
+	  <span>
+		  <input type="submit" class="btn btn-primary" value="Update Survey">
+	  </span>
+	  <span id="cancel-edit" class="btn btn-danger">Cancel Edit</span> 
+	</div>
+</form>

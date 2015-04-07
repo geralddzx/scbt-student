@@ -1,0 +1,30 @@
+<a href="#">Home</a> >
+<a href="#campuses/index">Campuses</a><br>
+
+<h3>All Campus</h3>
+
+<% if (Scbt.Models.user.permissionType() == "admin"){ %>
+  <a href="#campuses/new" class="btn btn-default btn-head">Create New Campus</a>
+<% } %>
+
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <% campuses.each(function(campus){ %>
+    <tr>
+      <td>
+        <a href="#campuses/<%= campus.id %>">
+          <%= campus.escape("name") %>
+        </a>
+      </td>
+      
+      <% if (Scbt.Models.user.permissionType() === "admin"){ %>
+        <td><a class="btn btn-info" href="#campuses/<%= campus.id %>/edit">Edit campus</a></td>
+        <td><button class="remove-campus btn btn-danger" id="<%= campus.id %>">Remove Campus</button>
+      <% } %>
+    </tr>
+  <% }) %>
+</table>
+
+<div style='height:500px;width:50%' id='campuses-map'></div>  
+
+
+

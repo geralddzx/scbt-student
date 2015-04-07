@@ -1,0 +1,17 @@
+<a href="#">Home</a> >
+<a href="#announcements/index">Announcements</a> > 
+<a href="#announcements/new">New</a><br>
+
+<h3>New Announcement</h3><br>
+<form>
+  <input type="text" name="announcement[title]" 
+    placeholder="Title"
+    class="form-control"
+    value="<%= announcement.escape("title") %>" id="name">
+  <div>
+
+  <textarea rows="10" name="announcement[content]" placeholder="Enter your message here" class="form-control form-textarea"
+  ><%= announcement.escape("content") %></textarea>
+  
+  <input type="submit" class="btn btn-primary btn-block" value="Create announcement">
+</form>

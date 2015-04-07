@@ -1,0 +1,21 @@
+<div class="nav-state">
+  <a href="#">Home</a> >
+  <a href="#programs/index">programs</a> >
+  <a href="#programs/<%= program.get("id") %>"><%= program.escape("name") %></a>
+</div>
+
+<table>
+<tr>
+  <td id="menu" valign="top">
+    <%= JST["programs/show/menu"]({program: program}) %>
+  </td>
+  <td id="content"></td>
+</tr>
+</table>
+
+
+
+
+
+
+  

@@ -1,0 +1,19 @@
+<a href="#">Home</a> >
+<a href="#announcements/index">announcements</a> > 
+<a href="#announcements/<%= announcement.get("id") %>"><%= announcement.escape("title") %></a> >
+<a href="#announcements/<%= announcement.get("id") %>/edit">edit</a><br>
+
+<h3>Edit Announcement</h3>
+<h5 class="subhead">Last Updated <%= announcement.escape("updated_at") %></h5>
+
+<br>
+<form>
+  <input type="text" name="announcement[title]"
+    class="form-control"
+    value="<%= announcement.escape("title") %>">
+
+  <textarea rows="10" name="announcement[content]" placeholder="Enter your message here" class="form-control form-textarea"
+  ><%= announcement.escape("content") %></textarea>
+
+  <input type="submit" class="btn btn-primary btn-block" value="Update announcement">
+</form>

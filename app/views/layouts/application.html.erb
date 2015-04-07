@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<head>
+  <title>Stanford College Student Space</title>
+
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag "/favicon.ico" %>
+
+</head>
+<body>
+  <script>
+    <% if flash[:alert] %>
+      alert('<%= flash[:alert] %>')
+    <% end %>
+  </script>
+
+  <%= yield %>
+
+
+</body>
+</html>

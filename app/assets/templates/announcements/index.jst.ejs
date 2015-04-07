@@ -1,0 +1,83 @@
+<a href="#">Home</a> >
+<a href="#announcements/index">Announcements</a><br>
+
+<h3>General Announcements</h3>
+
+<% if (Scbt.Models.user.admin()){ %>
+  <a href="#announcements/new" class="btn btn-default btn-head">Make New Announcement</a>
+<% } %>
+
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Last Updated</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% announcements.each(function(announcement){ %>
+    <tr>
+      <td>
+        <a href="#announcements/<%= announcement.id %>">
+          <%= announcement.escape("title") %>
+        </a>
+      </td>
+
+      <td>
+        <%= announcement.escape("author_name") %>
+      </td>
+
+      <td>
+        <%= announcement.escape("updated_at") %>
+      </td>
+     
+      <td>
+        <% if (announcement.escape("author")){ %>
+          <a class="btn btn-info" href="#announcements/<%= announcement.id %>/edit">Edit announcement</a>
+        <% } %>
+      </td>
+
+      <td>
+        <% if (announcement.escape("author") || Scbt.Models.user.admin()){ %>
+          <button class="remove-announcement btn btn-danger" id="<%= announcement.id %>">Remove Announcement</button>
+        <% } %>
+      </td>
+    </tr>
+  <% }) %>
+
+  <tr>
+  <td>
+    <ul class="pagination">
+      <li
+        <% if (announcements.page <= 1){ %>
+          class="disabled"
+        <% } %>
+        page="<%= announcements.page - 1 %>"
+      ><a>&laquo;</a></li>
+
+      <% for (p = 1; p <= announcements.total_pages; p++){ %>
+        <li
+          <% if (announcements.page == p){ %>
+            class="active"
+          <% } %>
+          page="<%= p %>"
+        ><a><%= p %></a></li>
+      <% } %>
+
+      <li 
+        <% if (announcements.page >= announcements.total_pages){ %>
+          class="disabled"
+        <% } %>
+        page="<%= announcements.page + 1 %>"
+      ><a>&raquo;</a></li>
+    </ul>
+  </td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+</table>
+
+

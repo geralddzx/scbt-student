@@ -1,0 +1,32 @@
+<h3 class="content"><%= program.get('name') %></h3>
+<% if (Scbt.Models.user.admin()){ %>
+  <a class="btn btn-info btn-head" href="#programs/<%= program.id %>/edit">Edit This Program</a>
+<% } else if (program.enrollment){ %>
+  <a class="btn btn-success btn-head" href="#programs/<%= program.id %>/survey"><%= program.programSurveyInstruction() %></a>
+<% } %>
+
+<table class="d1" border="0" cellspacing="10" cellpadding="10">  
+  <tr>
+    <td>Code</td>
+    <td><%= program.escape('code') %></td>
+  </tr>
+  
+  <tr>
+    <td>Start Date</td>
+    <td><%= program.escape('start_date') %></td>
+  </tr>
+  
+  <tr>
+    <td>End Date</td>
+    <td><%= program.get('end_date') %></td>
+  </tr>
+  
+  <tr>
+    <td>Hours</td>
+    <td><%= program.get('hours') %></td>
+  </tr>
+</table>
+
+<br>
+<h4 class="with-margin">Sections</h4>
+<div id="sections"></div>

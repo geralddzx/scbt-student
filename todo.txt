@@ -1,0 +1,18 @@
+admin can approve enrollment
+instructor can post grade on enrollment
+where to put student messages, files, grades for a program
+How to upload files to program
+edit profile in api folder
+my programs tab
+add approved by
+edit program from show
+Api controller vs normal controller
+
+modeling current_user
+how to implement assign instructor
+modeling current_user permission
+default user url should not be api/user
+
+why sign out is white
+
+jqeury select buttons and add class

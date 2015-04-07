@@ -1,0 +1,24 @@
+<h3>All Programs</h3>
+
+<% if (Scbt.Models.user.admin()){ %>
+  <a href="#programs/new" class="btn btn-default btn-head">Create New Program</a>
+<% } %>
+
+<table class="table" cellspacing="5" cellpadding="5">
+  <% programs.each(function(program){ %>
+    <tr>
+      <td class="programs-data">
+        <a href="#programs/<%= program.id %>">
+          <%= program.escape("name") %>
+        </a>
+      </td>
+            
+      <% if (Scbt.Models.user.admin()){ %>
+        <td><a class="btn btn-info" href="#programs/<%= program.id %>/edit">Edit Program</a></td>
+        <td><button class="remove-program btn btn-danger" id="<%= program.id %>">Remove Program</button>
+      <% } %>
+    </tr>
+  <% }) %>
+</table>
+
+

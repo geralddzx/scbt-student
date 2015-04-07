@@ -1,0 +1,21 @@
+<form class="row-form">
+  <input type="text" name="question[question]" 
+    placeholder="Enter Question"
+    class="form-control">
+
+  <span>
+  	<strong>Select Answer Type</strong>
+	  <input type="radio" name="question[answer_type]" value="COMMENT" id="select-comment">Comment
+		<span>
+			<input type="radio" name="question[answer_type]" value="RATING" id="select-rating">Rating
+			<input type="hidden" name="question[min_rating]" placeholder="Min Rating" class="form-control">
+			<input type="hidden" name="question[max_rating]" placeholder="Max Rating" class="form-control">
+		</span>
+	</span>
+  
+
+  <span>
+  	<input type="submit" class="btn btn-primary btn-block form-control" value="Create Question">
+  	<div id="cancel-new" class="btn btn-warning btn-block form-control">Cancel New</div>
+  </span>
+</form>

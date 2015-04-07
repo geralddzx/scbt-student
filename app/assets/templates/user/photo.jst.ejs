@@ -1,0 +1,32 @@
+<table id="profile-photo-table" class="thumbnail">
+  <tr>
+  <% if (user.escape("photo_url")){ %>
+    <td>
+      <image src="<%= user.escape("photo_url") %>" width="300px" height="300px">
+    </td>
+  <% } else { %>
+    <td id="profile-photo">
+      <div class="flex-center">
+        <span id="picture-icon" class="glyphicon glyphicon-picture"></span>
+      </div>
+    </td>
+  <% } %>
+  </tr>
+
+  <tr>
+  <td class="flex-space-between">
+      <input 
+        type="filepicker"
+        data-fp-services="COMPUTER"
+        data-fp-button-text="Choose New Photo"
+        data-fp-button-class="btn btn-info"
+        data-fp-mimetype="image/*"
+      >
+      <button style="margin-left:10px" id="remove-photo" class="btn btn-danger"
+        <% if(!user.get("photo_url")){ %>
+          disabled="disabled"
+        <% } %> 
+      >Remove</button>
+  </td>
+  </tr>
+</table>

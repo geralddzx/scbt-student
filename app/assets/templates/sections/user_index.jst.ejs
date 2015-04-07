@@ -1,0 +1,45 @@
+<a href="#">Home</a> >
+<a href="#my/sections/index">My Sections</a><br>
+
+<h3>My Sections</h3>
+<table class="table" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Program</th>
+    <th>Section</th>
+    <th>Schedule</th>
+    <th>Weekdays</th>
+    <th>Status</th>
+  </tr>
+  
+  <% sections.each(function(section){ %>
+    <% if (section.enrollment.pending()){ %>
+      <tr class="warning">
+    <% } else if (section.enrollment){ %>
+      <tr class="success">
+    <% } %>
+
+      <td>
+        <a href="#sections/<%= sections.get("id") %>">
+          <%= section.escape("program") %>
+        </a>
+      </td>
+      
+      <td>
+        <%= section.escape("code") %>
+      </td>
+      
+      <td>
+        <%= section.time() %>
+      </td>  
+      
+      <td>
+        <%= section.weekdays() %>
+      </td>
+      
+      <td>
+        <%= section.enrollment.escape("status") %>
+      </td>     
+    </tr>
+  <% }) %>
+</table>
+

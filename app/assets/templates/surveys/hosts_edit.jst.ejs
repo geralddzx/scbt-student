@@ -1,0 +1,21 @@
+<div>Select <%= capitalize(pluralize[hosts.hostType]) %> that use this survey</div>
+
+<div id="select-all" class="btn btn-success">Select All</div>
+<div id="deselect-all" class="btn btn-danger">Deselect All</div><br>
+
+<form>
+	<% hosts.allHosts.each(function(host){ %>
+	  <label class="check">
+	    <input 
+	      type="checkbox" 
+	      name="host_ids[<%= host.get("id") %>]" 
+	      id="<%= host.get("id") %>"
+	    >
+	    <%= host.escape("name") %>
+	  </label>
+	<% }) %>
+</form><br>
+
+<div id="update-hosts" class="btn btn-primary">Update <%= capitalize(pluralize[hosts.hostType]) %></div>
+<div id="cancel-edit" class="btn btn-warning">Cancel Edit</div>
+

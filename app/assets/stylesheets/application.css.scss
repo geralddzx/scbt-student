@@ -1,0 +1,351 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require jquery-ui
+ */
+
+
+@import "bootstrap";
+
+body {
+  .space-table {
+    td {
+      padding: 30px;
+    }
+  }
+}
+
+#auth-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  > * {
+    margin: auto;
+  }
+}
+
+form {
+  color: black;
+  display: inline-block;
+  input, select, textarea {
+    margin-bottom: 15px;
+  }
+  .form-textarea{
+    padding: 12px;
+  }
+}
+
+.form-control {
+  min-width: 200px;
+}
+
+h1, h2, h3, h4 {
+  vertical-align: center;
+  display: inline-block;
+  &.with-margin {
+    margin: 7.5px;
+  }
+  &.header {
+    display: block;
+  }
+}
+
+.flex-center {
+  justify-content: center;
+  display: flex;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+  display: flex;
+}
+
+#header {
+  display: flex;
+  height: 50px;
+  background-color: #003282;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  color: white;
+  a {
+    color: white;
+  }
+  .header-item {
+    margin: 10px;
+    display: inline-block;
+    margin: 15px;
+  }
+}
+
+.top {
+  margin-top: 10px;
+}
+
+#banner {
+  padding-left: 25px;
+  padding-bottom: 5px;
+}
+
+#view {
+  padding-left: 25px;
+  padding-right: 25px;
+
+  .nav-state {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #menu {
+    width: 200px;
+    padding: 0px;
+    background-color: #F8F8F8;
+    vertical-align: top;
+    a {
+      color: #787878; 
+    }
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  #content {
+    padding: 0px;
+    padding-left: 20px;
+    vertical-align: top;
+
+    .file-bar {
+      margin-bottom: 15px;
+
+      #file-name {
+        display: inline;
+      }
+
+      td {
+        padding: 0px;
+      }
+
+      .file-caption {
+        padding: 5px;
+        border: ridge 1px lightgrey;
+      }
+    }
+  }
+
+  .pagination li {
+    cursor: pointer;
+  }
+
+  h3.content {
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+
+  table {
+    &.th-bold {
+      td:first-child {
+        font-weight: bold; 
+      }
+    }
+    &.left {
+      text-align: left;
+    }
+    td, th {
+      padding: 10px;
+      vertical-align: middle;
+    }
+
+    &.align-top {
+      td {
+        vertical-align: top;
+      }
+    }
+
+    &.horizontal-form {
+      td {
+        padding-left: 0;
+        .form-control {
+          margin-top: 2px;
+        }
+      }
+    }
+
+    &.table-form {
+      margin-bottom: 10px;
+      td {
+        padding-left: 0;
+        .form-control, label {
+          margin: 0;
+        }
+      }
+    }
+
+    &#announcement-table {
+      td {
+        &.subhead-cell {
+          color: #666666;
+          h5 {
+            margin: 0;
+          }
+        }
+        padding-left: 0;
+      }
+    }
+
+    &#profile-table {
+      #personal-info {
+        vertical-align:top;
+        padding: 10px;
+        padding-left: 0px;
+      }
+
+      #profile-uploader {
+        vertical-align: top;
+        padding-left: 30px;
+
+        #profile-photo-table {
+          padding: 10px;
+          #profile-photo {
+            background-color: #CCCCCC;
+            width: 200px;
+            height: 200px;
+          }
+
+          #profile-photo-buttons {
+            padding: 5px;
+            button {
+              margin: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tight-table {
+    td {
+      padding: 5px;
+    }
+  }
+
+  .row-form {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100%;
+    .form-control {
+      margin: 0;
+      width: auto;
+      min-width: 0;
+      display: inline-block;
+    }
+    #code-input {
+      width: 100px;
+    }
+    > * {
+      margin-right: 15px !important;
+    }
+    input[type=radio] {
+      margin-right: 2px;
+    }
+  }
+
+  .column-form {
+    input, label {
+      display: block;
+    }
+  }
+
+  select {
+    margin-top: 5px;
+  }
+
+  .hidden-input {
+    visibility: hidden;
+    height: 0px;
+  }
+
+  .btn-head {
+    margin: 7.5px;
+    vertical-align: 15%;
+    &.new-section {
+      margin-left: 0px;
+      margin-bottom: 15px;
+      margin-top: 10px;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+  }
+
+  h5 #address {
+    margin-top: 20px;
+  } 
+
+  hr {
+    border-top: 1px dotted #BDBDBD;
+  }
+
+  .survey-list-table {
+    margin-bottom: 15px;
+    .scroll-list {
+      vertical-align: top;
+      height: 200px;
+      overflow: scroll;
+      border: ridge 1px lightgrey;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin: 15px;
+      min-width: 150px;
+
+      .btn {
+        padding: 5px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        display: inline-block
+      }
+
+      span {
+        margin-bottom: 10px;
+      }
+
+      > * {
+        display: block;
+      }
+    }
+  
+  }  
+
+  label.check {
+    display: block;
+    margin: 5px;
+    input {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 2.5px;
+    }
+    display: block;
+  } 
+}
+
+
+
+
+
+
+

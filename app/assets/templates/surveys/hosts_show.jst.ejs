@@ -1,0 +1,10 @@
+<strong><%= capitalize(pluralize[hosts.hostType]) %></strong>
+
+<% if (Scbt.Models.user.admin()){ %>
+  <div class="btn btn-info btn-head" id="edit-list">Edit List</div>
+<% } %>
+
+
+<% hosts.currentHosts.each(function(host){ %>
+  <div><%= host.escape("name") %></div>
+<% }) %>

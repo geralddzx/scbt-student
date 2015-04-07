@@ -1,0 +1,57 @@
+<table class="table">
+  <tr>
+    <th>Student</th>
+    <th>Section</th>
+    <th>Program</th>
+    <th>Campus</th>
+    <th>Status</th>
+    <th>Approver</th>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <% enrollments.each(function(enrollment){ %>
+    <tr>
+      <td>
+        <%= models.students.get(enrollment.get("student_id")).escape("name") %>
+      </td>
+
+      <td>
+        <%= enrollment.section.get("code") %>
+      </td>
+
+      <td>
+        <%= models.programs.get(enrollment.section.get("program_id")).escape("name") %>
+      </td>
+
+      <td>
+        <%= models.campuses.get(enrollment.section.get("campus_id")).escape("name") %>
+      </td>
+
+      <td>
+        <%= enrollment.get("status") %>
+      </td>
+      
+      <% if (enrollment.pending()){ %>
+        <td></td>
+
+        <td>
+          <div class="approve-enrollment btn btn-success" id="<%= enrollment.get("id") %>">Approve enrollment</div>
+        </td>
+
+        <td>
+          <div class="reject-enrollment btn btn-danger" id="<%= enrollment.get("id") %>">Reject enrollment</div>
+        </td>
+      <% } else { %>
+        <td>
+          <%= enrollment.approver.escape("name") %>
+        </td>
+        <td></td>
+        <td></td>
+      <% } %>  
+    </tr>
+  <% }) %>
+</table>
+
+
+

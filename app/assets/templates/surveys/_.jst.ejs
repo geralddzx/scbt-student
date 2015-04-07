@@ -1,0 +1,21 @@
+<a href="#">Home</a> >
+<a href="#surveys/index">Surveys</a> > 
+<a href="#surveys/<%= survey.get("id") %>"><%= survey.escape("title") %></a><br>
+
+<div id="show"></div><hr><br>
+
+<% if (Scbt.Models.user.admin()){ %>
+  <div id="questions-new"></div><br>
+<% } %>
+<div id="questions-index"></div><br>
+
+<h4>Survey Users</h4>
+<table class="survey-list-table">
+  <tr>
+    <td id="program-hosts" class="scroll-list"></td>
+    <td></td>
+    <td id="campus-hosts" class="scroll-list"></td>
+    <td></td>
+    <td id="instructor-hosts" class="scroll-list"></td>
+  </tr>
+</table>
