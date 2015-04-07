@@ -15,7 +15,7 @@ module ApplicationHelper
   def sign_in(user)
     add_alert("Your account is not activated, please activate your account through email now.") unless user.activated?
     session[:session_token] = user.reset_token
-    redirect_to home_url
+    redirect_to root_url
   end
   
   def current_user

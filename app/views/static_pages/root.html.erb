@@ -1,85 +1,59 @@
-<nav id="nav-container" class="navbar navbar-default">
-    <div class="container-fluid">
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      	<ul class="nav navbar-nav">
-	        	<li class="tab"><a href="#">Profile</a></li>
-	      	</ul>
-	    </div>
-    </div>
-</nav>
+<div id="header" text-align="left">
+  <h4>
+  	<a href="/">Stanford International College</a>
+  </h4>
+  <div id="left-items">
+	  <div class="header-item"><a href="#">Home</a></div>
+	  <div class="header-item"><a href="#profile">My Profile</a></div>
+	  <% if current_user.student? %>
+	    <div class="header-item"><a href="#my/sections/index">My Sections</a></div>
+	  <% end %>
+	  <div class="header-item"><a href="#campuses/index">Campuses</a></div>
+	  <div class="header-item"><a href="#announcements/index">Announcements</a></div>
 
-<table>
-<tr>
-	<td>
-		<div style="width:300px; height:300px; padding:20px">
-		    <a href="#" class="thumbnail">
-		      <%= image_tag("root/profile_photo.jpg") %>
-		    </a>
-		</div>
-	</td>
-	
-	<td>
-		<a href="http://ca.linkedin.com/pub/gerald-ding/73/3b/a70/en">
-			<%= image_tag("root/linkedin.gif", size: "50x50") %>
-		</a>
+	  <% if current_user.admin? %>
+	    <div class="header-item"><a href="#surveys/index">Surveys</a></div>
+	  <% end %>
 
-		<a href="https://github.com/geralddzx">
-			<%= image_tag("root/github.png", size: "50x50") %>
-		</a>
-	</td>
-</tr>
+	  <div class="header-item"><a href="#sections/index">Sections</a></div>
 
-</table>
+	  <% if current_user.admin? %>
+	    <div class="header-item"><a href="#enrollments/index">Enrollments</a></div>
+	  <% end %>
+	</div>
 
-<div style="padding:20px">
-	<a target="_blank" href="https://www.dropbox.com/s/batot8gwyxvma1x/Gerald%20Ding%202015%20Resume.pdf?raw=1">My Resume</a><br>
-</div> 
+	<div id="right-items">
+	  <div class="header-item">Permission: <%= current_user.permission %></div>
+	  <div class="header-item">
+	    <%= button_to "Sign Out", session_url, method: :delete, class: "btn btn-warning"%>
+	  </div>
+	</div>
+</div>
 
-<div style="width:750px; height:200px; padding:20px">
-	Hello. My name is Gerald Ding. I specialize in building full stack web applications with Ruby on Rails. I am also experienced in building real-time applications with node. I worked with SQL and Mongo databases.
+<p><%= flash[:notices] %></p>
+<p><%= flash[:errors] %></p>
 
-	I started programming when my friend told me about project Euler. After finishing the first 50 problems, I started learning ruby. After building my first app. I joined App Academy and learned good coding practices and pair programming. I built a full stack rails and backbone application for Stanford International College. After that, I worked part time for Sightline Innovations. I am finishing university this year and I am looking for full time junior developer positions.
-</div> 
+<div id="banner">
+   Welcome <%= current_user.first_name %> to Stanford College Student Space
+</div>
+
+<div id="view">
+</div>
 
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<script>
+  currentUser = Scbt.Models.user = new Scbt.Models.User(
+    <%= current_user.to_json({only: [:id, :permission, :email]}).html_safe %>
+  )
+  $(Scbt.initialize)
+</script>
 
-<center><h2>Projects</h2></center>
-<table class="space-table">
-<tr>
-	<td>
-		<div style="width:200px; height:200px" class="web-thumb">
-			<center><h4>Student Portal</h4></center>
-			<a href="http://<%= request.host_with_port %>/home" class="thumbnail">
-		      <%= image_tag("root/projects/scbt.jpg") %>
-		    </a>
-		</div>
-	</td>
+<!-- File picker -->
+<%= filepicker_js_include_tag %>
+<script type="text/javascript">
+  filepicker.setKey('<%= ENV["FILE_PICKER_API_KEY"] %>')
+</script>
 
-	<td>
-		<div style="width:200px; height:200px" class="web-thumb">
-			<center><h4>Timeline Monitor</h4></center>
-			<a href="http://geralddzx.github.io/?tm" class="thumbnail">
-		      <%= image_tag("root/projects/monitor.jpg") %>
-		    </a>
-		</div>
-	</td>
-
-	<td>
-		<div style="width:200px; height:200px" class="web-thumb">
-			<center><h4>Space War</h4></center>
-			<a href="http://geralddzx.github.io/?sw" class="thumbnail">
-		      <%= image_tag("root/projects/space.jpg") %>
-		    </a>
-		</div>
-	</td>
-
-	<td>
-		<div style="width:200px; height:200px" class="web-thumb">
-			<center><h4>Carlisle Capital</h4></center>
-			<a href="http://www.carlislecapital.ca/" class="thumbnail">
-		      <%= image_tag("root/projects/carlisle.png") %>
-		    </a>
-		</div>
-	</td>
-</tr>
-</table>
+<!-- Google Map -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API_KEY"] %>">
+</script>
